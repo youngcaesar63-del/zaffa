@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>زَفّة — دعوة زفافك برابط واحد</title>
+<meta name="description" content="زَفّة | صمّم دعوة زفاف إلكترونية في دقائق: دعوة تفاعلية، موسيقى، تأكيد حضور، دفتر تهاني وخريطة — وأرسلها برابط واحد على الواتساب.">
+<meta property="og:site_name" content="زَفّة">
+<meta property="og:title" content="زَفّة — دعوة زفافك برابط واحد">
+<meta property="og:description" content="افتتاح الدعوة، موسيقى، تأكيد حضور ودفتر تهاني — كلها في رابط واحد.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f4efe4">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/base.css?v=60785fa1">
+<style>
+/* ================= HERO ================= */
+.hero{position:relative;overflow:hidden;padding:clamp(2rem,5vw,4rem) 0 clamp(3rem,7vw,5.5rem)}
+.hero::before{
+  content:'';position:absolute;inset:-30% -10% auto;height:80%;
+  background:radial-gradient(60% 60% at 50% 0%,rgba(253,238,242,.95),transparent 70%),
+             radial-gradient(40% 40% at 80% 20%,rgba(228,198,126,.28),transparent 70%);
+  pointer-events:none;
+}
+.hero-grid{position:relative;display:grid;gap:clamp(2rem,5vw,3.5rem);align-items:center;grid-template-columns:1.05fr .95fr}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;text-align:center}}
+.hero h1{margin:1.1rem 0 .9rem}
+.hero h1 em{font-style:normal;color:var(--rose-deep)}
+.hero .lead{max-width:34rem}
+@media(max-width:900px){.hero .lead{margin-inline:auto}}
+.hero-cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.7rem}
+@media(max-width:900px){.hero-cta{justify-content:center}}
+.trust{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:1.6rem;font-size:.85rem;color:var(--ink-2);font-weight:700}
+@media(max-width:900px){.trust{justify-content:center}}
+.trust span{display:flex;align-items:center;gap:.35rem}
+
+/* ---------- invitation card mock ---------- */
+.inv-mock{position:relative;display:flex;justify-content:center;perspective:1200px}
+.inv-card{
+  position:relative;width:min(360px,84vw);aspect-ratio:5/7;border-radius:20px;
+  background:var(--grad-soft);
+  box-shadow:var(--sh-3), 0 0 0 1px rgba(168,135,79,.14);
+  display:grid;place-content:center;text-align:center;padding:2rem 1.6rem;
+  transform:rotateY(-9deg) rotateX(4deg) rotate(-1.5deg);
+  transition:transform .8s var(--ease),box-shadow .8s var(--ease);
+  overflow:hidden;
+}
+.inv-card:hover{transform:rotateY(-3deg) rotateX(1deg) rotate(0deg) translateY(-6px)}
+.inv-card::before{
+  content:'';position:absolute;inset:12px;border:1.5px solid rgba(184,145,47,.4);border-radius:12px;
+  pointer-events:none;
+}
+.inv-card::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(120% 60% at 50% -10%,rgba(228,198,126,.22),transparent 60%);
+  pointer-events:none;
+}
+.ic-bism{font-family:var(--font-display);font-size:.82rem;color:var(--gold-dk);opacity:.85;letter-spacing:.02em}
+.ic-orn{width:120px;height:1px;margin:.9rem auto;background:linear-gradient(90deg,transparent,var(--gold),transparent);position:relative}
+.ic-orn::after{content:'❦';position:absolute;top:-.85rem;inset-inline-start:50%;transform:translateX(50%);font-size:.8rem;color:var(--gold)}
+.ic-phrase{font-size:.72rem;color:var(--rose-dk);font-weight:700;letter-spacing:.04em;margin-bottom:.4rem}
+.ic-names{font-family:var(--font-display);font-size:clamp(1.5rem,4.6vw,2rem);line-height:1.5;color:var(--ink)}
+.ic-amp{display:block;font-size:.78em;color:var(--gold);line-height:1}
+.ic-date{margin-top:1.1rem;font-size:.86rem;font-weight:800;color:var(--rose-deep);letter-spacing:.02em}
+.ic-venue{font-size:.76rem;color:var(--ink-3);margin-top:.15rem}
+.ic-badge{
+  position:absolute;top:14px;inset-inline-end:14px;font-size:.62rem;font-weight:800;
+  background:var(--gold);color:#fff;padding:.2rem .55rem;border-radius:999px;opacity:.9;
+}
+.float{animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -12px}}
+.mock-note{
+  position:absolute;bottom:-.4rem;inset-inline-start:-.4rem;background:#fff;border:1px solid var(--line);
+  border-radius:14px;padding:.6rem .9rem;font-size:.78rem;font-weight:800;box-shadow:var(--sh-2);
+  display:flex;align-items:center;gap:.45rem;z-index:2;
+}
+@media(max-width:520px){.mock-note{display:none}}
+
+/* ================= FEATURES ================= */
+.feat-grid{display:grid;gap:.9rem;grid-template-columns:repeat(4,1fr)}
+@media(max-width:1000px){.feat-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.feat-grid{grid-template-columns:1fr}}
+.feat{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.15rem;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s;
+}
+.feat:hover{transform:translateY(-4px);box-shadow:var(--sh-2);border-color:var(--line-2)}
+.feat .ic{
+  width:42px;height:42px;border-radius:13px;display:grid;place-content:center;font-size:1.15rem;
+  background:linear-gradient(140deg,var(--tint-1),var(--tint-2));border:1px solid var(--line-2);margin-bottom:.7rem;
+}
+.feat h3{font-size:1rem;margin-bottom:.2rem}
+.feat p{font-size:.86rem;color:var(--ink-2);line-height:1.75}
+
+/* ================= TEMPLATES ================= */
+.tpl-grid{display:grid;gap:.8rem;grid-template-columns:repeat(6,1fr)}
+@media(max-width:1200px){.tpl-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:900px){.tpl-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.tpl-grid{grid-template-columns:repeat(2,1fr)}}
+.tpl{
+  position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);
+  aspect-ratio:3/4;display:block;background:var(--tint-1);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+}
+.tpl:hover{transform:translateY(-6px) scale(1.015);box-shadow:var(--sh-3)}
+.tpl .swatch{position:absolute;inset:0}
+.tpl .swatch .bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);transition:transform .6s var(--ease)}
+.tpl:hover .swatch .bg{transform:scale(1.12)}
+/* تعتيم لكل هوية — يبرز اختلاف القوالب */
+.tpl.t-garden .swatch .bg{filter:brightness(.95) saturate(.95)}
+.tpl.t-saudi .swatch .bg{filter:brightness(.88) sepia(.16)}
+.tpl.t-crystal .swatch .bg{filter:brightness(.84) saturate(.7)}
+.tpl.t-sudan .swatch .bg{filter:brightness(.84) saturate(1.12) sepia(.1)}
+.tpl.t-levant .swatch .bg{filter:brightness(.82) saturate(1.08)}
+.tpl.t-men .swatch .bg{filter:brightness(.62) saturate(.9)}
+.tpl.t-women .swatch .bg{filter:brightness(.9) saturate(1.05)}
+.tpl.t-ivory .swatch .bg{filter:brightness(.97) saturate(.9)}
+.tpl.t-velvet .swatch .bg{filter:brightness(.68) saturate(1.15)}
+.tpl.t-thuluth .swatch .bg{filter:brightness(.62) saturate(.85)}
+.tpl.t-sunset .swatch .bg{filter:brightness(.88) saturate(1.1)}
+.tpl.t-blossom .swatch .bg{filter:brightness(.98) saturate(.92)}
+.tpl.t-marble .swatch .bg{filter:brightness(.98) saturate(.8)}
+.tpl.t-emerald .swatch .bg{filter:brightness(.7) saturate(1.1)}
+.tpl.t-terracotta .swatch .bg{filter:brightness(.9) saturate(1.08)}
+.tpl.t-linen .swatch .bg{filter:brightness(.97) saturate(.85)}
+.tpl.t-lantern .swatch .bg{filter:brightness(.66) saturate(1.1)}
+/* شارة الاسم أسفل البطاقة */
+.tpl .lab{
+  position:absolute;inset-inline:0;bottom:0;padding:.62rem .7rem;
+  background:linear-gradient(0deg,rgba(30,20,26,.94),rgba(30,20,26,.60) 58%,transparent);
+  color:#fff;font-size:.78rem;font-weight:800;line-height:1.35;
+  text-shadow:0 1px 3px rgba(0,0,0,.5);
+}
+.tpl .lab small{display:block;font-size:.65rem;font-weight:500;opacity:.82;margin-top:.1rem}
+/* شارة القالب النشط */
+.tpl .badge{
+  position:absolute;top:6px;inset-inline-end:6px;
+  background:rgba(255,255,255,.92);color:var(--rose-deep);font-size:.6rem;font-weight:800;
+  padding:.16rem .42rem;border-radius:999px;letter-spacing:.02em;
+}
+
+
+/* ================= STEPS ================= */
+.steps{display:grid;gap:1rem;grid-template-columns:repeat(3,1fr);counter-reset:s}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.step{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem 1.2rem}
+.step::before{
+  counter-increment:s;content:counter(s);
+  display:grid;place-content:center;width:38px;height:38px;border-radius:50%;
+  font-weight:800;color:#fff;font-size:1rem;margin-bottom:.8rem;
+  background:var(--grad-deep);box-shadow:0 8px 18px -8px rgba(95,72,35,.8);
+}
+.step h3{font-size:1.02rem;margin-bottom:.25rem}
+.step p{font-size:.87rem;color:var(--ink-2)}
+
+/* ================= PRICING ================= */
+.price-card{
+  position:relative;max-width:520px;margin-inline:auto;text-align:center;
+  background:linear-gradient(170deg,#fff,var(--tint-1) 60%,var(--tint-2));
+  border:1.5px solid var(--line-2);border-radius:var(--r-xl);padding:clamp(1.6rem,4vw,3rem);
+  box-shadow:var(--sh-2);overflow:hidden;
+}
+.price-card::before{
+  content:'';position:absolute;inset-inline:0;top:0;height:4px;
+  background:linear-gradient(90deg,var(--gold-lt),var(--rose),var(--gold));
+}
+.price-old{color:var(--ink-3);text-decoration:line-through;font-size:1.05rem;margin-inline-end:.5rem}
+.price-now{font-size:clamp(2.6rem,9vw,3.8rem);font-weight:800;line-height:1;letter-spacing:-.03em}
+.price-now small{font-size:.3em;font-weight:700;color:var(--ink-3);letter-spacing:0}
+.price-list{list-style:none;padding:0;margin:1.5rem 0;display:grid;gap:.55rem;text-align:start;font-size:.9rem}
+.price-list li{display:flex;gap:.5rem;align-items:flex-start}
+.price-list li::before{content:'✓';color:var(--ok);font-weight:800;flex:0 0 auto}
+.seats{font-size:.8rem;font-weight:800;color:var(--rose-deep);background:#fff;border:1px solid var(--line-2);border-radius:999px;padding:.35rem .9rem;display:inline-block}
+
+/* ================= FAQ ================= */
+.faq{display:grid;gap:.6rem;max-width:760px;margin-inline:auto}
+.faq details{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.faq summary{
+  padding:1rem 1.2rem;font-weight:800;font-size:.95rem;cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;gap:1rem;align-items:center;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:'+';font-size:1.3rem;color:var(--rose);transition:transform .25s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .ans{padding:0 1.2rem 1.1rem;font-size:.9rem;color:var(--ink-2);line-height:1.85}
+
+/* ================= CTA ================= */
+.cta-band{
+  position:relative;border-radius:var(--r-xl);padding:clamp(2rem,5vw,3.4rem);text-align:center;
+  background:var(--grad-deep);color:#fff;overflow:hidden;
+}
+.cta-band::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(60% 80% at 50% 0%,rgba(228,198,126,.3),transparent 65%);
+}
+.cta-band>*{position:relative}
+.cta-band h2{color:#fff}
+.cta-band p{color:rgba(255,255,255,.82);margin-top:.6rem}
+</style>
+<link rel="stylesheet" href="/assets/site-refresh.css?v=20261123c">
+</head>
+<body class="site-home">
+
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="logo">
+      <img class="mark" src="/assets/logo.svg" alt="" width="34" height="34">
+      <span>زَفّة</span>
+    </a>
+    <div class="nav-links">
+      <a href="#feat">الميزات</a>
+      <a href="#tpl">القوالب</a>
+      <a href="#how">كيف يعمل</a>
+      <a href="#pricing">السعر</a>
+      <a href="#faq">أسئلة</a>
+    </div>
+    <a href="/create" class="btn btn-primary" style="padding:.6rem 1.2rem;font-size:.88rem">أنشئ دعوتك</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">✦ صُنعت للّحظات التي تستحق أن تُروى</span>
+      <h1 class="display">كل فرحة لها حكاية،<br><em>ودعوتها الأولى</em></h1>
+      <p class="lead">صمّم دعوة زفاف تعبّر عنك، واجمع تفاصيل مناسبتك وذكريات أحبّتك في رابط واحد تشاركه بكل سهولة.</p>
+      <div class="hero-cta">
+        <a href="/create" class="btn btn-primary btn-lg">ابدأ دعوتك الآن</a>
+        <a href="/i/demo" class="btn btn-ghost btn-lg">شاهد مثال حي ←</a>
+      </div>
+      <div class="trust">
+        <span>✦ تصميم يناسبك</span>
+        <span>✦ تأكيد حضور</span>
+        <span>✦ مشاركة سهلة</span>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-label="مثال لتصميم دعوة زفاف">
+      <div class="visual-image"></div>
+      <div class="visual-caption"><span>دعوة تشبه فرحتك</span><small>صُمّمت للمشاركة، وحُفظت للذكرى</small></div>
+      <div class="visual-card" aria-hidden="true"><span>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</span><i>✦</i><p>فرحةٌ تبدأ بكم</p><strong>محمد <em>و</em> سارة</strong><small>دعوة بكل محبة</small></div>
+      <div class="visual-tag"><b>✦</b><span>تفاصيلك الجميلة<br><small>في رابط واحد</small></span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ================= FEATURES ================= -->
+<section class="sec" id="feat">
+  <div class="wrap">
+    <div class="center rv" style="margin-bottom:2.2rem">
+      <span class="eyebrow">الميزات</span>
+      <h2 class="display" style="margin-top:.8rem">كل اللي تحتاجه في دعوة وحدة</h2>
+      <p class="lead" style="margin-top:.5rem">مصممة للجوال، وتفتح في ثواني بدون أي تطبيق</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat rv"><div class="ic">🎬</div><h3>افتتاح الدعوة</h3><p>ضيفك يفتح الدعوة ويدخل أجواء مناسبتكم بلمسة بسيطة.</p></div>
+      <div class="feat rv"><div class="ic">🎵</div><h3>موسيقى</h3><p>لحن يشتغل مع فتح الدعوة، مع تلاشي ناعم عند الخروج.</p></div>
+      <div class="feat rv"><div class="ic">✅</div><h3>تأكيد الحضور</h3><p>تعرف مين جاي بالضبط وكم عدد المرافقين معه.</p></div>
+      <div class="feat rv"><div class="ic">💌</div><h3>دفتر التهاني</h3><p>ضيوفك يكتبون لكم أجمل الكلمات وتظهر فورًا.</p></div>
+      <div class="feat rv"><div class="ic">📍</div><h3>الموقع</h3><p>زر مباشر لخرائط جوجل يوصل الضيف للقاعة بضغطة.</p></div>
+      <div class="feat rv"><div class="ic">⏳</div><h3>تقويم وعدّاد</h3><p>عدّ تنازلي حي وإضافة الموعد لتقويم الضيف.</p></div>
+      <div class="feat rv"><div class="ic">🖼️</div><h3>كرت الدعوة</h3><p>صورة دعوة أنيقة جاهزة للمشاركة على الحالة والستوري.</p></div>
+      <div class="feat rv"><div class="ic">📊</div><h3>لوحة تحكم</h3><p>كل الردود والتهاني في مكان واحد مع تصدير القائمة.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEMPLATES ================= -->
+<section class="sec" id="tpl" style="background:linear-gradient(180deg,#fff,var(--tint-1),#fff)">
+  <div class="wrap">
+    <div class="center rv" style="margin-bottom:2.2rem">
+      <span class="eyebrow">القوالب</span>
+      <h2 class="display" style="margin-top:.8rem">لكل مناسبة تصميمها</h2>
+      <p class="lead" style="margin-top:.5rem">اضغط على أي قالب لمعاينته كأنك ضيف</p>
+    </div>
+    <div class="tpl-grid" id="tplGrid">
+      <a class="tpl rv t-garden" href="/i/demo?t=garden" data-t="garden">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/garden.webp')"></div></div>
+        <div class="lab">🌹 حديقة الورود<small>رومانسي — يناسب الجميع</small></div>
+      </a>
+      <a class="tpl rv t-saudi" href="/i/demo?t=saudi" data-t="saudi">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/saudi.webp')"></div></div>
+        <div class="lab">🇸🇦 القاعة السعودية<small>أبيض وذهبي فخم</small></div>
+      </a>
+      <a class="tpl rv t-crystal" href="/i/demo?t=crystal" data-t="crystal">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/crystal.webp')"></div></div>
+        <div class="lab">💎 قاعة الكريستال<small>هادئ وراقٍ</small></div>
+      </a>
+      <a class="tpl rv t-henna-groom" href="/i/demo?t=henna-groom" data-t="henna-groom">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/henna-groom.webp')"></div></div>
+        <div class="lab">✨ حنة العريس<small>عنّابي وذهب · فرحة سودانية</small></div>
+      </a>
+      <a class="tpl rv t-jirtig" href="/i/demo?t=jirtig" data-t="jirtig">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/jirtig.webp')"></div></div>
+        <div class="lab">❤️ ليلة الجرتق<small>فرحة سودانية بالأحمر والذهب</small></div>
+      </a>
+      <a class="tpl rv t-sudan" href="/i/demo?t=sudan" data-t="sudan">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/sudan.webp')"></div></div>
+        <div class="lab">🇸🇩 الجرتق السوداني<small>طابع سوداني أصيل</small></div>
+      </a>
+      <a class="tpl rv t-levant" href="/i/demo?t=levant" data-t="levant">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/levant.webp')"></div></div>
+        <div class="lab">🕊️ قاعة الشام<small>مصر والخليج والشام</small></div>
+      </a>
+      <a class="tpl rv t-men" href="/i/demo?t=saudi-m" data-t="saudi-m">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/men.webp')"></div></div>
+        <div class="lab">🤵 حفل الرجال<small>دعوة باسم العريس</small></div>
+      </a>
+      <a class="tpl rv t-women" href="/i/demo?t=saudi-w" data-t="saudi-w">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/women.webp')"></div></div>
+        <div class="lab">👰 حفل النساء<small>دعوة بصيغة المؤنث</small></div>
+      </a>
+      <a class="tpl rv t-ivory" href="/i/demo?t=ivory" data-t="ivory">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/ivory.webp')"></div></div>
+        <div class="lab">🕯️ العاج الملكي<small>تذهيب كلاسيكي فخم</small></div>
+      </a>
+      <a class="tpl rv t-velvet" href="/i/demo?t=velvet" data-t="velvet">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/velvet.webp')"></div></div>
+        <div class="lab">🥀 المخمل العنّابي<small>درامي — ورد أحمر</small></div>
+      </a>
+      <a class="tpl rv t-thuluth" href="/i/demo?t=thuluth" data-t="thuluth">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/thuluth.webp')"></div></div>
+        <div class="lab">🌙 الذهب والليل<small>أسود وذهب — فخامة صامتة</small></div>
+      </a>
+      <a class="tpl rv t-sunset" href="/i/demo?t=sunset" data-t="sunset">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/sunset.webp')"></div></div>
+        <div class="lab">🌇 غروب المدينة<small>حالم — وردي وبنفسجي</small></div>
+      </a>
+      <a class="tpl rv t-blossom" href="/i/demo?t=blossom" data-t="blossom">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/blossom.webp')"></div></div>
+        <div class="lab">🌸 زهر الياسمين<small>أزرق فاتح — رقّة</small></div>
+      </a>
+      <a class="tpl rv t-marble" href="/i/demo?t=marble" data-t="marble">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/marble.webp')"></div></div>
+        <div class="lab">🏛️ رخام وذهب<small>آرت ديكو حديث</small></div>
+      </a>
+      <a class="tpl rv t-emerald" href="/i/demo?t=emerald" data-t="emerald">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/emerald.webp')"></div></div>
+        <div class="lab">💚 الزمرد الملكي<small>زمردي وتذهيب</small></div>
+      </a>
+      <a class="tpl rv t-terracotta" href="/i/demo?t=terracotta" data-t="terracotta">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/terracotta.webp')"></div></div>
+        <div class="lab">🏺 الطين والسنبلة<small>نقش نوبي أصيل</small></div>
+      </a>
+      <a class="tpl rv t-linen" href="/i/demo?t=linen" data-t="linen">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/linen.webp')"></div></div>
+        <div class="lab">🤍 الكتّان الهادئ<small>بساطة اسكندنافية</small></div>
+      </a>
+      <a class="tpl rv t-lantern" href="/i/demo?t=lantern" data-t="lantern">
+        <div class="swatch"><div class="bg" style="background-image:url('/assets/hero/lantern.webp')"></div></div>
+        <div class="lab">🏮 فانوس الليل<small>كحلي وفوانيس</small></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW ================= -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="center rv" style="margin-bottom:2.2rem">
+      <span class="eyebrow">ثلاث خطوات</span>
+      <h2 class="display" style="margin-top:.8rem">من غير تصميم ولا تعقيد</h2>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <h3>اختر قالبك</h3>
+        <p>الأسماء، التاريخ، المكان وبرنامج المناسبة — وشوف المعاينة مباشرة أثناء الكتابة.</p>
+      </div>
+      <div class="step rv">
+        <h3>ادفع مرة وحدة</h3>
+        <p>اختر التحويل المحلي، وتُفعّل الدعوة بعد التحقق من المبلغ.</p>
+      </div>
+      <div class="step rv">
+        <h3>أرسل الرابط</h3>
+        <p>شارك الرابط على الواتساب، وتابع الحضور والتهاني من لوحتك.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section class="sec" id="pricing" style="background:linear-gradient(180deg,#fff,var(--tint-1),#fff)">
+  <div class="wrap">
+    <div class="center rv" style="margin-bottom:2rem">
+      <span class="eyebrow">السعر</span>
+      <h2 class="display" style="margin-top:.8rem">دفعة واحدة… بلا اشتراك</h2>
+    </div>
+    <div class="price-card rv">
+      <div style="margin-top:1rem">
+        <span class="price-now" id="pNow">٢٠٬٠٠٠ ج.س</span>
+        <div class="muted" style="margin-top:.3rem">للدعوة الواحدة — دفع مرة واحدة</div>
+      </div>
+      <ul class="price-list">
+        <li>افتتاح الدعوة وموسيقى وأنيميشن كامل</li>
+        <li>كرت الدعوة كصورة جاهزة للمشاركة</li>
+        <li>قوالب خاصة لحفل الرجال وحفل النساء</li>
+        <li>تأكيد حضور ودفتر تهاني بلا حدود</li>
+        <li>لوحة تحكم وتصدير قائمة الضيوف</li>
+        <li>تعديل البيانات في أي وقت</li>
+        <li>الرابط يشتغل لين يوم المناسبة وبعده</li>
+      </ul>
+      <a href="/create" class="btn btn-primary btn-lg btn-block">أنشئ دعوتك الآن</a>
+      <p class="muted" id="paymentNote" style="margin-top:.8rem;font-size:.8rem">تحويل محلي — تفعيل بعد التحقق</p>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="center rv" style="margin-bottom:2rem">
+      <h2 class="display">أسئلة شائعة</h2>
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>هل الضيف يحتاج ينزّل تطبيق؟</summary><div class="ans">لا، الدعوة رابط يفتح مباشرة من الواتساب أو أي متصفح، على أندرويد وiPhone.</div></details>
+      <details class="rv"><summary>هل أقدر أعدّل الدعوة بعد ما أرسلها؟</summary><div class="ans">نعم، تعدّل الوقت أو المكان أو البرنامج، والتعديل يظهر للضيوف فوراً بنفس الرابط — إلا القالب فهو يُثبَّت بعد التفعيل.</div></details>
+      <details class="rv"><summary>كيف أعرف مين أكّد حضوره؟</summary><div class="ans">كل ردود الضيوف وعدد المرافقين تظهر في لوحة التحكم الخاصة بك، وتقدر تنزّلها كملف CSV.</div></details>
+      <details class="rv"><summary>هل أقدر أشوف الدعوة قبل الدفع؟</summary><div class="ans">أكيد، صفحة الإنشاء فيها معاينة حيّة لكل تغيير تسويه، وتقدر تفتحها بحجم كامل.</div></details>
+      <details class="rv"><summary>كيف أدفع؟</summary><div class="ans">بالتحويل عبر بنكك أو فوري أو أوكاش، ثم إدخال رقم العملية والرقم المرجعي لمراجعة التحويل وتفعيل الدعوة.</div></details>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="sec" style="padding-top:1rem">
+  <div class="wrap">
+    <div class="cta-band rv">
+      <h2 class="display">جاهزين لليلة العمر؟</h2>
+      <p>دقيقتان وتكون دعوتك جاهزة للإرسال.</p>
+      <div style="margin-top:1.5rem">
+        <a href="/create" class="btn btn-gold btn-lg">ابدأ دعوتك الآن ←</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <div class="row" style="gap:.5rem">
+      <img src="/assets/logo.svg" width="22" height="22" alt="">
+      <b>زَفّة</b> <span>— دعوات إلكترونية للمناسبات</span>
+    </div>
+    <div class="row" style="gap:1.2rem">
+      <a href="/i/demo">مثال حي</a>
+      <a href="/create">إنشاء دعوة</a>
+      <a href="/admin">الإدارة</a>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/zaffa.js?v=60785fa1"></script>
+<script>
+fetch('/api/stats').then(r=>r.json()).then(p=>{
+  const inJ = c => Math.round(c/100) + ' ج.س';
+  const sdMode = p.sd;
+  const now = document.getElementById('pNow');
+  if (sdMode && !p.cardAvailable){
+    now.textContent = inJ(sdMode.price);
+    document.getElementById('paymentNote').textContent = 'بنكك · فوري · أوكاش — التفعيل بعد التحقق من التحويل';
+  } else {
+    now.textContent = money(p.amount, p.currency);
+    if (sdMode) now.insertAdjacentHTML('afterend', `<div class="muted" style="margin-top:.35rem;font-size:.85rem">أو ${inJ(sdMode.price)} بالتحويل المحلي</div>`);
+  }
+  if (p.demoCheckoutEnabled) {
+    const b = document.getElementById('paymentNote');
+    if (b) b.textContent = 'الوضع التجريبي — التفعيل فوري بلا دفع';
+  }
+}).catch(()=>{});
+</script>
+</body>
+</html>

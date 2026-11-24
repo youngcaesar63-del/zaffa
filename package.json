@@ -1,0 +1,20 @@
+{
+  "name": "zaffa",
+  "version": "1.0.0",
+  "private": true,
+  "description": "زَفّة — منصة دعوات زفاف إلكترونية (نسخة تشغيل محلية + نسخة إنتاج PHP)",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node server/server.js"
+  },
+  "dependencies": {
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.6.0"
+  }
+}

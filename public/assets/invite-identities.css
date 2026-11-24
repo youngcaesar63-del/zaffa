@@ -1,0 +1,128 @@
+/* هويات مستقلة لصفحات الدعوة الداخلية؛ لا تغير محتوى العميل أو وظائفه. */
+body[class*="t-"] .heroInv .inner{width:min(100%,620px)}
+body[class*="t-"] .heroInv .meta span{white-space:normal;overflow-wrap:anywhere}
+body[class*="t-"] .is .sub{overflow-wrap:anywhere}
+/* حديقة: بطاقة نباتية داخل الصورة وأرقام مفتوحة */
+body.t-garden .heroInv .inner{padding:2.4rem 1.3rem;border:1px solid #fce9dc;border-radius:190px 190px 12px 12px;background:#26342899}
+body.t-garden .heroInv .inner:before{content:'❧  ✿  ❧';display:block;color:#f5d7bf;font-size:1.5rem;margin-bottom:1rem}
+body.t-garden .cd .u{border:0;background:transparent;box-shadow:none;border-bottom:2px solid var(--accent);border-radius:0}
+body.t-garden .venue-box{border-radius:100px 100px 12px 12px;padding-top:2.4rem}
+/* قاعة سعودية: قوس مركزي، تفاصيل على هيئة أروقة */
+body.t-saudi .heroInv .inner{border:2px solid #e8cd90;padding:3rem 1.4rem 2rem;border-radius:240px 240px 0 0;box-shadow:inset 0 0 0 8px #ffffff20;background:#37280b9e}
+body.t-saudi .heroInv .meta{border-block:1px solid #e8cd90;padding:.9rem 0}
+body.t-saudi .cal,body.t-saudi .rsvp-box{border:3px double var(--accent);border-radius:0}
+/* كريستال: لوح زجاجي جانبي وتخطيط تحريري */
+body.t-crystal .heroInv{place-content:center end;text-align:start}
+body.t-crystal .heroInv .inner{max-width:500px;margin:0;padding:2rem;background:#f8fcffdf;color:#25333e;border-inline-start:5px solid #a7bdc8;box-shadow:0 20px 55px #0004}
+body.t-crystal .heroInv h1,body.t-crystal .heroInv .phrase,body.t-crystal .heroInv .meta{color:#25333e;text-shadow:none}
+body.t-crystal .heroInv h1 .amp{color:#708b9c;display:inline;padding:0 .2em}
+body.t-crystal .heroInv .meta{grid-template-columns:1fr;gap:.5rem}
+body.t-crystal .heroInv .meta>div{display:flex;gap:1rem;align-items:baseline;border-top:1px solid #a7bdc8;padding-top:.3rem}
+body.t-crystal .is h2{text-align:start}body.t-crystal .is .divider{margin-inline-start:0}
+body.t-crystal .cd .u{border:0;border-radius:0;background:#e5eef4;box-shadow:none}
+/* السودان: نسيج هندسي وبطاقات تشبه القماش */
+body.t-sudan .heroInv .inner{padding:2rem 1.2rem;background:#fff6dfec;color:#542714;border-block:10px solid #9f4524;outline:2px solid #e8bc73;outline-offset:-6px}
+body.t-sudan .heroInv h1,body.t-sudan .heroInv .phrase,body.t-sudan .heroInv .meta{color:#542714;text-shadow:none}
+body.t-sudan .heroInv h1 .amp{color:#a54c29}
+body.t-sudan .is.alt{background:#f6e9d6}body.t-sudan .cd .u{border:2px solid #b66a36;border-radius:0;box-shadow:4px 4px 0 #e9c895}
+body.t-sudan .venue-box,body.t-sudan .rsvp-box{border-block:4px double #ad6535;border-radius:0}
+/* بلاد الشام: شريط معلومات على يمين الصورة */
+body.t-levant .heroInv{place-content:end center;padding-bottom:6rem}
+body.t-levant .heroInv .inner{background:#153f35dc;border-inline-start:7px solid #a5c9a9;padding:1.6rem;text-align:start}
+body.t-levant .heroInv .meta{grid-template-columns:1fr;gap:.4rem;margin-inline:0}
+body.t-levant .heroInv .meta>div{display:flex;gap:.7rem;border-bottom:1px solid #ffffff45;padding:.3rem}
+body.t-levant .heroInv h1 .amp{display:inline;margin:0 .3em}
+body.t-levant .is.alt{background:#e8f2ea}body.t-levant .cal{border-radius:0;border:0;border-top:5px solid #3f7d6e}
+/* رجال: لوحة رسمية بتوقيع نحاسي */
+body.t-men .heroInv .inner{padding:2.2rem;border-block:1px solid #d5ad6b;background:#25141acf}
+body.t-men .heroInv .inner:before{content:'✦';color:#d9b878;display:block;font-size:2rem}
+body.t-men .heroInv h1{letter-spacing:.04em}body.t-men .heroInv h1 .amp{display:inline;margin:0 .4em}
+body.t-men .cd .u{background:#29191b;border-color:#ac854c;border-radius:0;box-shadow:none}body.t-men .cd .u b,body.t-men .cd .u span{color:#fff0d6}
+body.t-men .venue-box{border:0;border-inline-start:5px solid #a77f4c;border-radius:0;text-align:start}
+/* نساء: أقواس بتلات وعداد دائري */
+body.t-women .heroInv .inner{padding:2.4rem 1.2rem;background:#67334bbd;border:1px solid #fbe2e9;border-radius:50% 50% 18px 18px}
+body.t-women .heroInv .inner:before{content:'❀  ❀  ❀';color:#f4cad9;display:block;font-size:1.5rem}
+body.t-women .cd .u{border-radius:50%;aspect-ratio:1;display:grid;align-content:center;background:#fff7fa}
+body.t-women .is.alt{background:#fff4f7}.t-women .venue-box{border-radius:60px 12px 60px 12px}
+/* عاج: بطاقة متحفية كلاسيكية */
+body.t-ivory .heroInv .inner{background:#fff9e9ed;color:#4b3a20;padding:2.3rem 1.4rem;border:6px double #b79a5e}
+body.t-ivory .heroInv h1,body.t-ivory .heroInv .phrase,body.t-ivory .heroInv .meta{color:#4b3a20;text-shadow:none}
+body.t-ivory .heroInv h1 .amp{color:#a27e40}.t-ivory .heroInv .meta{border-top:1px solid #c4ac7d;padding-top:1rem}
+body.t-ivory .cal{border:5px double #b79a5e;border-radius:0;box-shadow:none}
+/* مخمل: مسرحية عمودية ومركزية */
+body.t-velvet .heroInv .veil{background:linear-gradient(90deg,#29000cdb,#3d0711a6,#29000cdb)}
+body.t-velvet .heroInv .inner{border-inline:1px solid #d99ca4;padding:2rem 1.3rem}
+body.t-velvet .heroInv h1{font-size:clamp(3rem,11vw,5rem)}
+body.t-velvet .heroInv .meta{grid-template-columns:1fr;border-block:1px solid #e0a9ab;padding:1rem}
+body.t-velvet .cd .u{background:#5a1725;border:0;border-radius:3px;box-shadow:none}body.t-velvet .cd .u b,body.t-velvet .cd .u span{color:#fff0e8}
+/* الثلث: مساحة خطية وخطوط فاصلة */
+body.t-thuluth .heroInv .inner{padding:1rem;border-top:3px double #d3ae54;border-bottom:3px double #d3ae54}
+body.t-thuluth .heroInv h1{font-size:clamp(3.2rem,12vw,5rem);line-height:1.45;color:#ffedb5}
+body.t-thuluth .heroInv .meta>div{border-inline-start:1px solid #c7aa69;padding:.4rem}
+body.t-thuluth .is.alt{background:#f6f0e4}body.t-thuluth .tl .node{transform:rotate(45deg);border-radius:0}
+body.t-thuluth .cal{border:2px solid #a78e52;outline:1px solid #a78e52;outline-offset:4px;border-radius:0}
+/* الغروب: نص على الحافة وبطاقات متراكبة */
+body.t-sunset .heroInv{place-content:end start;text-align:start;padding-bottom:6rem}
+body.t-sunset .heroInv .inner{margin:0;padding:1.3rem;border-inline-start:5px solid #ffd9bd;background:#55213c98}
+body.t-sunset .heroInv h1 .amp{display:inline;margin:0 .25em}body.t-sunset .heroInv .meta{margin-inline:0}
+body.t-sunset .cd .u{border:0;background:#f9e1e9;transform:rotate(-3deg)}body.t-sunset .cd .u:nth-child(even){transform:rotate(3deg);background:#f4d4c5}
+body.t-sunset .venue-box{border-radius:32px 4px 32px 4px}
+/* الياسمين: فواصل زهرية وخلفيات شفافة */
+body.t-blossom .heroInv .inner{padding:2rem 1rem;background:#344f65a8;border-radius:100px 12px 100px 12px}
+body.t-blossom .heroInv .inner:before{content:'✿  ✿  ✿';font-size:1.4rem;color:#eef7ff}
+body.t-blossom .cd .u{border:0;border-radius:50% 50% 8px 8px;background:#eaf4fa;box-shadow:none}
+body.t-blossom .cal{border-radius:25px;background:#f7fcff;border:2px solid #c9deeb}
+/* الرخام: إطار هندسي وحواف حادة */
+body.t-marble .heroInv{place-content:center start;text-align:start}
+body.t-marble .heroInv .inner{margin:0;background:#fffef7ec;color:#373126;border-inline-start:8px solid #aa9059;padding:2rem}
+body.t-marble .heroInv h1,body.t-marble .heroInv .phrase,body.t-marble .heroInv .meta{color:#373126;text-shadow:none}
+body.t-marble .heroInv h1 .amp{display:inline;color:#a08041;margin:0 .3em}
+body.t-marble .heroInv .meta{grid-template-columns:1fr;gap:.4rem;margin-inline:0}
+body.t-marble .heroInv .meta>div{display:flex;gap:1rem;border-top:1px solid #d1c4a8;padding-top:.3rem}
+body.t-marble .is h2{text-align:start}body.t-marble .is .divider{margin-inline-start:0}body.t-marble .cal,body.t-marble .venue-box,body.t-marble .rsvp-box{border-radius:0;box-shadow:7px 7px 0 #e1d7c4}
+/* زمرد: عقد ملكي وتدرجات نباتية */
+body.t-emerald .heroInv .inner{padding:3rem 1rem 1.8rem;background:#0c3a2bd9;border:2px solid #dbca8a;border-radius:220px 220px 6px 6px}
+body.t-emerald .heroInv .inner:before{content:'✦';display:block;color:#dbca8a;font-size:1.8rem}
+body.t-emerald .is.alt{background:#e6f1e8}body.t-emerald .cd .u{background:#185b44;border:1px solid #c0ab6f;border-radius:30px 30px 3px 3px}
+body.t-emerald .cd .u b,body.t-emerald .cd .u span{color:#fff7db}body.t-emerald .venue-box{border:3px double #51916e;border-radius:90px 90px 6px 6px}
+/* تراكوتا: ورق فخاري وختم */
+body.t-terracotta .heroInv .inner{padding:2rem 1rem;background:#f9e9d6e8;color:#4b2414;box-shadow:9px 9px 0 #9a4d2eaa;transform:rotate(-1deg)}
+body.t-terracotta .heroInv h1,body.t-terracotta .heroInv .phrase,body.t-terracotta .heroInv .meta{color:#4b2414;text-shadow:none}
+body.t-terracotta .heroInv h1 .amp{color:#a55230}.t-terracotta .is.alt{background:#f1dfcf}
+body.t-terracotta .cd .u{border:0;background:#e9cbb4;border-radius:2px;box-shadow:none}.t-terracotta .cal{border:0;border-block:6px double #aa5d37;border-radius:0}
+/* كتان: تصميم تحريري هادئ */
+body.t-linen .heroInv{place-content:center start;text-align:start}
+body.t-linen .heroInv .inner{margin:0;padding:2rem;background:#f8f4eae8;color:#423a2d;border-inline-start:1px solid #8a7a63}
+body.t-linen .heroInv h1,body.t-linen .heroInv .phrase,body.t-linen .heroInv .meta{color:#423a2d;text-shadow:none}
+body.t-linen .heroInv h1 .amp{display:inline;margin:0 .3em;color:#92795c}
+body.t-linen .heroInv .meta{grid-template-columns:1fr;gap:.5rem;margin-inline:0}body.t-linen .heroInv .meta>div{display:flex;gap:1rem;border-bottom:1px solid #c3b7a4;padding:.3rem}
+body.t-linen .is h2{text-align:start}body.t-linen .is .divider{margin-inline-start:0}body.t-linen .cd .u{border:0;border-radius:0;box-shadow:none;background:transparent}
+body.t-linen .cal,body.t-linen .venue-box,body.t-linen .rsvp-box{border:0;border-block:1px solid #c7bcab;border-radius:0;box-shadow:none}
+/* فانوس: نجوم وإضاءة ليلية */
+body.t-lantern .heroInv .inner{padding:2rem 1.2rem;border:1px solid #d2ae65;background:#101e36d4;border-radius:18px}
+body.t-lantern .heroInv .inner:before{content:'✧  ☾  ✧';display:block;color:#f0d995;font-size:2rem}
+body.t-lantern .heroInv .meta{border-top:1px solid #bba06e;padding-top:1rem}
+body.t-lantern .cd .u{background:#152841;border:1px solid #baa069;border-radius:30px 30px 5px 5px}body.t-lantern .cd .u b,body.t-lantern .cd .u span{color:#f8e8bc}
+body.t-lantern .venue-box{border:3px double #ad935e;border-radius:8px}
+/* الجرتق: امتداد تراثي أحمر وذهبي */
+body.t-jirtig .heroInv .inner{padding:1.5rem .8rem;background:#fff6e9ec;border-block:6px double #a92c2e;color:#591c22}
+body.t-jirtig .heroInv h1,body.t-jirtig .heroInv .phrase,body.t-jirtig .heroInv .meta{color:#591c22;text-shadow:none}
+body.t-jirtig .heroInv h1 .amp{color:#a92c2e}body.t-jirtig .is.alt{background:#f9e8d5}
+body.t-jirtig .cd .u{border:2px solid #aa3033;border-radius:0;background:#fff8e9;box-shadow:3px 3px 0 #d6b36e}
+body.t-jirtig .venue-box,body.t-jirtig .rsvp-box{border-block:5px double #a92c2e;border-radius:0}
+/* حنة العريس: لوحة حمراء وختم احتفالي */
+body.t-henna-groom .heroInv .inner{background:#4b0c1cdb;border:2px solid #d8ae70;padding:2rem 1rem;box-shadow:inset 0 0 0 6px #d8ae7044}
+body.t-henna-groom .heroInv .inner:before{content:'✦  ✦  ✦';display:block;color:#e7c38b}
+body.t-henna-groom .heroInv .meta{border-block:1px solid #dab57a;padding:1rem 0}
+body.t-henna-groom .is.alt{background:#f5e9dc}body.t-henna-groom .cd .u{background:#61172a;border:1px solid #d6ae70;border-radius:0}
+body.t-henna-groom .cd .u b,body.t-henna-groom .cd .u span{color:#fff2d9}body.t-henna-groom .venue-box{border:3px double #a85050;border-radius:2px}
+@media(max-width:400px){
+ body:is(.t-saudi,.t-ivory,.t-garden,.t-emerald,.t-henna-groom,.t-jirtig,.t-velvet,.t-thuluth,.t-women,.t-men,.t-lantern,.t-blossom,.t-sudan,.t-terracotta) .heroInv .meta>div{justify-content:center}
+ body:is(.t-crystal,.t-marble,.t-linen,.t-levant,.t-sunset) .heroInv .meta>div{justify-content:flex-start}
+ body:is(.t-garden,.t-saudi,.t-emerald,.t-women) .heroInv .inner{padding-inline:1rem}
+ body.t-jirtig .heroInv .inner{padding:.8rem .5rem}
+}
+/* قيم التاريخ والمكان كانت ترث لوناً فاتحاً مستقلاً عن الحاوية. */
+body:is(.t-crystal,.t-marble,.t-linen) .heroInv .meta span{color:#26333a}
+body:is(.t-sudan,.t-terracotta,.t-ivory,.t-jirtig) .heroInv .meta span{color:#4b261d}
+body:is(.t-crystal,.t-marble,.t-linen,.t-levant,.t-sunset,.t-men) .heroInv h1 .amp{padding-inline:.25em}

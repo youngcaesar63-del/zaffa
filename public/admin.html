@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الإدارة — زَفّة</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/base.css?v=60785fa1">
+<style>
+body{background:#f7f5f0;color:#27251f}.wrap.main{width:min(1380px,100% - 3rem);padding:1.5rem 0 5rem}
+.gate{max-width:440px;margin:8vh auto;padding:2.4rem;text-align:start;border-radius:22px;box-shadow:0 18px 60px #3c30201a}
+.gate .logo{margin:0 auto 1rem}.gate h1,.gate .gate-sub{text-align:center}.gate h1{font-size:1.8rem!important}.gate label{display:block;font-weight:700;font-size:.86rem;margin:.8rem 0 .3rem}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-bottom:1px solid #e9e3d8;padding-bottom:1.1rem;margin-bottom:1.5rem}
+.brand{display:flex;align-items:center;gap:.65rem}.brand img{width:38px}.brand strong{font-family:var(--font-display);font-size:1.6rem}.brand span{color:#8a806f;font-size:.8rem}
+.top-actions{display:flex;gap:.5rem;flex-wrap:wrap}.top-actions .btn{padding:.55rem .85rem;font-size:.8rem}
+.hero-admin{display:flex;align-items:end;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}.hero-admin h1{font-size:2.15rem!important}.eyebrow-admin{color:#977440;font-weight:800;font-size:.75rem;letter-spacing:.02em}.hero-admin p{color:#7c766b;font-size:.9rem;margin-top:.25rem}
+.sync{font-size:.78rem;color:#827a6b}.sync:before{content:'';display:inline-block;width:7px;height:7px;border-radius:50%;background:#82a389;margin-inline-end:.5rem}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.85rem;margin-bottom:1.2rem}.stat{background:#fff;border:1px solid #eee8de;border-radius:16px;padding:1.05rem 1.2rem;min-height:125px;box-shadow:0 4px 18px #3c302008}
+.stat-top{display:flex;justify-content:space-between;align-items:center;color:#777064;font-weight:700;font-size:.85rem}.stat-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#f7f1e6;color:#9c7841;font-size:1rem}.stat-value{display:block;font-size:2rem;font-weight:800;line-height:1.2;margin-top:.55rem;color:#28251e}.stat-note{font-size:.75rem;color:#999184}
+.work{display:grid;grid-template-columns:minmax(0,1fr) 265px;gap:1rem;align-items:start}.workspace,.insight{background:#fff;border:1px solid #eee8de;border-radius:18px;box-shadow:0 4px 18px #3c302008;overflow:hidden}.workspace-head{padding:1.25rem 1.3rem 1rem}.workspace-title{display:flex;justify-content:space-between;align-items:start;gap:1rem}.workspace-title h2{font-size:1.15rem}.workspace-title p{font-size:.8rem;color:#8a8274;margin-top:.2rem}.count-pill{background:#f7f2e9;color:#806239;padding:.25rem .7rem;border-radius:30px;white-space:nowrap;font-size:.75rem;font-weight:800}
+.filters{display:grid;grid-template-columns:minmax(200px,1fr) 155px 155px;gap:.6rem;margin-top:1rem}.filters .inp{width:100%;font-size:.83rem;height:44px;background:#faf9f6;border-color:#eae4da}.filters label{display:block;font-size:.73rem;font-weight:800;color:#7b7367;margin-bottom:.3rem}
+.tbl{width:100%;border-collapse:collapse;font-size:.81rem}.tbl th{text-align:start;font-size:.72rem;color:#938a7c;font-weight:800;padding:.8rem 1rem;background:#faf9f6;white-space:nowrap}.tbl td{padding:1rem;border-bottom:1px solid #f0ede7;vertical-align:middle}.tbl tr:last-child td{border-bottom:0}.tbl .nm{font-weight:800;min-width:130px}.tbl .id{font-family:ui-monospace,monospace;font-size:.76rem;color:#82786a;direction:ltr;unicode-bidi:plaintext}.badge{font-size:.71rem;font-weight:800;padding:.3rem .65rem;border-radius:999px;white-space:nowrap}.badge.active{background:#eaf5ee;color:#3c7555}.badge.pending{background:#fbf2df;color:#986c22}.badge.draft{background:#f1f0ed;color:#756d61}.acts{display:flex;gap:.35rem;flex-wrap:wrap}.acts button,.acts a{font-size:.73rem;font-weight:800;padding:.38rem .6rem;border-radius:7px;background:#f5efe3;color:#785925}.acts button:hover,.acts a:hover{background:#ece0cb}.acts button.danger{background:#f8eeec;color:#a33e36}.acts button:disabled{opacity:.5;cursor:wait}.scroll{overflow-x:auto}.empty{padding:3rem!important;text-align:center;color:#91897c}.insight{padding:1.25rem}.insight h2{font-size:1rem}.insight .sub{font-size:.78rem;color:#91897c;margin:.25rem 0 1rem}.method-row{display:flex;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f0ede7;font-size:.84rem}.method-row strong{font-size:1rem}.tip{margin-top:1.1rem;padding:1rem;background:#faf6ed;border-radius:12px;color:#756347;font-size:.78rem;line-height:1.8}.security{margin-bottom:1rem}.notice{font-size:.76rem;color:#a79e8f;text-align:center;padding:1.3rem}
+@media(max-width:1100px){.work{grid-template-columns:1fr}.insight{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.insight .tip{margin:0}}
+@media(max-width:700px){.wrap.main{width:min(100% - 1.4rem,1380px);padding-top:.8rem}.topline{align-items:start;flex-direction:column}.brand span{display:none}.top-actions{width:100%}.top-actions .btn{font-size:.74rem}.hero-admin h1{font-size:1.8rem!important}.stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.stat{padding:.8rem;min-height:105px}.stat-value{font-size:1.6rem}.work{gap:.7rem}.filters{grid-template-columns:1fr 1fr}.filters .search-filter{grid-column:1/-1}.tbl,.tbl tbody,.tbl tr,.tbl td{display:block;width:100%}.tbl thead{display:none}.tbl tr{padding:.7rem 1rem;border-bottom:1px solid #eee8de}.tbl td{display:flex;justify-content:space-between;gap:1rem;border:0;padding:.34rem 0;text-align:end}.tbl td:before{content:attr(data-label);color:#938a7c;font-size:.76rem;font-weight:700;text-align:start;white-space:nowrap}.tbl .nm{min-width:0}.tbl .id{direction:rtl;unicode-bidi:normal}.tbl td:last-child{align-items:center}.tbl .empty{display:block;text-align:center}.tbl .empty:before{display:none}.insight{grid-template-columns:1fr}.gate{margin:4vh auto;padding:1.4rem}}
+</style>
+<link rel="stylesheet" href="/assets/site-refresh.css?v=20261123c">
+</head>
+<body class="site-admin">
+<div class="wrap main">
+
+  <div class="gate card card-pad" id="gate">
+    <img class="logo" src="/assets/logo.svg" width="44" height="44" alt="">
+    <h1 class="display" style="font-size:1.3rem">لوحة الإدارة</h1>
+    <p class="muted gate-sub" style="margin:.4rem 0 1.2rem;font-size:.84rem">مرحبًا بعودتك، أدخل بيانات حساب المدير للمتابعة</p>
+    <form id="loginForm">
+      <label for="username">اسم المستخدم</label>
+      <input class="inp" id="username" type="text" autocomplete="username" required dir="ltr" maxlength="40">
+      <label for="password" style="display:block;margin-top:.7rem">كلمة المرور</label>
+      <input class="inp" id="password" type="password" autocomplete="current-password" required dir="ltr" maxlength="200">
+      <button class="btn btn-primary btn-block" id="enter" type="submit" style="margin-top:.7rem">دخول</button>
+    </form>
+    <p class="err" id="err" role="alert" style="display:none;margin-top:.6rem">اسم المستخدم أو كلمة المرور غير صحيحة</p>
+  </div>
+
+  <div id="panel" class="hide" style="display:grid;gap:1rem">
+    <header class="topline">
+      <div class="brand"><img src="/assets/logo.svg" alt=""><strong>زَفّة</strong><span> / مساحة الإدارة</span></div>
+      <nav class="top-actions" aria-label="إجراءات الإدارة">
+        <button class="btn btn-ghost" id="refresh" type="button">↻ تحديث</button>
+        <button class="btn btn-ghost" id="changeToggle" type="button">تغيير كلمة المرور</button>
+        <button class="btn btn-ghost" id="logout" type="button">تسجيل الخروج</button>
+        <a class="btn btn-primary" href="/">الموقع ↗</a>
+      </nav>
+    </header>
+    <section class="hero-admin"><div><span class="eyebrow-admin">نظرة عامة على أعمالك</span><h1 class="display">لوحة الإدارة</h1><p>كل ما تحتاجه لمتابعة الدعوات وطلبات التفعيل في مكان واحد.</p></div><span class="sync" id="summary">جارٍ تحميل البيانات</span></section>
+    <section class="stats" aria-label="ملخص الدعوات">
+      <div class="stat"><div class="stat-top"><span>إجمالي الدعوات</span><span class="stat-icon">◇</span></div><strong class="stat-value" id="statTotal">—</strong><span class="stat-note">جميع الحالات</span></div>
+      <div class="stat"><div class="stat-top"><span>بانتظار التأكيد</span><span class="stat-icon">◷</span></div><strong class="stat-value" id="statPending">—</strong><span class="stat-note">تحتاج مراجعة التحويل</span></div>
+      <div class="stat"><div class="stat-top"><span>الدعوات المفعّلة</span><span class="stat-icon">✓</span></div><strong class="stat-value" id="statActive">—</strong><span class="stat-note">متاحة للضيوف</span></div>
+      <div class="stat"><div class="stat-top"><span>ردود الضيوف</span><span class="stat-icon">♧</span></div><strong class="stat-value" id="statRsvp">—</strong><span class="stat-note">إجمالي الردود المسجلة</span></div>
+    </section>
+    <form class="card card-pad hide" id="passwordForm">
+      <h2 style="font-size:1rem;margin-bottom:.7rem">تغيير كلمة المرور</h2>
+      <label for="currentPassword">كلمة المرور الحالية</label><input class="inp" id="currentPassword" type="password" autocomplete="current-password" required maxlength="200">
+      <label for="newPassword" style="display:block;margin-top:.7rem">كلمة المرور الجديدة — ١٢ حرفًا على الأقل</label><input class="inp" id="newPassword" type="password" autocomplete="new-password" required minlength="12" maxlength="200">
+      <label for="confirmPassword" style="display:block;margin-top:.7rem">تأكيد كلمة المرور الجديدة</label><input class="inp" id="confirmPassword" type="password" autocomplete="new-password" required minlength="12" maxlength="200">
+      <p class="err" id="pwError" role="alert" style="display:none;margin-top:.6rem"></p>
+      <button class="btn btn-primary" type="submit" style="margin-top:.8rem">حفظ كلمة المرور</button>
+    </form>
+    <div class="work">
+      <section class="workspace" aria-labelledby="requestsTitle">
+        <div class="workspace-head"><div class="workspace-title"><div><h2 id="requestsTitle">الدعوات والطلبات</h2><p>راجع تفاصيل التحويل وطابق الرقم المرجعي قبل التفعيل.</p></div><span class="count-pill" id="resultCount">—</span></div>
+          <div class="filters">
+            <div class="search-filter"><label for="refSearch">البحث</label><input class="inp" id="refSearch" type="search" placeholder="الرقم المرجعي، الاسم أو رقم العملية"></div>
+            <div><label for="statusFilter">الحالة</label><select class="inp" id="statusFilter"><option value="">كل الحالات</option><option value="pending">بانتظار التأكيد</option><option value="active">مفعّلة</option><option value="draft">مسودة</option></select></div>
+            <div><label for="methodFilter">طريقة التحويل</label><select class="inp" id="methodFilter"><option value="">كل الطرق</option><option value="bankak">بنكك</option><option value="fawry">فوري</option><option value="ocash">أوكاش</option><option value="none">بدون تحويل</option></select></div>
+          </div>
+        </div>
+        <div class="scroll"><table class="tbl"><thead><tr><th>المرجع</th><th>الدعوة</th><th>الأسماء</th><th>تاريخ الحفل</th><th>الحالة</th><th>الردود</th><th>تفاصيل التحويل</th><th>إجراء</th></tr></thead><tbody id="rows"></tbody></table></div>
+      </section>
+      <aside class="insight" aria-labelledby="insightTitle"><div><h2 id="insightTitle">ملخص التحويلات</h2><p class="sub">الطلبات التي أُدخلت لها بيانات تحويل</p><div id="methodSummary"></div><div class="method-row"><span>المسودات</span><strong id="draftCount">—</strong></div></div><div class="tip"><strong>قبل التفعيل</strong><br>طابق الرقم المرجعي ورقم العملية واسم المحوِّل، وتأكد من وصول المبلغ إلى الحساب. لا يعني إرسال الطلب تأكيد الدفع.</div></aside>
+    </div>
+    <p class="notice">البيانات المعروضة مبنية على الطلبات المسجّلة، وليست تأكيدًا بنكيًا أو تقريرًا ماليًا.</p>
+  </div>
+</div>
+
+<script src="/assets/zaffa.js?v=60785fa1"></script>
+<script>
+let CSRF = '', PREVIEW_SESSION = '', ADMIN_DATA = null;
+function adminApi(path, opts = {}) {
+  return api(path, {...opts, headers: {...(opts.headers || {}), ...(PREVIEW_SESSION ? {'x-admin-preview-session':PREVIEW_SESSION} : {})}});
+}
+// تنظيف المفتاح القديم إن وُجد من إصدار سابق.
+try { sessionStorage.removeItem('zaffa_admin'); } catch (_) {}
+['refSearch','statusFilter','methodFilter'].forEach(id => $(id).addEventListener(id === 'refSearch' ? 'input' : 'change', () => { if (ADMIN_DATA) render(ADMIN_DATA); }));
+$('refresh').onclick = load;
+$('changeToggle').onclick = () => $('passwordForm').classList.toggle('hide');
+function showGate(message){
+  CSRF = ''; PREVIEW_SESSION = ''; ADMIN_DATA = null; $('panel').classList.add('hide'); $('gate').classList.remove('hide');
+  $('password').value = ''; $('passwordForm').reset(); $('passwordForm').classList.add('hide');
+  $('err').textContent = message || ''; $('err').style.display = message ? 'block' : 'none';
+}
+async function load(){
+  try {
+    const d = await adminApi('/api/admin');
+    $('gate').classList.add('hide'); $('panel').classList.remove('hide'); render(d);
+  } catch (e) { showGate(e.message || 'تعذّر تحميل لوحة الإدارة'); }
+}
+$('loginForm').onsubmit = async e => {
+  e.preventDefault(); $('enter').disabled = true; $('err').style.display = 'none';
+  try {
+    const d = await adminApi('/api/admin/login', {method:'POST', body:JSON.stringify({username:$('username').value.trim(), password:$('password').value})});
+    CSRF = d.csrf; PREVIEW_SESSION = d.previewToken || ''; $('password').value = ''; await load();
+  } catch (err) { showGate(err.message || 'تعذّر تسجيل الدخول'); }
+  finally { $('enter').disabled = false; }
+};
+$('logout').onclick = async () => {
+  try { await adminApi('/api/admin/logout', {method:'POST', headers:{'x-csrf-token':CSRF}, body:'{}'}); showGate('تم تسجيل الخروج'); }
+  catch (err) { showGate(err.message || 'انتهت الجلسة'); }
+};
+$('passwordForm').onsubmit = async e => {
+  e.preventDefault(); const msg = $('pwError'); msg.style.display = 'none';
+  if ($('newPassword').value !== $('confirmPassword').value) { msg.textContent = 'كلمتا المرور غير متطابقتين'; msg.style.display = 'block'; return; }
+  const button = e.currentTarget.querySelector('[type=submit]'); button.disabled = true;
+  try {
+    await adminApi('/api/admin/password', {method:'POST', headers:{'x-csrf-token':CSRF}, body:JSON.stringify({currentPassword:$('currentPassword').value,newPassword:$('newPassword').value})});
+    showGate('تم تغيير كلمة المرور. سجّل الدخول من جديد.');
+  } catch (err) { msg.textContent = err.message || 'تعذّر تغيير كلمة المرور'; msg.style.display = 'block'; }
+  finally { button.disabled = false; }
+};
+(async () => {
+  try { const d = await adminApi('/api/admin/session'); CSRF = d.csrf; await load(); } catch (_) { /* لم يسجّل المدير الدخول بعد */ }
+})();
+
+const METHODS = {bankak:'بنكك', fawry:'فوري', ocash:'أوكاش'};
+const STATUS = {active:'مفعّلة',pending:'قيد التأكيد',draft:'مسودة'};
+const number = n => Number(n || 0).toLocaleString('ar-EG');
+const normalize = s => String(s || '').toLowerCase().replace(/[٠-٩]/g, c => String('٠١٢٣٤٥٦٧٨٩'.indexOf(c))).replace(/[۰-۹]/g, c => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(c)));
+function render(d){
+  ADMIN_DATA = d;
+  const all = Array.isArray(d.invites) ? d.invites : [];
+  $('summary').textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar-EG', {hour:'2-digit',minute:'2-digit'});
+  $('statTotal').textContent = number(all.length);
+  $('statPending').textContent = number(all.filter(i => i.status === 'pending').length);
+  $('statActive').textContent = number(all.filter(i => i.status === 'active').length);
+  $('statRsvp').textContent = number(all.reduce((sum,i) => sum + (Number(i.rsvps) || 0),0));
+  $('draftCount').textContent = number(all.filter(i => i.status === 'draft').length);
+  $('methodSummary').innerHTML = Object.entries(METHODS).map(([key,label]) => `<div class="method-row"><span>${label}</span><strong>${number(all.filter(i => i.bankTxn && (i.bankMethod || 'bankak') === key).length)}</strong></div>`).join('');
+  const query = normalize($('refSearch').value.trim()), status = $('statusFilter').value, method = $('methodFilter').value;
+  const invites = all.filter(i => {
+    const found = !query || [i.referenceNumber,i.id,i.groom,i.bride,i.email,i.bankTxn,i.bankSender].some(x => normalize(x).includes(query));
+    return found && (!status || i.status === status) && (!method || (method === 'none' ? !i.bankTxn : i.bankTxn && (i.bankMethod || 'bankak') === method));
+  });
+  $('resultCount').textContent = number(invites.length) + ' من ' + number(all.length);
+  const tbody = $('rows');
+  if (!invites.length){
+    tbody.innerHTML = `<tr><td class="empty" colspan="8">${all.length ? 'لا توجد نتائج مطابقة. جرّب تعديل البحث أو الفلاتر.' : 'لا توجد دعوات مسجلة حتى الآن.'}</td></tr>`;
+    return;
+  }
+  tbody.innerHTML = invites.map(i => {
+    const id = esc(i.id), statusClass = Object.hasOwn(STATUS,i.status) ? i.status : 'draft';
+    const date = i.date && !isNaN(new Date(i.date)) ? new Date(i.date).toLocaleDateString('ar-EG') : '—';
+    const transfer = i.bankTxn ? esc(METHODS[i.bankMethod] || 'بنكك') + '<br><b dir="auto">' + esc(i.bankTxn) + '</b><br><small dir="auto">' + esc(i.bankSender || '') + '</small>' : '—';
+    return `<tr>
+      <td class="id" data-label="المرجع">${esc(i.referenceNumber || '—')}</td>
+      <td class="id" data-label="معرّف الدعوة">${id}</td>
+      <td class="nm" data-label="الأسماء">${esc([i.groom, i.bride].filter(Boolean).join(' و ') || '—')}</td>
+      <td data-label="تاريخ الحفل">${date}</td>
+      <td data-label="الحالة"><span class="badge ${statusClass}">${esc(STATUS[i.status] || 'غير معروفة')}</span></td>
+      <td data-label="الردود">${number(i.rsvps)}</td>
+      <td data-label="التحويل"><span>${transfer}</span></td>
+      <td data-label="إجراء"><div class="acts">${i.status !== 'active' ? `<button type="button" data-act="activate" data-id="${id}">تفعيل</button>` : `<button type="button" class="danger" data-act="deactivate" data-id="${id}">إيقاف</button>`}<a href="/i/${encodeURIComponent(i.id)}" target="_blank" rel="noopener">عرض</a></div></td>
+    </tr>`;
+  }).join('');
+}
+
+$('rows').onclick = async e => {
+  const b = e.target.closest('[data-act]'); if (!b) return;
+  const item = (ADMIN_DATA?.invites || []).find(i => String(i.id) === b.dataset.id);
+  if (!item) return;
+  const ref = item.referenceNumber || item.id;
+  const message = b.dataset.act === 'activate' ? `هل تأكدت من وصول المبلغ ومطابقة بيانات التحويل للطلب رقم ${ref}؟ سيتم إتاحة الدعوة للضيوف.` : `هل تريد إيقاف الدعوة رقم ${ref}؟ لن يستطيع الضيوف فتحها أو إرسال ردود جديدة حتى إعادة تفعيلها.`;
+  if (!confirm(message)) return;
+  b.disabled = true;
+  try {
+    await adminApi('/api/admin', {
+      method:'POST',
+      headers:{ 'x-csrf-token': CSRF },
+      body: JSON.stringify({ id: b.dataset.id, action: b.dataset.act }),
+    });
+    toast('تم ✓');
+    load();
+  } catch (err) { toast(err.message); b.disabled = false; }
+};
+</script>
+</body>
+</html>

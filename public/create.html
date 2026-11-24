@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>إنشاء دعوة — زَفّة</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/base.css?v=60785fa1">
+<style>
+body{background:linear-gradient(180deg,var(--bg),var(--tint-1))}
+.topbar{
+  position:sticky;top:0;z-index:50;background:rgba(255,250,249,.92);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.7rem}
+.topbar .back{font-size:.85rem;font-weight:700;color:var(--ink-2);display:flex;align-items:center;gap:.3rem}
+.topbar .back:hover{color:var(--rose-deep)}
+.steps-mini{display:flex;gap:.4rem;font-size:.72rem;font-weight:800;color:var(--ink-3)}
+.steps-mini b{color:var(--rose-deep)}
+@media(max-width:700px){.steps-mini{display:none}}
+
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.92fr);gap:1.6rem;align-items:start;padding:1.6rem 0 5rem}
+@media(max-width:1020px){.layout{grid-template-columns:1fr}}
+.col-form{display:grid;gap:1rem}
+.card-h{display:flex;align-items:center;gap:.55rem;margin-bottom:1rem}
+.card-h .n{
+  width:26px;height:26px;border-radius:50%;background:var(--rose);color:#fff;font-size:.78rem;
+  font-weight:800;display:grid;place-content:center;flex:0 0 auto;
+}
+.card-h h2{font-size:1.02rem;font-weight:800}
+.card-h small{color:var(--ink-3);font-size:.76rem;font-weight:500}
+
+/* ---------- templates picker ---------- */
+.tps{display:grid;grid-template-columns:repeat(6,1fr);gap:.5rem}
+@media(max-width:1200px){.tps{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:700px){.tps{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:520px){.tps{grid-template-columns:repeat(2,1fr)}}
+.tp{
+  position:relative;border:2px solid var(--line);border-radius:13px;overflow:hidden;
+  aspect-ratio:4/3;transition:border-color .2s,transform .2s var(--ease),box-shadow .2s;
+  background:#fff;
+}
+.tp:hover{transform:translateY(-2px);box-shadow:var(--sh-1)}
+.tp.on{border-color:var(--rose);box-shadow:0 0 0 3px rgba(168,135,79,.16)}
+.tp .sw{position:absolute;inset:0;overflow:hidden}
+.tp .sw i{position:absolute;inset:0;background-size:cover;background-position:center;display:block;transition:transform .5s var(--ease)}
+.tp:hover .sw i{transform:scale(1.08)}
+.tp .sw.t-garden  i{filter:brightness(.95) saturate(.95)}
+.tp .sw.t-saudi   i{filter:brightness(.88) sepia(.16)}
+.tp .sw.t-crystal i{filter:brightness(.84) saturate(.7)}
+.tp .sw.t-sudan   i{filter:brightness(.84) saturate(1.12) sepia(.1)}
+.tp .sw.t-levant  i{filter:brightness(.82) saturate(1.08)}
+.tp .sw.t-men     i{filter:brightness(.62) saturate(.9)}
+.tp .sw.t-women   i{filter:brightness(.9) saturate(1.05)}
+.tp .sw.t-ivory i{filter:brightness(.97) saturate(.9)}
+.tp .sw.t-velvet i{filter:brightness(.7) saturate(1.15)}
+.tp .sw.t-thuluth i{filter:brightness(.65) saturate(.85)}
+.tp .sw.t-sunset i{filter:brightness(.9) saturate(1.1)}
+.tp .sw.t-blossom i{filter:brightness(.99) saturate(.92)}
+.tp .sw.t-marble i{filter:brightness(.99) saturate(.8)}
+.tp .sw.t-emerald i{filter:brightness(.72) saturate(1.1)}
+.tp .sw.t-terracotta i{filter:brightness(.92) saturate(1.08)}
+.tp .sw.t-linen i{filter:brightness(.98) saturate(.85)}
+.tp .sw.t-lantern i{filter:brightness(.68) saturate(1.1)}
+.tp .nm{position:absolute;inset-inline:0;bottom:0;background:rgba(44,34,48,.82);color:#fff;font-size:.66rem;font-weight:700;padding:.22rem;text-align:center}
+.tp .chk{position:absolute;top:5px;inset-inline-end:5px;width:18px;height:18px;border-radius:50%;background:var(--rose);color:#fff;font-size:.66rem;display:none;place-content:center;font-weight:800}
+.tp.on .chk{display:grid}
+.tp[disabled]{opacity:.42;cursor:not-allowed}
+
+/* ---------- program rows ---------- */
+.prow{display:grid;grid-template-columns:74px 1fr 1.3fr 30px;gap:.4rem;margin-bottom:.45rem;align-items:center}
+@media(max-width:560px){.prow{grid-template-columns:64px 1fr 30px}.prow .pn{grid-column:1/-1}}
+.prow input{padding:.55rem .6rem;border-radius:9px;border:1.5px solid var(--line);font-size:.85rem;width:100%;font-family:inherit}
+.prow input:focus{outline:0;border-color:var(--rose);box-shadow:0 0 0 3px rgba(168,135,79,.12)}
+.icon-btn{width:30px;height:30px;border-radius:8px;display:grid;place-content:center;color:var(--ink-3);font-size:1.1rem;background:var(--tint-1)}
+.icon-btn:hover{background:var(--tint-2);color:var(--err)}
+
+/* ---------- music rows ---------- */
+.mrow{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border-radius:11px;border:1.5px solid var(--line);margin-bottom:.4rem;cursor:pointer;background:#fff}
+.mrow.on{border-color:var(--rose);background:var(--tint-1)}
+.mrow .t{flex:1;min-width:0}
+.mrow .t b{display:block;font-size:.86rem}
+.mrow .t small{font-size:.72rem;color:var(--ink-3)}
+.mrow .p{width:30px;height:30px;border-radius:50%;background:var(--tint-1);display:grid;place-content:center;font-size:.72rem;color:var(--rose-deep);flex:0 0 auto}
+.mrow .p.playing{background:var(--rose);color:#fff}
+.mrow input{position:absolute;opacity:0;pointer-events:none}
+
+/* ---------- preview ---------- */
+.col-prev{position:sticky;top:5.2rem}
+@media(max-width:1020px){.col-prev{position:static}}
+.prev-wrap{
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:.75rem;
+  box-shadow:var(--sh-2);
+}
+.prev-bar{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.55rem;padding-inline:.15rem}
+.prev-bar .t{font-size:.78rem;font-weight:800;color:var(--ink-2);display:flex;align-items:center;gap:.35rem}
+.live{width:7px;height:7px;border-radius:50%;background:var(--ok);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(63,122,92,.5)}50%{opacity:.7;box-shadow:0 0 0 6px rgba(63,122,92,0)}}
+.phone{
+  position:relative;border-radius:22px;overflow:hidden;background:var(--ink);
+  aspect-ratio:9/16;max-height:min(74vh,660px);margin-inline:auto;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);
+}
+.phone iframe{width:100%;height:100%;border:0;display:block;background:#fff}
+.pv-tabs{display:flex;gap:.3rem;margin-top:.55rem;justify-content:center}
+.pv-tabs button{
+  padding:.35rem .85rem;border-radius:999px;font-size:.75rem;font-weight:800;
+  color:var(--ink-3);background:var(--tint-1);transition:background .2s,color .2s;
+}
+.pv-tabs button.on{background:var(--rose);color:#fff}
+
+/* ---------- price bar ---------- */
+.price-bar{
+  position:fixed;inset-inline:0;bottom:0;z-index:55;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-top:1px solid var(--line);
+  box-shadow:0 -8px 30px -18px rgba(44,34,48,.28);
+}
+.price-bar-in{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding-block:.7rem}
+.pb-l .amt{font-size:1.25rem;font-weight:800;line-height:1.1}
+.pb-l .sub{font-size:.72rem;color:var(--ink-3)}
+.pb-r{display:flex;gap:.5rem;flex:0 0 auto}
+@media(max-width:520px){
+  .pb-l .amt{font-size:1.05rem}
+  .pb-r .btn{padding:.7rem 1.1rem;font-size:.85rem}
+}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:200;background:rgba(26,18,22,.86);backdrop-filter:blur(6px);display:none;padding:1rem;overflow:auto}
+.modal.on{display:grid;place-content:center}
+.modal .phone{max-height:88vh;width:min(400px,92vw);aspect-ratio:9/16}
+.modal-bar{position:fixed;top:1rem;inset-inline-end:1rem;z-index:210}
+
+/* ---------- notice ---------- */
+.notice{
+  display:none;padding:.85rem 1.1rem;border-radius:14px;font-size:.86rem;line-height:1.75;
+  background:var(--tint-2);border:1px solid var(--line-2);color:var(--warn);
+}
+.notice.on{display:block}
+.notice.ok{background:var(--ok-soft);border-color:var(--ok-line);color:var(--ok)}
+
+/* ---------- bankak ---------- */
+.bk-rows{display:grid;gap:.45rem;margin:1rem 0;font-size:.86rem}
+.bk-rows div{display:flex;justify-content:space-between;gap:1rem;padding:.5rem .7rem;background:var(--tint-1);border-radius:9px}
+.bk-rows b{font-weight:800}
+</style>
+<link rel="stylesheet" href="/assets/site-refresh.css?v=20261123c">
+</head>
+<body class="site-create">
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <a class="back" href="/">→ الرئيسية</a>
+    <div class="row" style="gap:.5rem">
+      <img src="/assets/logo.svg" width="24" height="24" alt="">
+      <b style="font-size:.95rem">زَفّة</b>
+    </div>
+    <div class="steps-mini"><b>١ البيانات</b> ← ٢ الدفع ← ٣ الإرسال</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="builder-intro"><div><span class="section-kicker">مساحة تصميمك ✦</span><h1 class="display">لنصنع دعوتك معًا</h1><p>اختر ما يشبه فرحتك، وأضف التفاصيل كما تحب.</p></div><span class="intro-note">معاينة مباشرة أثناء التصميم</span></div>
+  <div class="layout">
+
+    <!-- ================= FORM ================= -->
+    <div class="col-form">
+
+      <div class="notice" id="notice"></div>
+
+      <!-- 1. TEMPLATE -->
+      <section class="card card-pad">
+        <div class="card-h"><span class="n">١</span><div><h2>اختر القالب</h2><small>يُثبَّت بعد التفعيل — اختر بعناية</small></div></div>
+        <div class="tps" id="tps"></div>
+        <p id="tplLock" class="muted hide" style="margin-top:.7rem;background:var(--tint-1);border:1px solid var(--line-2);border-radius:11px;padding:.6rem .8rem;font-size:.78rem;line-height:1.7">
+          🔒 قالبك مثبّت — باقي البيانات تقدر تعدّلها في أي وقت.
+        </p>
+      </section>
+
+      <!-- 2. DETAILS -->
+      <section class="card card-pad">
+        <div class="card-h"><span class="n">٢</span><div><h2>تفاصيل المناسبة</h2><small>شوف المعاينة تتحدّث أثناء الكتابة</small></div></div>
+        <div class="grid2">
+          <div class="field" id="fGroom"><label for="groom">اسم العريس</label><input class="inp" id="groom" maxlength="30" placeholder="محمد"></div>
+          <div class="field" id="fBride"><label for="bride">اسم العروس</label><input class="inp" id="bride" maxlength="30" placeholder="سارة"></div>
+        </div>
+        <div class="grid2" style="margin-top:.85rem">
+          <div class="field"><label for="d">تاريخ الحفل</label><input class="inp" id="d" type="date"></div>
+          <div class="field"><label for="tm">الوقت</label><input class="inp" id="tm" type="time" value="19:30"></div>
+        </div>
+        <div class="field" style="margin-top:.85rem"><label for="venue">اسم القاعة</label><input class="inp" id="venue" maxlength="60" placeholder="قاعة الأفراح الكبرى"></div>
+        <div class="field" style="margin-top:.85rem"><label for="address">العنوان</label><input class="inp" id="address" maxlength="90" placeholder="الخرطوم — شارع ..."></div>
+        <div class="field" style="margin-top:.85rem">
+          <label for="mapQuery">موقع خرائط جوجل</label>
+          <input class="inp" id="mapQuery" maxlength="120" placeholder="اتركه فارغًا ليُستخدم اسم القاعة + العنوان">
+          <span class="hint">تقدر تلصق رابط خرائط جوجل مباشرة هنا.</span>
+        </div>
+        <div class="field" style="margin-top:.85rem">
+          <label for="welcome">كلمة الترحيب</label>
+          <textarea class="inp" id="welcome" maxlength="220" rows="3" placeholder="يسعدنا ويشرفنا حضوركم..."></textarea>
+          <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.45rem">
+            <button class="btn btn-ghost" type="button" id="wRefill"
+                    style="padding:.35rem .7rem;font-size:.74rem">✨ اقترح كلمة تناسب القالب</button>
+            <button class="btn btn-ghost" type="button" id="wShort"
+                    style="padding:.35rem .7rem;font-size:.74rem">↻ اقتراح آخر</button>
+          </div>
+        </div>
+        <div class="field" style="margin-top:1rem">
+          <label for="story">رسالة إضافية للضيوف <span class="muted">(اختيارية)</span></label>
+          <textarea class="inp" id="story" maxlength="400" rows="4" placeholder="اكتب رسالة خاصة أو اختر إحدى العبارات المقترحة"></textarea>
+          <span class="hint">تظهر في قسم مستقل داخل الدعوة. يمكنك تعديلها أو حذفها.</span>
+          <label for="writingChoices" style="display:block;margin-top:.7rem;font-size:.82rem">عبارات جاهزة حسب الأسلوب</label>
+          <select class="inp" id="writingChoices"><option value="">اختر عبارة لإضافتها إلى الرسالة</option></select>
+        </div>
+        <div class="grid2" style="margin-top:.85rem">
+          <div class="field"><label for="rsvpBy">آخر موعد للتأكيد</label><input class="inp" id="rsvpBy" maxlength="50" placeholder="نرجو التأكيد قبل ١٥ ديسمبر"></div>
+          <div class="field"><label for="phone">رقم الواتساب (اختياري)</label><input class="inp" id="phone" maxlength="20" placeholder="249xxxxxxxxx" inputmode="tel"></div>
+        </div>
+      </section>
+
+      <!-- 3. PROGRAM -->
+      <section class="card card-pad">
+        <div class="card-h"><span class="n">٣</span><div><h2>برنامج المناسبة</h2><small>حتى ٨ فقرات</small></div></div>
+        <div id="prog"></div>
+        <button class="btn btn-ghost" type="button" id="addP" style="padding:.5rem 1rem;font-size:.82rem;margin-top:.3rem">+ أضف فقرة</button>
+      </section>
+
+      <!-- 4. MUSIC -->
+      <section class="card card-pad">
+        <div class="card-h"><span class="n">٤</span><div><h2>الموسيقى</h2><small>اضغط ▶ للاستماع</small></div></div>
+        <div id="mus"></div>
+        <div class="field" style="margin-top:1rem">
+          <label for="musicFile">أو ارفع موسيقاك الخاصة</label>
+          <input class="inp" id="musicFile" type="file" accept=".mp3,audio/mpeg">
+          <span class="hint">ملف MP3 واحد بحد أقصى ٨ ميغابايت. استخدم موسيقى تملك حق استخدامها. سيُرفع الملف عند حفظ الدعوة. استمع إليه من المشغّل أدناه؛ داخل معاينة التصميم تُستخدم الموسيقى الافتراضية حتى الحفظ.</span>
+          <p id="musicFileStatus" class="hint" aria-live="polite"></p>
+          <audio id="musicPreview" controls style="display:none;width:100%;margin-top:.5rem"></audio>
+        </div>
+      </section>
+
+      <!-- 5. EMAIL -->
+      <section class="card card-pad">
+        <div class="card-h"><span class="n">٥</span><div><h2>بريدك الإلكتروني</h2><small>لاسترجاع رابط لوحة التحكم</small></div></div>
+        <input class="inp" id="email" type="email" maxlength="90" placeholder="you@example.com" dir="ltr" style="text-align:start">
+        <p class="hint" style="margin-top:.4rem">🔒 ما نطلب منك أي صور شخصية، وما نشارك بريدك مع أحد.</p>
+      </section>
+
+      <section class="card card-pad hide" id="ogCard">
+        <div class="card-h"><span class="n">🖼️</span><div><h2>صورة المشاركة</h2><small>تظهر عند مشاركة الرابط على واتساب</small></div></div>
+        <div class="row" style="gap:.6rem;flex-wrap:wrap">
+          <img id="ogPreview" alt="" style="width:96px;border-radius:9px;border:1px solid var(--line);aspect-ratio:5/7;object-fit:cover;background:var(--tint-1)">
+          <div class="grow" style="min-width:150px">
+            <div class="muted" style="font-size:.8rem;line-height:1.7">نولّد كرت الدعوة تلقائيًا. اضغط التحديث بعد تعديل الأسماء أو التاريخ.</div>
+          </div>
+          <button class="btn btn-ghost" id="ogBtn" type="button" style="padding:.5rem 1rem;font-size:.82rem">تحديث الصورة</button>
+        </div>
+      </section>
+
+      <p class="err" id="err" style="display:none"></p>
+    </div>
+
+    <!-- ================= PREVIEW ================= -->
+    <aside class="col-prev">
+      <div class="prev-wrap">
+        <div class="prev-bar">
+          <span class="t"><span class="live"></span> معاينة حيّة</span>
+          <div class="row" style="gap:.4rem">
+            <button class="btn btn-ghost" id="reload" style="padding:.3rem .7rem;font-size:.72rem">تحديث</button>
+            <button class="btn btn-ghost" id="mprev" style="padding:.3rem .7rem;font-size:.72rem">ملء الشاشة</button>
+          </div>
+        </div>
+        <div class="phone"><iframe id="pv" title="معاينة الدعوة" loading="lazy"></iframe></div>
+      </div>
+      <p class="muted center" style="margin-top:.7rem;font-size:.75rem">هذه بالضبط ما سيراه ضيفك 🤍</p>
+    </aside>
+  </div>
+</div>
+
+<!-- ================= PRICE BAR ================= -->
+<div class="price-bar">
+  <div class="wrap price-bar-in">
+    <div class="pb-l">
+      <div class="amt" id="pAmt">—</div>
+      <div class="sub" id="pOld">دفع مرة واحدة</div>
+    </div>
+    <div class="pb-r">
+      <button class="btn btn-ghost hide" id="bkgo" type="button">🇸🇩 التحويل المحلي</button>
+      <button class="btn btn-primary" id="go" type="button">أكمل والدفع</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FULLSCREEN MODAL ================= -->
+<div class="modal" id="modal">
+  <div class="phone"><iframe id="pv2" title="معاينة كاملة"></iframe></div>
+  <button class="btn btn-ghost modal-bar" id="mclose" type="button">إغلاق ✕</button>
+</div>
+
+<!-- ================= BANKAK MODAL ================= -->
+<div class="modal" id="bkModal">
+  <div class="card card-pad" style="width:min(420px,92vw);max-height:90vh;overflow:auto">
+    <div class="card-h"><span class="n">🏦</span><div><h2>الدفع بالتحويل المحلي</h2><small>حوّل المبلغ ثم أرسل رقم العملية</small></div></div>
+    <div class="field" style="margin-bottom:.8rem"><label for="bkMethod">اختر طريقة التحويل</label><select class="inp" id="bkMethod"></select></div>
+    <div class="bk-rows">
+      <div><span>المبلغ</span><b id="bkAmt">—</b></div>
+      <div><span>رقم الحساب</span><b id="bkAcc" dir="ltr">—</b></div>
+      <div><span>اسم المستفيد</span><b id="bkName">—</b></div>
+      <div><span>الرقم المرجعي للدعوة</span><b id="bkRef" dir="ltr">—</b></div>
+    </div>
+    <p class="hint" style="margin:.6rem 0">اكتب الرقم المرجعي في خانة ملاحظة التحويل، إن توفرت، ثم أدخل رقم العملية واسم المحوّل أدناه. التفعيل بعد التحقق من وصول المبلغ.</p>
+    <button class="btn btn-ghost btn-block" id="bkRefCopy" type="button" style="margin-bottom:.5rem">📋 انسخ الرقم المرجعي</button>
+    <button class="btn btn-ghost btn-block" id="bkCopy" type="button" style="margin-bottom:1rem">📋 انسخ رقم الحساب</button>
+    <div class="field" style="margin-bottom:.6rem"><label for="bkTxn">رقم عملية التحويل</label><input class="inp" id="bkTxn" maxlength="40" dir="ltr" placeholder="123456789"></div>
+    <div class="field" style="margin-bottom:1rem"><label for="bkSender">اسم المحوِّل</label><input class="inp" id="bkSender" maxlength="60" placeholder="الاسم كما في الحساب"></div>
+    <div class="row" style="gap:.5rem">
+      <button class="btn btn-ghost grow" id="bkclose" type="button">إلغاء</button>
+      <button class="btn btn-primary grow" id="bkSend" type="button">أرسل وأكمل</button>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/phrases.js?v=express2026"></script>
+<script src="/assets/zaffa.js?v=60785fa1"></script>
+<script src="/assets/card.js?v=joy2026"></script>
+<script>
+/* ==================== الحالة ==================== */
+const EDIT = { id: qs.get('id'), k: qs.get('k') };
+let status = 'draft', referenceNumber = null;
+let PRICE = null;
+let LOCKED = false;   // القالب مثبّت
+let TPL = 'garden';
+
+const TEMPLATES = [
+  { id:'garden', img:'garden', ident:'garden', name:'حديقة الورود' },
+  { id:'saudi', img:'saudi', ident:'saudi', name:'القاعة السعودية' },
+  { id:'crystal', img:'crystal', ident:'crystal', name:'قاعة الكريستال' },
+  { id:'sudan', img:'sudan', ident:'sudan', name:'الجرتق السوداني' },
+  { id:'jirtig', img:'jirtig', ident:'jirtig', name:'ليلة الجرتق' },
+  { id:'henna-groom', img:'henna-groom', ident:'henna-groom', name:'حنة العريس' },
+  { id:'levant', img:'levant', ident:'levant', name:'قاعة الشام' },
+  { id:'saudi-m', img:'men', ident:'men', name:'حفل الرجال' },
+  { id:'saudi-w', img:'women', ident:'women', name:'حفل النساء' },
+  { id:'ivory', img:'ivory', ident:'ivory', name:'العاج الملكي' },
+  { id:'velvet', img:'velvet', ident:'velvet', name:'المخمل العنّابي' },
+  { id:'thuluth', img:'thuluth', ident:'thuluth', name:'الذهب والليل' },
+  { id:'sunset', img:'sunset', ident:'sunset', name:'غروب المدينة' },
+  { id:'blossom', img:'blossom', ident:'blossom', name:'زهر الياسمين' },
+  { id:'marble', img:'marble', ident:'marble', name:'رخام وذهب' },
+  { id:'emerald', img:'emerald', ident:'emerald', name:'الزمرد الملكي' },
+  { id:'terracotta', img:'terracotta', ident:'terracotta', name:'الطين والسنبلة' },
+  { id:'linen', img:'linen', ident:'linen', name:'الكتّان الهادئ' },
+  { id:'lantern', img:'lantern', ident:'lantern', name:'فانوس الليل' },
+];
+TPL = TEMPLATES.some(t => t.id === qs.get('t')) ? qs.get('t') : 'garden';
+const SOLO = { 'saudi-m':'m', 'saudi-w':'w', 'henna-groom':'m' };
+
+const TRACKS = [
+  { id:'',       name:'موسيقى القالب الافتراضية', desc:'تُختار تلقائيًا حسب القالب' },
+  { id:'bridal', name:'موكب العروس',   desc:'وتريات هادئة ورومانسية' },
+  { id:'zaffa',  name:'زفّة حماسية',   desc:'إيقاع أسرع وأكثر حياة' },
+  { id:'night',  name:'ليل وفوانيس',   desc:'مقام حجاز حنيني — يليق بالليل والذهب' },
+  { id:'golden', name:'ذهب وفرح',      desc:'احتفالي فخم — للقوالب الملكية' },
+  { id:'breeze', name:'نسيم',          desc:'هادئ مينيمال — للقوالب الرقيقة' },
+];
+let MUSIC = '';  // '' = تُختار تلقائيًا حسب القالب
+let customFile = null, customPreviewUrl = '', savedMusic = '';
+const MUSIC_MAX = 8 * 1024 * 1024;
+
+let program = [
+  { t:'١٩:٣٠', title:'استقبال الضيوف', note:'فتح الأبواب واستقبال المدعوين' },
+  { t:'٢٠:٣٠', title:'دخول العروسين', note:'الزفّة' },
+  { t:'٢١:٣٠', title:'العشاء', note:'بوفيه عشاء ومشروبات' },
+];
+
+/* ==================== القوالب ==================== */
+function renderTps(){
+  $('tps').innerHTML = TEMPLATES.map(t => `
+    <button class="tp${t.id === TPL ? ' on' : ''}" type="button" data-t="${t.id}"
+            ${LOCKED && t.id !== TPL ? 'disabled' : ''}>
+      <span class="sw t-${t.ident}"><i style="background-image:url('/assets/hero/${t.img}.webp')"></i></span>
+      <span class="nm">${esc(t.name)}</span>
+      <span class="chk">✓</span>
+    </button>`).join('');
+}
+$('tps').addEventListener('click', e => {
+  const b = e.target.closest('.tp'); if (!b) return;
+  if (LOCKED){ toast('القالب يُختار مرة واحدة ولا يتغيّر بعد التفعيل'); return; }
+  setTpl(b.dataset.t);
+});
+
+function setTpl(t, silent){
+  // لا نستبدل نص العميل؛ نغيّر الاقتراح فقط إذا لم يحرّره ولم تكن دعوة محفوظة.
+  const oldSuggestion = PHRASES[TPL]?.welcome;
+  const oldStory = STORY_DEFAULTS[TPL];
+  if (!EDIT.id && $('story').value === oldStory && STORY_DEFAULTS[t]) $('story').value = STORY_DEFAULTS[t];
+  if (!EDIT.id && $('welcome').value === oldSuggestion && PHRASES[t]) $('welcome').value = PHRASES[t].welcome;
+  TPL = t;
+  renderTps();
+  const solo = SOLO[t];
+  $('fGroom').style.display = solo === 'w' ? 'none' : '';
+  $('fBride').style.display = solo === 'm' ? 'none' : '';
+  if (!silent) preview();
+}
+
+function lockTpl(){
+  LOCKED = true;
+  renderTps();
+  $('tplLock').classList.remove('hide');
+}
+
+/* ==================== البرنامج ==================== */
+function renderProg(){
+  $('prog').innerHTML = program.map((p,i) => `
+    <div class="prow">
+      <input value="${esc(p.t)}" data-i="${i}" data-k="t" maxlength="12" placeholder="الوقت" aria-label="الوقت">
+      <input value="${esc(p.title)}" data-i="${i}" data-k="title" maxlength="40" placeholder="الفقرة" aria-label="الفقرة">
+      <input class="pn" value="${esc(p.note)}" data-i="${i}" data-k="note" maxlength="70" placeholder="وصف قصير" aria-label="الوصف">
+      <button class="icon-btn" type="button" data-del="${i}" title="حذف" aria-label="حذف">×</button>
+    </div>`).join('');
+}
+$('prog').addEventListener('input', e => {
+  const t = e.target;
+  if (t.dataset.k){ program[+t.dataset.i][t.dataset.k] = t.value; schedule(); }
+});
+$('prog').addEventListener('click', e => {
+  const d = e.target.dataset.del;
+  if (d !== undefined){ program.splice(+d,1); renderProg(); schedule(); }
+});
+$('addP').onclick = () => {
+  if (program.length >= 8) return toast('الحد الأقصى ٨ فقرات');
+  program.push({ t:'', title:'', note:'' });
+  renderProg();
+};
+
+/* ==================== الموسيقى ==================== */
+function renderMusic(){
+  const tracks = (savedMusic === 'custom' || customFile) ? [...TRACKS, { id:'custom', name:'موسيقاك الخاصة', desc:'الملف الذي اخترته أو حفظته' }] : TRACKS;
+  $('mus').innerHTML = tracks.map(t => `
+    <label class="mrow${t.id === MUSIC ? ' on' : ''}" data-id="${t.id}">
+      <input type="radio" name="mt" ${t.id === MUSIC ? 'checked' : ''}>
+      <span class="t"><b>${esc(t.name)}</b><small>${esc(t.desc)}</small></span>
+      ${t.id && t.id !== 'custom' ? `<button type="button" class="p" data-play="${t.id}" aria-label="استمع">▶</button>` : ''}
+    </label>`).join('');
+}
+let mAudio = null, mPlaying = '';
+function stopTrack(){
+  if (mAudio){ mAudio.pause(); mAudio = null; }
+  mPlaying = '';
+  document.querySelectorAll('#mus .p').forEach(b => { b.classList.remove('playing'); b.textContent = '▶'; });
+}
+function playTrack(id, btn){
+  if (mPlaying === id){ stopTrack(); return; }
+  stopTrack();
+  mAudio = new Audio('/assets/music/' + id + '.mp3');
+  mAudio.play().catch(() => toast('ما قدرنا نشغّل المقطع'));
+  mAudio.onended = stopTrack;
+  mPlaying = id;
+  btn.classList.add('playing'); btn.textContent = '❚❚';
+}
+$('mus').addEventListener('click', e => {
+  const pb = e.target.closest('[data-play]');
+  if (pb){ e.preventDefault(); playTrack(pb.dataset.play, pb); return; }
+  const row = e.target.closest('.mrow');
+  if (row){
+    MUSIC = row.dataset.id;
+    if (MUSIC !== 'custom'){
+      customFile = null; $('musicFile').value = ''; $('musicFileStatus').textContent = '';
+      $('musicPreview').pause(); $('musicPreview').style.display = 'none';
+      if (customPreviewUrl) URL.revokeObjectURL(customPreviewUrl); customPreviewUrl = '';
+    } else if (!customFile && savedMusic === 'custom'){
+      $('musicFileStatus').textContent = 'الموسيقى الخاصة المحفوظة'; showSavedMusic();
+    }
+    renderMusic(); schedule();
+  }
+});
+
+async function showSavedMusic(){
+  try {
+    const r = await fetch(`/api/invites/${EDIT.id}/music`, { headers:{ 'x-edit-key': EDIT.k } });
+    if (!r.ok) throw new Error();
+    if (customPreviewUrl) URL.revokeObjectURL(customPreviewUrl);
+    customPreviewUrl = URL.createObjectURL(await r.blob());
+    $('musicPreview').src = customPreviewUrl; $('musicPreview').style.display = 'block';
+  } catch (_) { $('musicFileStatus').textContent = 'تعذّر تحميل الموسيقى المحفوظة'; }
+}
+
+$('musicFile').addEventListener('change', () => {
+  const file = $('musicFile').files[0];
+  if (!file) return;
+  if (!/\.mp3$/i.test(file.name) || file.size === 0 || file.size > MUSIC_MAX){
+    $('musicFile').value = '';
+    toast('اختر ملف MP3 صالحًا لا يتجاوز ٨ ميغابايت');
+    return;
+  }
+  stopTrack();
+  if (customPreviewUrl) URL.revokeObjectURL(customPreviewUrl);
+  customFile = file; customPreviewUrl = URL.createObjectURL(file);
+  MUSIC = 'custom'; renderMusic();
+  $('musicFileStatus').textContent = 'تم اختيار: ' + file.name;
+  $('musicPreview').src = customPreviewUrl; $('musicPreview').style.display = 'block';
+  schedule();
+});
+
+/* ==================== جمع البيانات ==================== */
+function mkDate(d, t){
+  const off = -new Date(`${d}T${t}`).getTimezoneOffset();
+  const sg = off >= 0 ? '+' : '-';
+  const hh = String(Math.floor(Math.abs(off)/60)).padStart(2,'0');
+  const mm = String(Math.abs(off)%60).padStart(2,'0');
+  return `${d}T${t}:00${sg}${hh}:${mm}`;
+}
+
+function collect(){
+  const v = id => ($(id).value || '').trim();
+  return {
+    groom: v('groom'),
+    bride: v('bride'),
+    date: mkDate(v('d') || '2026-12-18', v('tm') || '19:30'),
+    rsvpBy: v('rsvpBy'),
+    venue: v('venue'),
+    address: v('address'),
+    mapQuery: v('mapQuery'),
+    welcome: v('welcome'),
+    story: v('story'),
+    phone: v('phone'),
+    music: MUSIC,
+    program: program.filter(p => (p.title || '').trim()),
+    photos: [],
+  };
+}
+
+/* ==================== المعاينة ==================== */
+let tmr;
+function schedule(){ clearTimeout(tmr); tmr = setTimeout(preview, 900); }
+
+function preview(){
+  const d = collect();
+  if (!d.groom) d.groom = 'محمد';
+  if (!d.bride) d.bride = 'سارة';
+  // أرسل البيانات إلى الـ iframe عبر postMessage (لا localStorage — يعمل مع أي origin)
+  const src = '/i/demo?preview=1&t=' + encodeURIComponent(TPL) + '&r=' + Date.now();
+  const f = $('pv');
+  f.onload = () => {
+    try {
+      f.contentWindow.postMessage({ type:'zaffa-preview', payload:d, template:TPL }, location.origin);
+    } catch(_){}
+  };
+  f.src = src;
+  if ($('modal').classList.contains('on')){
+    const f2 = $('pv2');
+    f2.onload = () => { try { f2.contentWindow.postMessage({ type:'zaffa-preview', payload:d, template:TPL }, location.origin); } catch(_){} };
+    f2.src = src;
+  }
+}
+
+$('reload').onclick = preview;
+$('mprev').onclick = () => { $('modal').classList.add('on'); preview(); };
+$('mclose').onclick = () => { $('modal').classList.remove('on'); $('pv2').src = 'about:blank'; };
+
+/* ==================== السعر ==================== */
+function updatePrice(){
+  if (!PRICE) return;
+  const amt = PRICE.amount;
+  $('pAmt').textContent = money(amt, PRICE.currency);
+  $('pOld').textContent = 'دفع مرة واحدة';
+
+  if (PRICE.sd && !PRICE.cardAvailable && !PRICE.demoCheckoutEnabled){
+    $('pAmt').textContent = money(PRICE.sd.price, 'sdg');
+    $('pOld').textContent = 'دفع مرة واحدة بالتحويل المحلي';
+  }
+  const bk = $('bkgo');
+  $('go').classList.toggle('hide', !PRICE.cardAvailable && !PRICE.demoCheckoutEnabled);
+  if (PRICE.sd){
+    bk.classList.remove('hide');
+    bk.textContent = '🇸🇩 التحويل المحلي · ' + money(PRICE.sd.price, 'sdg');
+  }
+  if (status === 'active'){
+    $('go').classList.remove('hide');
+    bk.classList.add('hide');
+    $('go').textContent = 'حفظ التعديلات';
+    $('pAmt').textContent = '✓ مفعّلة';
+    $('pOld').textContent = 'أي تعديل يظهر للضيوف فوراً';
+  } else if (status === 'pending'){
+    $('go').classList.remove('hide');
+    bk.classList.add('hide');
+    $('go').textContent = 'حفظ التعديلات';
+    $('pAmt').textContent = '⏳ قيد التأكيد';
+    $('pOld').textContent = 'تحويلك بانتظار المراجعة';
+  }
+}
+
+/* ==================== التحقق والحفظ ==================== */
+function validate(){
+  const miss = [];
+  const solo = SOLO[TPL];
+  if (/@/.test($('groom').value + ' ' + $('bride').value)) miss.push('الأسماء (اكتب الاسم وليس الإيميل)');
+  if (solo !== 'w' && !$('groom').value.trim()) miss.push('اسم العريس');
+  if (solo !== 'm' && !$('bride').value.trim()) miss.push('اسم العروس');
+  if (!$('d').value) miss.push('تاريخ الحفل');
+  if (!$('venue').value.trim()) miss.push('اسم القاعة');
+  const em = $('email').value.trim();
+  if (!em) miss.push('بريدك الإلكتروني');
+  else if (!/^[^@\s]+@[^@\s.]+\.[^@\s]+$/.test(em)) miss.push('بريد إلكتروني صحيح');
+
+  if (miss.length){
+    const e = $('err');
+    e.textContent = 'فضلاً أكمل: ' + miss.join('، ');
+    e.style.display = 'block';
+    e.scrollIntoView({ behavior:'smooth', block:'center' });
+    return false;
+  }
+  $('err').style.display = 'none';
+  return true;
+}
+
+async function save(){
+  const body = { data: collect(), email: $('email').value.trim(), template: TPL };
+  const uploading = MUSIC === 'custom' && !!customFile;
+  if (uploading) body.data.music = savedMusic;
+  if (!EDIT.id){
+    const d = await api('/api/invites', { method:'POST', body: JSON.stringify(body) });
+    EDIT.id = d.id; EDIT.k = d.k; referenceNumber = d.referenceNumber;
+    setLast(EDIT);
+    history.replaceState(null, '', `?id=${d.id}&k=${d.k}`);
+  } else {
+    await api(`/api/invites/${EDIT.id}`, {
+      method:'PUT',
+      headers: { 'x-edit-key': EDIT.k },
+      body: JSON.stringify({ data: body.data, template: TPL }),
+    });
+  }
+  if (uploading){
+    const r = await fetch(`/api/invites/${EDIT.id}/music`, {
+      method:'POST', headers:{ 'content-type':'audio/mpeg', 'x-edit-key': EDIT.k }, body:customFile,
+    });
+    if (!r.ok){
+      const error = await r.json().catch(() => ({}));
+      throw new Error(error.error || 'تعذّر رفع الموسيقى، حاول مرة أخرى');
+    }
+    await api(`/api/invites/${EDIT.id}`, { method:'PUT', headers:{ 'x-edit-key': EDIT.k }, body:JSON.stringify({ data:collect(), template:TPL }) });
+    customFile = null;
+    $('musicFileStatus').textContent = 'تم رفع الموسيقى الخاصة ✓';
+  }
+  savedMusic = MUSIC;
+}
+
+$('go').onclick = async () => {
+  if (!validate()) return;
+  const b = $('go'), label = b.textContent;
+  b.disabled = true; $('bkgo').disabled = true; b.textContent = 'جاري الحفظ…';
+  try {
+    await save();
+    if (status === 'active' || status === 'pending'){
+      toast('تم حفظ التعديلات ✓');
+      b.textContent = label; b.disabled = false; $('bkgo').disabled = false;
+      return;
+    }
+    b.textContent = 'جاري التحويل للدفع…';
+    const d = await api('/api/checkout', { method:'POST', body: JSON.stringify({ id: EDIT.id, k: EDIT.k }) });
+    if (d.alreadyActive){ location.href = `/done?id=${EDIT.id}&k=${EDIT.k}`; return; }
+    location.href = d.url;
+  } catch (e) {
+    toast(e.message, 3500);
+    b.textContent = label; b.disabled = false; $('bkgo').disabled = false;
+  }
+};
+
+/* ==================== بنكك ==================== */
+$('bkgo').onclick = async () => {
+  if (!PRICE || !PRICE.sd) return toast('غير متاح حاليًا');
+  if (!validate()) return;
+  const b = $('bkgo'), label = b.textContent;
+  b.disabled = true; $('go').disabled = true; b.textContent = 'جاري تجهيز الرقم المرجعي…';
+  try {
+    // تُحفظ الدعوة أولًا، ليظهر الرقم قبل إجراء التحويل لا بعده.
+    await save();
+    if (!referenceNumber) throw new Error('تعذّر الحصول على الرقم المرجعي');
+    $('bkAmt').textContent = money(PRICE.sd.price, 'sdg');
+    const methods = PRICE.sd.methods || [{id:'bankak',name:'بنكك',account:PRICE.sd.account}];
+    $('bkMethod').innerHTML = methods.map(m => `<option value="${esc(m.id)}">${esc(m.name)}</option>`).join('');
+    $('bkAcc').textContent = methods[0].account;
+    $('bkName').textContent = PRICE.sd.name || '—';
+    $('bkRef').textContent = String(referenceNumber);
+    $('bkModal').classList.add('on');
+  } catch (e) { toast(e.message || 'تعذّر تجهيز الدعوة', 3500); }
+  finally { b.disabled = false; $('go').disabled = false; b.textContent = label; }
+};
+$('bkclose').onclick = () => $('bkModal').classList.remove('on');
+$('bkMethod').onchange = () => { const method = PRICE.sd.methods.find(m => m.id === $('bkMethod').value); $('bkAcc').textContent = method ? method.account : '—'; };
+$('bkCopy').onclick = () => copyText($('bkAcc').textContent);
+$('bkRefCopy').onclick = () => copyText(String(referenceNumber));
+
+$('bkSend').onclick = async () => {
+  const txn = $('bkTxn').value.trim(), sender = $('bkSender').value.trim();
+  if (!txn || !sender) return toast('اكتب رقم العملية واسم المحوِّل');
+  if (!validate()) { $('bkModal').classList.remove('on'); return; }
+  const b = $('bkSend'); b.disabled = true; b.textContent = 'جاري الإرسال…';
+  try {
+    await save();
+    const d = await api('/api/bankak', { method:'POST', body: JSON.stringify({ id: EDIT.id, k: EDIT.k, txn, sender, method: $('bkMethod').value }) });
+    if (d.alreadyActive){ location.href = `/done?id=${EDIT.id}&k=${EDIT.k}`; return; }
+    if (d.wa) window.open(d.wa, '_blank');
+    location.href = `/done?id=${EDIT.id}&k=${EDIT.k}&bk=1`;
+  } catch (e) {
+    toast(e.message, 3500);
+    b.disabled = false; b.textContent = 'أرسل وأكمل';
+  }
+};
+
+/* ==================== التهيئة ==================== */
+async function init(){
+  renderTps(); renderProg(); renderMusic();
+
+  PRICE = await fetch('/api/stats').then(r => r.json()).catch(() => null);
+
+  if (EDIT.id && EDIT.k){
+    try {
+      const d = await api(`/api/invites/${EDIT.id}?k=${encodeURIComponent(EDIT.k)}`);
+      status = d.status; referenceNumber = d.referenceNumber;
+      if (d.template) TPL = d.template;
+      const x = d.data || {};
+      ['groom','bride','rsvpBy','venue','address','mapQuery','welcome','story','phone'].forEach(id => {
+        if (x[id] != null) $(id).value = x[id];
+      });
+      if (d.email) $('email').value = d.email;
+      const m = String(x.date || '').match(/(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2})/);
+      if (m){ $('d').value = m[1]; $('tm').value = m[2]; }
+      if (Array.isArray(x.program)) program = x.program;
+      if (x.music != null) MUSIC = savedMusic = x.music;
+      if (MUSIC === 'custom'){ $('musicFileStatus').textContent = 'الموسيقى الخاصة محفوظة. يمكنك اختيار ملف آخر لاستبدالها.'; showSavedMusic(); }
+
+      renderProg(); renderMusic();
+
+      if (status === 'active'){ lockTpl(); }
+      if (status === 'active'){ $('notice').className = 'notice ok on'; $('notice').textContent = '✓ دعوتك مفعّلة — أي تعديل يظهر للضيوف فوراً.'; }
+      if (status === 'pending'){ $('notice').className = 'notice on'; $('notice').textContent = '⏳ استلمنا طلب التحويل، وبتتفعّل دعوتك أول ما نتأكد.'; }
+      if (qs.get('canceled')){ $('notice').className = 'notice on'; $('notice').textContent = 'لم يكتمل الدفع. بياناتك محفوظة، تقدر تكمل متى ما حبيت.'; }
+      if (status === 'active' || status === 'pending') $('email').closest('section').style.opacity = '.75';
+    } catch (e) {
+      toast('تعذّر تحميل الدعوة');
+    }
+  } else {
+    const d = new Date(Date.now() + 60*864e5);
+    $('d').value = d.toISOString().slice(0,10);
+    $('welcome').value = PHRASES[TPL]?.welcome || WELCOME_BANK[0];
+    $('story').value = STORY_DEFAULTS[TPL] || '';
+    $('rsvpBy').value = 'نرجو التأكيد قبل ٥ أيام من الموعد';
+  }
+
+  setTpl(TPL, true);
+  updatePrice();
+  preview();
+
+  document.querySelectorAll('#groom,#bride,#d,#tm,#venue,#address,#mapQuery,#welcome,#story,#rsvpBy,#phone')
+    .forEach(el => { el.addEventListener('input', schedule); el.addEventListener('change', schedule); });
+
+  if (status === 'active') initOg();
+}
+
+/* ==================== صورة المشاركة (OG) ==================== */
+async function refreshOgImage(showToastMsg = true){
+  if (!EDIT.id || !EDIT.k) return;
+  const b = $('ogBtn'), label = b.textContent;
+  b.disabled = true; b.textContent = 'جاري التوليد…';
+  try {
+    const blob = await InviteCard.toBlob(collect(), TPL);
+    const buf = await blob.arrayBuffer();
+    const r = await fetch(`/api/invites/${EDIT.id}/og`, {
+      method:'POST',
+      headers:{ 'content-type':'image/png', 'x-edit-key': EDIT.k },
+      body: buf,
+    });
+    if (!r.ok) throw new Error('فشل الرفع');
+    $('ogPreview').src = `/og/${EDIT.id}.png?v=` + Date.now();
+    if (showToastMsg) toast('تم تحديث صورة المشاركة ✓');
+  } catch (e) {
+    toast('تعذّر توليد الصورة');
+  }
+  b.disabled = false; b.textContent = label;
+}
+
+function initOg(){
+  if (!EDIT.id || !EDIT.k || status !== 'active') return;
+  $('ogCard').classList.remove('hide');
+  $('ogPreview').src = `/og/${EDIT.id}.png?v=` + Date.now();
+  $('ogBtn').onclick = () => refreshOgImage(true);
+}
+
+/* استقبل تحديث المعاينة من نفس الصفحة */
+addEventListener('message', e => {
+  if (e.data && e.data.type === 'zaffa-preview-ack'){ /* لا شيء */ }
+});
+
+init();
+
+/* ==================== بنك العبارات ==================== */
+let wIdx = 0;
+const choices = $('writingChoices');
+Object.entries(WRITING_BANK).forEach(([group, phrases]) => {
+  const optgroup = document.createElement('optgroup'); optgroup.label = group;
+  phrases.forEach(text => { const option = document.createElement('option'); option.value = text; option.textContent = text; optgroup.appendChild(option); });
+  choices.appendChild(optgroup);
+});
+choices.addEventListener('change', () => {
+  if (!choices.value) return;
+  const existing = $('story').value.trim();
+  if (existing && !confirm('هل تريد استبدال الرسالة الحالية بالعبارة المختارة؟')) { choices.value = ''; return; }
+  $('story').value = choices.value; choices.value = ''; schedule();
+});
+function tplPhrase(){ return (typeof PHRASES !== 'undefined' && PHRASES[TPL]) || null; }
+function tplName(){ return (TEMPLATES.find(t => t.id === TPL) || {}).name || ''; }
+
+$('wRefill').addEventListener('click', () => {
+  const p = tplPhrase();
+  if (!p) return;
+  $('welcome').value = p.welcome;
+  toast('✨ كلمة ترحيب تناسب قالب «' + tplName() + '»');
+  schedule();
+});
+$('wShort').addEventListener('click', () => {
+  const bank = WELCOME_BANK;
+  if (!bank.length) return;
+  $('welcome').value = bank[wIdx % bank.length];
+  wIdx = (wIdx + 1) % bank.length;
+  toast('اقتراح ترحيب جديد (' + wIdx + '/' + bank.length + ')');
+  schedule();
+});
+</script>
+</body>
+</html>

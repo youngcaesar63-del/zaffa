@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>لوحة التحكم — زَفّة</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/base.css?v=60785fa1">
+<style>
+body{background:linear-gradient(180deg,var(--bg),var(--tint-1))}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,250,249,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.topbar-in{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.7rem;flex-wrap:wrap}
+.main{padding:1.6rem 0 5rem;display:grid;gap:1.2rem}
+
+/* حالة */
+.status-bar{display:flex;align-items:center;gap:.7rem;flex-wrap:wrap;padding:.9rem 1.1rem;border-radius:14px;font-size:.87rem;font-weight:700}
+.status-bar.ok{background:var(--ok-soft);border:1px solid var(--ok-line);color:var(--ok)}
+.status-bar.pending{background:var(--tint-2);border:1px solid var(--line-2);color:var(--warn)}
+.status-bar.draft{background:var(--tint-2);border:1px solid var(--line-2);color:var(--err)}
+
+/* إحصاءات */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem}
+@media(max-width:720px){.kpis{grid-template-columns:repeat(2,1fr)}}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1rem;text-align:center;box-shadow:var(--sh-1)}
+.kpi b{display:block;font-size:1.7rem;font-weight:800;line-height:1.1;color:var(--deep, var(--rose-deep))}
+.kpi span{font-size:.74rem;color:var(--ink-3);font-weight:700}
+
+/* رابط المشاركة */
+.share-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:1.1rem}
+.share-card .url{display:flex;gap:.4rem;margin-top:.6rem}
+.share-card input{flex:1;min-width:0;padding:.7rem .85rem;border-radius:10px;border:1.5px solid var(--line);
+  font-size:.8rem;font-family:ui-monospace,monospace;direction:ltr;text-align:left;background:var(--tint-1)}
+
+/* tabs */
+.tabs{display:flex;gap:.3rem;background:var(--tint-1);padding:.3rem;border-radius:999px;width:max-content;max-width:100%;overflow-x:auto}
+.tabs button{padding:.5rem 1.1rem;border-radius:999px;font-size:.85rem;font-weight:800;color:var(--ink-2);white-space:nowrap}
+.tabs button.on{background:#fff;color:var(--rose-deep);box-shadow:0 3px 10px -5px rgba(0,0,0,.3)}
+.panel{display:none}
+.panel.on{display:block}
+
+/* guests */
+.guest{display:flex;align-items:center;gap:.8rem;padding:.8rem .9rem;border-bottom:1px solid var(--line);font-size:.88rem}
+.guest:last-child{border-bottom:0}
+.guest .who{flex:1;min-width:0}
+.guest .who b{display:block;font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.guest .who small{font-size:.74rem;color:var(--ink-3)}
+.guest .tag{font-size:.72rem;font-weight:800;padding:.2rem .6rem;border-radius:999px;flex:0 0 auto}
+.tag.yes{background:var(--ok-soft);color:var(--ok)}
+.tag.no{background:var(--tint-2);color:var(--err)}
+.guest .n{
+  font-weight:800;color:var(--rose-deep);font-size:.82rem;flex:0 0 auto;
+  background:var(--rose-soft);border-radius:999px;padding:.1rem .55rem;
+}
+.empty{padding:2.4rem 1rem;text-align:center;color:var(--ink-3);font-size:.9rem}
+
+/* wishes */
+.wish{display:flex;gap:.7rem;align-items:flex-start;padding:.85rem .9rem;border-bottom:1px solid var(--line)}
+.wish:last-child{border-bottom:0}
+.wish .body{flex:1;min-width:0}
+.wish b{display:block;font-size:.82rem;color:var(--rose-deep);margin-bottom:.1rem}
+.wish p{font-size:.86rem;color:var(--ink-2);margin:0;line-height:1.7;word-break:break-word}
+.wish.hidden{opacity:.45}
+.wish .del{color:var(--ink-3);font-size:1.1rem;padding:.2rem .4rem;border-radius:6px}
+.wish .del:hover{background:var(--tint-2);color:var(--err)}
+
+/* details */
+.dl{display:grid;gap:.5rem;font-size:.87rem}
+.dl div{display:flex;justify-content:space-between;gap:1rem;padding:.55rem .75rem;background:var(--tint-1);border-radius:9px}
+.dl b{font-weight:800;text-align:start;word-break:break-word}
+</style>
+<link rel="stylesheet" href="/assets/site-refresh.css?v=20261123c">
+</head>
+<body class="site-dashboard">
+
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <div class="row" style="gap:.5rem">
+      <img src="/assets/logo.svg" width="24" height="24" alt="">
+      <b style="font-size:.95rem">زَفّة</b>
+      <span class="muted" style="font-size:.78rem">لوحة التحكم</span>
+    </div>
+    <div class="row" style="gap:.5rem">
+      <a class="btn btn-ghost" id="editBtn" href="#" style="padding:.5rem 1rem;font-size:.82rem">تعديل الدعوة</a>
+      <a class="btn btn-primary hide" id="viewBtn" href="#" target="_blank" rel="noopener" style="padding:.5rem 1rem;font-size:.82rem">شاهد الدعوة</a>
+    </div>
+  </div>
+</div>
+
+<div class="wrap main" id="main">
+
+  <div id="loading" class="card card-pad center">
+    <div class="skel" style="height:22px;width:60%;margin:0 auto .6rem;border-radius:8px"></div>
+    <div class="skel" style="height:16px;width:40%;margin:0 auto;border-radius:8px"></div>
+  </div>
+
+  <div id="errorBox" class="card card-pad center hide">
+    <h2 class="display" style="font-size:1.3rem">تعذّر فتح اللوحة</h2>
+    <p class="lead" style="margin-top:.5rem;font-size:.9rem" id="errMsg">تحقق من الرابط.</p>
+    <a href="/create" class="btn btn-primary" style="margin-top:1rem">أنشئ دعوة جديدة</a>
+  </div>
+
+  <div id="content" class="hide" style="display:grid;gap:1.2rem">
+    <div class="dash-intro"><div><span class="section-kicker">كل تفاصيل فرحتك</span><h1 class="display">لوحة دعوتك</h1><p>تابع حالة الدعوة وردود أحبّتك من مكان واحد.</p></div><div class="dash-orn" aria-hidden="true">✦</div></div>
+    <div class="status-bar ok" id="statusBar">✓ دعوتك مفعّلة</div>
+    <div class="card card-pad">الرقم المرجعي للدعوة: <b id="dashRef" dir="ltr">—</b></div>
+
+    <div class="kpis">
+      <div class="kpi"><b id="kResp">0</b><span>ردود</span></div>
+      <div class="kpi"><b id="kCome">0</b><span>حاضر</span></div>
+      <div class="kpi"><b id="kDecl">0</b><span>معتذر</span></div>
+      <div class="kpi"><b id="kGuests">0</b><span>إجمالي الأشخاص</span></div>
+    </div>
+
+    <div class="share-card hide" id="shareCard">
+      <div class="row" style="justify-content:space-between;gap:.6rem;flex-wrap:wrap">
+        <div>
+          <b style="font-size:.92rem">رابط الدعوة</b>
+          <div class="muted" style="font-size:.76rem">شاركه على الواتساب — كل من يفتحه يرى الدعوة</div>
+        </div>
+        <div class="row" style="gap:.4rem">
+          <button class="btn btn-gold" id="waBtn" style="padding:.5rem 1rem;font-size:.8rem">📲 شارك</button>
+          <button class="btn btn-ghost" id="cardBtn" style="padding:.5rem 1rem;font-size:.8rem">🖼️ كرت الدعوة</button>
+        </div>
+      </div>
+      <div class="url">
+        <input id="inviteUrl" readonly dir="ltr">
+        <button class="btn btn-ghost" id="copyBtn" style="padding:.6rem 1rem;font-size:.8rem">نسخ</button>
+      </div>
+    </div>
+
+    <div class="tabs" id="tabs">
+      <button class="on" data-p="guests">الضيوف</button>
+      <button data-p="wishes">التهاني</button>
+      <button data-p="details">تفاصيل الدعوة</button>
+    </div>
+
+    <div class="card">
+      <div class="panel on" id="pGuests">
+        <div class="row" style="justify-content:space-between;padding:.9rem 1rem;border-bottom:1px solid var(--line)">
+          <b style="font-size:.9rem">قائمة الضيوف</b>
+          <button class="btn btn-ghost" id="csvBtn" style="padding:.4rem .9rem;font-size:.76rem">⬇ تصدير CSV</button>
+        </div>
+        <div id="guestsList"></div>
+      </div>
+
+      <div class="panel" id="pWishes">
+        <div id="wishesList"></div>
+      </div>
+
+      <div class="panel" id="pDetails">
+        <div style="padding:1.1rem">
+          <div class="dl" id="detailsList"></div>
+          <p class="hint" style="margin-top:1rem">🔑 رابط لوحة التحكم هذا هو مفتاحك — لا تشاركه مع أحد.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/assets/phrases.js?v=express2026"></script>
+<script src="/assets/zaffa.js?v=60785fa1"></script>
+<script>
+const id = qs.get('id'), k = qs.get('k');
+let DASH = null;
+const ar = n => String(n).replace(/\d/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+
+if (!id || !k){
+  $('loading').classList.add('hide');
+  $('errorBox').classList.remove('hide');
+  $('errMsg').textContent = 'الرابط ناقص — افتح اللوحة من رابط «لوحة التحكم» الذي ظهر لك بعد الدفع.';
+} else {
+  $('editBtn').href = `/create?id=${id}&k=${encodeURIComponent(k)}`;
+  $('viewBtn').href = `/i/${id}`;
+  $('inviteUrl').value = `${location.origin}/i/${id}`;
+  load();
+}
+
+async function load(){
+  try {
+    DASH = await api(`/api/invites/${id}/dashboard?k=${encodeURIComponent(k)}`);
+    $('loading').classList.add('hide');
+    $('content').classList.remove('hide');
+    render();
+  } catch (e) {
+    $('loading').classList.add('hide');
+    $('errorBox').classList.remove('hide');
+    $('errMsg').textContent = e.message || 'تحقق من الرابط.';
+  }
+}
+
+function render(){
+  $('dashRef').textContent = DASH.referenceNumber || '—';
+  const s = DASH.stats;
+  // أرقام لاتينية واضحة في اللوحة (الصفر العربي ٠ يبدو كنقطة)
+  $('kResp').textContent = s.responses;
+  $('kCome').textContent = s.coming;
+  $('kDecl').textContent = s.declined;
+  $('kGuests').textContent = s.guests;
+
+  const active = DASH.status === 'active';
+  $('viewBtn').classList.toggle('hide', !active);
+  $('shareCard').classList.toggle('hide', !active);
+  const bar = $('statusBar');
+  if (DASH.status === 'active'){
+    bar.className = 'status-bar ok';
+    bar.textContent = '✓ دعوتك مفعّلة وتستقبل الردود';
+  } else if (DASH.status === 'pending'){
+    bar.className = 'status-bar pending';
+    bar.textContent = '⏳ بانتظار تأكيد التحويل — المشاركة والردود متاحة بعد التفعيل';
+  } else {
+    bar.className = 'status-bar draft';
+    bar.textContent = '⚠️ الدعوة غير مفعّلة بعد — أكمل الدفع من صفحة التعديل';
+  }
+
+  /* الضيوف */
+  const gl = $('guestsList');
+  if (!DASH.rsvps.length){
+    gl.innerHTML = `<div class="empty">لا توجد ردود بعد.<br><span style="font-size:.8rem">شارك الرابط مع ضيوفك لتبدأ الردود بالوصول.</span></div>`;
+  } else {
+    gl.innerHTML = DASH.rsvps.map(r => `
+      <div class="guest">
+        <span class="tag ${r.attending ? 'yes' : 'no'}">${r.attending ? 'حاضر' : 'معتذر'}</span>
+        ${r.attending ? `<span class="n">${r.guests} ${r.guests > 2 ? 'أشخاص' : r.guests === 2 ? 'شخصان' : 'شخص'}</span>` : ''}
+        <div class="who">
+          <b>${esc(r.name)}</b>
+          <small>${r.note ? esc(r.note) : new Date(r.createdAt).toLocaleString('ar-EG', { dateStyle:'short', timeStyle:'short' })}</small>
+        </div>
+      </div>`).join('');
+  }
+
+  /* التهاني */
+  const wl = $('wishesList');
+  if (!DASH.wishes.length){
+    wl.innerHTML = `<div class="empty">لا توجد تهاني بعد.</div>`;
+  } else {
+    wl.innerHTML = DASH.wishes.map(w => `
+      <div class="wish ${w.hidden ? 'hidden' : ''}" data-w="${w.id}">
+        <div class="body"><b>${esc(w.name)}</b><p>${esc(w.message)}</p></div>
+        <button class="del" data-del="${w.id}" title="${w.hidden ? 'استرجاع' : 'إخفاء'}" aria-label="${w.hidden ? 'استرجاع' : 'إخفاء'}">${w.hidden ? '↺' : '✕'}</button>
+      </div>`).join('');
+  }
+
+  /* التفاصيل */
+  const d = DASH.data || {};
+  const rows = [
+    ['العريس', d.groom], ['العروس', d.bride],
+    ['التاريخ', d.date ? new Date(d.date).toLocaleString('ar-EG', { dateStyle:'full', timeStyle:'short' }) : '—'],
+    ['القاعة', d.venue], ['العنوان', d.address],
+    ['القالب', DASH.template],
+  ].filter(r => r[1]);
+  $('detailsList').innerHTML = rows.map(r => `<div><span>${esc(r[0])}</span><b>${esc(r[1])}</b></div>`).join('');
+}
+
+/* tabs */
+$('tabs').onclick = e => {
+  const b = e.target.closest('button'); if (!b) return;
+  [...$('tabs').children].forEach(x => x.classList.toggle('on', x === b));
+  ['guests','wishes','details'].forEach(p => {
+    $('p' + p[0].toUpperCase() + p.slice(1)).classList.toggle('on', p === b.dataset.p);
+  });
+};
+
+/* نسخ ومشاركة */
+$('copyBtn').onclick = () => copyText($('inviteUrl').value);
+$('waBtn').onclick = () => {
+  const names = DASH && DASH.data ? [DASH.data.groom, DASH.data.bride].filter(Boolean).join(' و ') : 'حفل زفافنا';
+  const txt = `تشرفنا حضوركم في ${names} 🤍\n${$('inviteUrl').value}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
+};
+
+/* كرت الدعوة PNG */
+$('cardBtn').onclick = async () => {
+  const b = $('cardBtn'), label = b.textContent;
+  b.disabled = true; b.textContent = 'جاري التوليد…';
+  try {
+    if (!window.InviteCard){
+      await new Promise((res, rej) => {
+        const s = document.createElement('script');
+        s.src = '/assets/card.js?v=joy2026'; s.onload = res; s.onerror = rej;
+        document.head.appendChild(s);
+      });
+    }
+    await InviteCard.download(DASH.data, DASH.template, `invitation-${id}.png`);
+    toast('تم تنزيل كرت الدعوة ✓');
+  } catch (e) {
+    toast('تعذّر توليد الكرت');
+  }
+  b.disabled = false; b.textContent = label;
+};
+
+/* CSV */
+$('csvBtn').onclick = async () => {
+  try {
+    const d = await api(`/api/invites/${id}/guests.csv?k=${encodeURIComponent(k)}`);
+    const blob = new Blob([d.csv], { type: 'text/csv;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `guests-${id}.csv`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+    toast('تم تنزيل القائمة ✓');
+  } catch (e) { toast(e.message); }
+};
+
+/* إخفاء تهنئة */
+$('wishesList').onclick = async e => {
+  const b = e.target.closest('[data-del]'); if (!b) return;
+  const wid = b.dataset.del;
+  try {
+    await api(`/api/invites/${id}/wishes/${wid}`, {
+      method: b.closest('.wish').classList.contains('hidden') ? 'PATCH' : 'DELETE', headers:{ 'x-edit-key': k },
+    });
+    toast(b.closest('.wish').classList.contains('hidden') ? 'تم استرجاع التهنئة' : 'تم الإخفاء');
+    load();
+  } catch (err) { toast(err.message); }
+};
+</script>
+</body>
+</html>

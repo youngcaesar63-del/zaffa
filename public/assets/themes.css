@@ -1,0 +1,1199 @@
+/* ==========================================================================
+   زَفّة — أنماط القوالب (٧ هويات بصرية مستقلة)
+   كل قالب يغيّر: الغلاف، الزخارف، الخط، شكل العدّاد، الإطار، الأزرار
+   ========================================================================== */
+
+/* ================== أساس مشترك ================== */
+/* الزخرفة أعلى الغلاف — تُستبدل لكل قالب */
+#cover .orn { width: 180px; height: 40px; margin: 0 auto; display: block; }
+#cover .orn path, #cover .orn line, #cover .orn circle, #cover .orn rect,
+#cover .orn ellipse, #cover .orn polygon {
+  stroke: var(--accent); fill: none; stroke-width: 1.3;
+}
+#cover .orn .fill { fill: var(--accent); stroke: none; }
+
+/* فاصل الأقسام */
+.is .divider { width: 140px; height: 26px; margin: .2rem auto 1.4rem; display: block; }
+.is .divider path, .is .divider line, .is .divider circle {
+  stroke: var(--accent); fill: none; stroke-width: 1.2; opacity: .8;
+}
+
+/* ==========================================================
+   ١) حديقة الورود — garden
+   رومانسي، زخرفة ورد، خط Amiri، إطار مزدوج ناعم
+   ========================================================== */
+body.t-garden #cover {
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fffdfd, #fdeef2 52%, #f7dde4);
+  background-image:linear-gradient(180deg, rgba(255,254,252,.78), rgba(248,244,236,.70) 55%, rgba(238,234,224,.82)), url('/assets/hero/garden.webp');
+}
+body.t-garden #cover .frame {
+  border: 1.5px solid rgba(201,121,140,.34);
+  border-radius: 26px;
+}
+body.t-garden #cover .frame::before { border-radius: 20px; }
+body.t-garden .cov-names { font-family: var(--font-display); }
+body.t-garden #cover::after {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(28% 20% at 12% 18%, rgba(247,179,194,.30), transparent 70%),
+    radial-gradient(24% 18% at 88% 82%, rgba(255,208,218,.34), transparent 70%);
+}
+body.t-garden .seal {
+  background: radial-gradient(circle at 35% 30%, #f6c6d2, #c9798c 55%, #8a3a52);
+}
+body.t-garden .cd .u { border-radius: 16px 16px 6px 6px; }
+body.t-garden .rsvp-box, body.t-garden .venue-box, body.t-garden .cal { border-radius: 20px; }
+body.t-garden .tl .node { border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
+body.t-garden .tl li.lit .node { transform: rotate(-45deg) scale(1.15); }
+body.t-garden .tl li.lit .node::after { content:''; }
+
+/* ===== صورة الغلاف: موضع التركيز حسب القالب ===== */
+body.t-garden  #cover { background-position: center 42%; }
+body.t-saudi   #cover { background-position: center 48%; }
+body.t-crystal #cover { background-position: center 46%; }
+body.t-sudan   #cover { background-position: center 50%; }
+body.t-levant  #cover { background-position: center 55%; }
+body.t-men     #cover { background-position: center 55%; }
+body.t-women   #cover { background-position: center 45%; }
+
+/* ===== فاصل زخرفي بين الاسم والتاريخ (يمنع التلاصق) ===== */
+#cover .cov-names { margin-bottom: 1.3rem; padding-bottom: .3rem; }
+body.t-men .cov-names .amp, body.t-saudi .cov-names .amp { margin: .22rem 0; }
+
+/* ==========================================================
+   ٢) القاعة السعودية — saudi
+   فخم، أقواس إسلامية، ذهبي على أبيض، خط Amiri عريض
+   ========================================================== */
+body.t-saudi #cover {
+  background:
+    radial-gradient(110% 70% at 50% -10%, #fffdf4, #fbf3e2 55%, #efe0bd);
+  background-image:linear-gradient(180deg, rgba(255,255,255,.92), rgba(253,248,236,.86) 55%, rgba(246,236,211,.92)), url('/assets/hero/saudi.webp');
+}
+body.t-saudi #cover .frame {
+  border: 2.5px double rgba(184,145,47,.55);
+  border-radius: 8px;
+}
+body.t-saudi #cover .frame::before {
+  border: 1px solid rgba(184,145,47,.35); border-radius: 4px;
+}
+/* قوس إسلامي خلف الأسماء */
+body.t-saudi #cover::before {
+  content:''; position:absolute; inset-inline:50%; top:14%; width:min(340px,74vw); height:min(430px,58vh);
+  transform: translateX(50%);
+  border: 2px solid rgba(184,145,47,.30);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 42% 42% 0 0;
+  pointer-events:none;
+}
+body.t-saudi .cov-names { font-family: var(--font-display); font-weight: 700; letter-spacing: .01em; }
+body.t-saudi .cov-names .amp { color: #b8912f; font-size: .48em; }
+body.t-saudi .seal {
+  border-radius: 14px;
+  background: linear-gradient(145deg, #e8d19a, #b8912f 50%, #7d6118);
+  transform: rotate(45deg);
+}
+body.t-saudi .seal span { transform: rotate(-45deg); }
+body.t-saudi .seal { animation: none; }
+body.t-saudi .cd .u {
+  border-radius: 4px; border-width: 1.5px;
+  background: linear-gradient(180deg,#fffefb,#fdf7e6);
+  position: relative;
+}
+body.t-saudi .cd .u::before, body.t-saudi .cd .u::after {
+  content:''; position:absolute; inset-inline:0; height:2px;
+  background: linear-gradient(90deg, transparent, #b8912f, transparent);
+}
+body.t-saudi .cd .u::before { top:0 } body.t-saudi .cd .u::after { bottom:0 }
+body.t-saudi .tl::before { background: linear-gradient(#b8912f, rgba(184,145,47,.1)); }
+body.t-saudi .tl .node { border-radius: 2px; transform: rotate(45deg); width: 14px; height: 14px; }
+body.t-saudi .tl li.lit .node { transform: rotate(45deg) scale(1.18); }
+body.t-saudi .rsvp-box, body.t-saudi .venue-box, body.t-saudi .cal { border-radius: 6px; }
+body.t-saudi .seg button.on { border-radius: 4px; }
+body.t-saudi .is h2 { letter-spacing: .01em; }
+
+/* ==========================================================
+   ٣) قاعة الكريستال — crystal
+   حديث، زجاجي، خط Tajawal، حواف حادة، مساحات بيضاء
+   ========================================================== */
+body.t-crystal #cover {
+  background:
+    radial-gradient(90% 60% at 50% 0%, #ffffff, #f3f7fa 55%, #e3ecf3);
+  background-image:linear-gradient(180deg, rgba(250,253,255,.90), rgba(238,245,250,.84) 55%, rgba(226,238,246,.92)), url('/assets/hero/crystal.webp');
+}
+body.t-crystal #cover .frame {
+  border: 1px solid rgba(124,135,148,.30);
+  border-radius: 4px;
+  backdrop-filter: blur(2px);
+}
+body.t-crystal #cover .frame::before {
+  border: 1px solid rgba(124,135,148,.16); border-radius: 2px; inset: 10px;
+}
+/* خطوط ضوئية قطرية */
+body.t-crystal #cover::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background: linear-gradient(115deg,
+    transparent 28%, rgba(255,255,255,.85) 42%, transparent 52%,
+    transparent 62%, rgba(255,255,255,.55) 72%, transparent 82%);
+}
+body.t-crystal .cov-names {
+  font-family: var(--font-body); font-weight: 300; letter-spacing: .06em;
+  font-size: clamp(1.7rem, 7.5vw, 2.5rem); text-transform: none;
+}
+body.t-crystal .cov-names .amp { color: #9aa6b2; font-size: .5em; font-family: var(--font-body); font-style: normal; }
+body.t-crystal .cov-bism { font-family: var(--font-body); font-weight: 500; letter-spacing: .08em; }
+body.t-crystal .seal {
+  border-radius: 4px;
+  background: linear-gradient(150deg, #dfe8ef, #a8b6c3 55%, #6b7885);
+  animation: none;
+  box-shadow: 0 10px 30px -14px rgba(43,51,61,.55), inset 0 1px 0 rgba(255,255,255,.7);
+}
+body.t-crystal .seal span { font-size: 1.5rem; }
+body.t-crystal .cd .u {
+  border-radius: 2px; background: rgba(255,255,255,.72); backdrop-filter: blur(8px);
+  border-color: rgba(124,135,148,.22); box-shadow: none;
+}
+body.t-crystal .cd .u b { font-weight: 400; letter-spacing: -.02em; }
+body.t-crystal .cd .u span { letter-spacing: .1em; }
+body.t-crystal .tl::before { background: linear-gradient(#8e99a5, rgba(142,153,165,.12)); width: 1px; }
+body.t-crystal .tl .node { width: 9px; height: 9px; border-width: 1.5px; inset-inline-start: 19px; }
+body.t-crystal .rsvp-box, body.t-crystal .venue-box, body.t-crystal .cal { border-radius: 3px; box-shadow: none; }
+body.t-crystal .cal .dd.hit { border-radius: 2px; box-shadow: none; }
+body.t-crystal .is h2 { font-family: var(--font-body); font-weight: 300; letter-spacing: .03em; }
+body.t-crystal .finale { background: linear-gradient(160deg, #2b333d, #171d24); }
+body.t-crystal .heroInv .phrase { letter-spacing: .2em; font-size: .72rem; }
+
+/* ==========================================================
+   ٤) الجرتق السوداني — sudan
+   ترابي، نقش سوداني، خط Amiri، إطار بنقوش هندسية
+   ========================================================== */
+body.t-sudan #cover {
+  background:
+    radial-gradient(110% 70% at 50% 0%, #fffdf8, #fdf1e6 55%, #f2dcc2);
+  background-image:linear-gradient(180deg, rgba(255,250,245,.90), rgba(248,238,228,.84) 55%, rgba(243,228,214,.92)), url('/assets/hero/sudan.webp');
+}
+body.t-sudan #cover .frame {
+  border: 2px solid rgba(181,100,46,.45);
+  border-radius: 3px;
+}
+body.t-sudan #cover .frame::before {
+  border: 1px dashed rgba(181,100,46,.40); border-radius: 0; inset: 6px;
+}
+/* شريط نقش سفلي */
+body.t-sudan #cover::before {
+  content:''; position:absolute; inset-inline:14px; bottom:14px; height:22px; pointer-events:none;
+  background-image:
+    linear-gradient(135deg, rgba(181,100,46,.35) 25%, transparent 25%, transparent 75%, rgba(181,100,46,.35) 75%),
+    linear-gradient(45deg, rgba(181,100,46,.35) 25%, transparent 25%, transparent 75%, rgba(181,100,46,.35) 75%);
+  background-size: 16px 16px; background-position: 0 0, 8px 8px;
+  opacity: .55;
+}
+body.t-sudan .cov-names { font-family: var(--font-display); }
+body.t-sudan .cov-bism { color: #8a4520; }
+body.t-sudan .seal {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #e0a662, #b5642e 55%, #6b2f12);
+  animation: none;
+}
+body.t-sudan .cov-orn::after { content: '✿'; }
+body.t-sudan .cd .u {
+  border-radius: 3px;
+  background: linear-gradient(180deg, #fffdf9, #fdf3e9);
+  border-color: rgba(181,100,46,.30);
+}
+body.t-sudan .cd .u b { color: #5a2a12; }
+body.t-sudan .tl::before {
+  background: repeating-linear-gradient(180deg, #b5642e 0 6px, transparent 6px 12px);
+  width: 2px;
+}
+body.t-sudan .tl .node {
+  border-radius: 2px; background: #fdf1e6; border-color: #b5642e;
+  width: 15px; height: 15px;
+}
+body.t-sudan .rsvp-box, body.t-sudan .venue-box, body.t-sudan .cal { border-radius: 4px; }
+body.t-sudan .is h2 { color: #5a2a12; }
+body.t-sudan .finale { background: linear-gradient(160deg, #5a2a12, #2d1408); }
+
+/* ==========================================================
+   ٥) قاعة الشام — levant
+   متوسطي، أقواس حجرية، أخضر زيتوني، خط Tajawal، خطوط رقيقة
+   ========================================================== */
+body.t-levant #cover {
+  background:
+    radial-gradient(100% 70% at 50% 0%, #fefffe, #eef7f3 55%, #d8ece4);
+  background-image:linear-gradient(180deg, rgba(251,255,253,.90), rgba(238,247,243,.84) 55%, rgba(224,240,233,.92)), url('/assets/hero/levant.webp');
+}
+body.t-levant #cover .frame {
+  border: 1px solid rgba(63,125,110,.34);
+  border-radius: 40px 40px 6px 6px;
+}
+body.t-levant #cover .frame::before {
+  border: 1px solid rgba(63,125,110,.16);
+  border-radius: 34px 34px 3px 3px; inset: 9px;
+}
+/* قوس متوسطي */
+body.t-levant #cover::before {
+  content:''; position:absolute; inset-inline:50%; top:11%; width:min(330px,72vw); height:min(400px,55vh);
+  transform: translateX(50%);
+  border: 1.5px solid rgba(63,125,110,.26);
+  border-bottom: 0;
+  border-radius: 50% 50% 0 0 / 55% 55% 0 0;
+  pointer-events:none;
+}
+body.t-levant .cov-names {
+  font-family: var(--font-body); font-weight: 500; letter-spacing: .01em;
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
+}
+body.t-levant .cov-names .amp { color: #3f7d6e; font-family: var(--font-display); font-size: .6em; }
+body.t-levant .seal {
+  border-radius: 50% 50% 6px 6px;
+  background: linear-gradient(160deg, #cfe7dc, #3f7d6e 55%, #1e4438);
+  animation: none;
+}
+body.t-levant .cd .u {
+  border-radius: 14px 14px 3px 3px;
+  border-color: rgba(63,125,110,.24);
+}
+body.t-levant .tl::before { background: linear-gradient(#3f7d6e, rgba(63,125,110,.10)); }
+body.t-levant .tl .node { border-radius: 50% 50% 3px 3px; }
+body.t-levant .rsvp-box, body.t-levant .venue-box, body.t-levant .cal { border-radius: 16px 16px 4px 4px; }
+body.t-levant .is h2 { font-family: var(--font-body); font-weight: 700; }
+body.t-levant .finale { background: linear-gradient(160deg, #1e4438, #12291f); }
+
+/* ==========================================================
+   ٦) حفل الرجال — men
+   داكن، رجولي، نحاسي على عنّابي، خط ثقيل، إطار مستقيم
+   ========================================================== */
+body.t-men #cover {
+  background:
+    radial-gradient(100% 65% at 50% 0%, #3d1a20, #1f0d11 60%, #14080b);
+  color: #f3e7c9;
+  background-image:linear-gradient(180deg, rgba(46,20,26,.54), rgba(38,15,21,.64) 50%, rgba(28,10,15,.74)), url('/assets/hero/men.webp');
+}
+body.t-men #cover .frame { border: 2px solid rgba(200,150,80,.45); border-radius: 2px; }
+body.t-men #cover .frame::before { border: 1px solid rgba(200,150,80,.24); border-radius: 0; inset: 7px; }
+body.t-men .cov-in, body.t-men .cov-bism, body.t-men .cov-date, body.t-men .cov-venue { color: #f3e7c9; }
+body.t-men .cov-bism { color: #d9b878; font-family: var(--font-display); }
+body.t-men .cov-names {
+  color: #f7edd6; font-family: var(--font-display); font-weight: 700;
+  text-shadow: 0 2px 30px rgba(200,150,80,.35);
+}
+body.t-men .cov-date { color: #d9b878; }
+body.t-men .cov-venue { color: rgba(243,231,201,.6); }
+body.t-men .cov-hint { color: rgba(243,231,201,.5); }
+body.t-men .cov-orn { background: linear-gradient(90deg, transparent, #c89650, transparent); }
+body.t-men .seal {
+  border-radius: 3px;
+  background: linear-gradient(150deg, #d9b878, #a8763a 50%, #6b4620);
+  animation: none;
+  box-shadow: 0 12px 34px -12px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.35);
+}
+body.t-men .cd .u { border-radius: 3px; background: rgba(255,255,255,.05); border-color: rgba(200,150,80,.3); }
+body.t-men .cd .u b { color: #f7edd6; }
+body.t-men .cd .u span { color: rgba(243,231,201,.5); }
+body.t-men .tl::before { background: linear-gradient(#c89650, rgba(200,150,80,.15)); }
+body.t-men .tl .node { border-radius: 2px; border-color: #c89650; }
+body.t-men .is h2 { color: #8a5a2a; }
+body.t-men .finale { background: linear-gradient(160deg, #1f0d11, #0c0507); }
+
+/* ==========================================================
+   ٧) حفل النساء — women
+   وردي لؤلؤي، زخرفة ورد متكاثف، خط Amiri مائل، إطار بيضاوي
+   ========================================================== */
+body.t-women #cover {
+  background:
+    radial-gradient(120% 80% at 50% 0%, #fffdfe, #fdeef4 50%, #f8d9e6);
+  background-image:linear-gradient(180deg, rgba(255,252,253,.88), rgba(253,241,245,.82) 55%, rgba(249,229,236,.90)), url('/assets/hero/women.webp');
+}
+body.t-women #cover .frame {
+  border: 1.5px solid rgba(214,140,170,.40);
+  border-radius: 50% 50% 20px 20px / 12% 12% 4% 4%;
+}
+body.t-women #cover .frame::before {
+  border: 1px solid rgba(214,140,170,.22);
+  border-radius: 50% 50% 14px 14px / 11% 11% 3% 3%;
+}
+body.t-women #cover::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(22% 16% at 15% 22%, rgba(246,180,205,.40), transparent 70%),
+    radial-gradient(20% 15% at 85% 30%, rgba(255,214,230,.45), transparent 70%),
+    radial-gradient(26% 18% at 20% 80%, rgba(246,180,205,.30), transparent 70%),
+    radial-gradient(22% 16% at 80% 84%, rgba(255,205,225,.38), transparent 70%);
+}
+body.t-women .cov-names {
+  font-family: var(--font-display); font-style: italic;
+  color: #8a3355;
+}
+body.t-women .cov-names .amp { font-style: normal; color: #d68caa; }
+body.t-women .seal {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ffe0ec, #e0799f 55%, #a84568);
+}
+body.t-women .cd .u {
+  border-radius: 50% 50% 14px 14px / 34% 34% 12px 12px;
+  background: linear-gradient(180deg, #fffdfe, #fdf2f6);
+}
+body.t-women .tl::before { background: linear-gradient(#e0799f, rgba(224,121,159,.14)); }
+body.t-women .tl .node { border-color: #e0799f; }
+body.t-women .rsvp-box, body.t-women .venue-box, body.t-women .cal {
+  border-radius: 22px 22px 8px 8px;
+}
+body.t-women .is h2 { color: #8a3355; }
+body.t-women .finale { background: linear-gradient(160deg, #8a3355, #5c1f37); }
+
+/* ==========================================================
+   حركات الدخول الخاصة بكل قالب
+   ========================================================== */
+@keyframes riseFade { from { opacity:0; transform: translateY(22px) } to { opacity:1; transform:none } }
+@keyframes scaleFade { from { opacity:0; transform: scale(.9) } to { opacity:1; transform:none } }
+@keyframes curtainUp { from { opacity:0; clip-path: inset(50% 0 50% 0) } to { opacity:1; clip-path: inset(0 0 0 0) } }
+
+body.t-garden  .cov-in > * { animation: riseFade .9s var(--ease) backwards; }
+body.t-garden  .cov-in > *:nth-child(2) { animation-delay:.08s }
+body.t-garden  .cov-in > *:nth-child(3) { animation-delay:.16s }
+body.t-garden  .cov-in > *:nth-child(4) { animation-delay:.26s }
+body.t-garden  .cov-in > *:nth-child(5) { animation-delay:.34s }
+
+body.t-saudi   .cov-in > * { animation: scaleFade 1s var(--ease) backwards; }
+body.t-saudi   .cov-in > *:nth-child(3) { animation-delay:.14s }
+body.t-saudi   .cov-in > *:nth-child(4) { animation-delay:.3s }
+
+body.t-crystal .cov-in > * { animation: riseFade .7s linear backwards; }
+
+body.t-sudan   .cov-in > * { animation: riseFade .8s var(--ease) backwards; }
+
+body.t-levant  .cov-in > * { animation: riseFade .85s var(--ease) backwards; }
+
+body.t-men     .cov-names { animation: scaleFade 1.1s var(--ease) backwards; }
+
+body.t-women   .cov-in > * { animation: riseFade 1s var(--ease) backwards; }
+body.t-women   .cov-names { animation: riseFade 1.2s var(--ease) backwards; }
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  body[class*="t-"] .cov-in > * { animation: none !important; }
+}
+
+/* ==========================================================
+   مكوّنات مشتركة تتبع لون القالب — لا القالب الافتراضي
+   ========================================================== */
+/* زر التأكيد الرئيسي: تدرّج من لون القالب */
+.is .btn-primary{
+  background:linear-gradient(135deg,
+    color-mix(in srgb, var(--accent) 72%, #fff),
+    var(--accent) 42%,
+    color-mix(in srgb, var(--accent) 78%, #000));
+  box-shadow:0 10px 24px -10px color-mix(in srgb, var(--accent) 70%, transparent),
+             inset 0 1px 0 rgba(255,255,255,.28);
+}
+.is .btn-primary:hover{
+  box-shadow:0 14px 30px -10px color-mix(in srgb, var(--accent) 80%, transparent);
+}
+/* زر التهنئة: ذهبي مشترك — لكن مقاسات الزوايا تتبع القالب */
+.is .seg button.on{ color:var(--deep); }
+/* عناوين الأقسام: لون القالب */
+.is h2{ color:color-mix(in srgb, var(--accent) 82%, #000); }
+.is .orn-sm path, .is .orn-sm line{ stroke: var(--accent); }
+/* بطاقات: حدود بلون القالب */
+.is .rsvp-box, .is .venue-box{ border-color: color-mix(in srgb, var(--accent) 20%, transparent); }
+/* العدّاد: لون الأرقام */
+.cd .u b{ color:color-mix(in srgb, var(--accent) 80%, #000); }
+body.t-men .cd .u b{ color:#f7edd6; }
+/* أزرار +/− في العدّاد */
+.cnt button{ color:var(--accent); border-color:color-mix(in srgb, var(--accent) 30%, transparent); }
+
+/* ==========================================================
+   هالة خلف نص الغلاف — تضمن قراءة الأسماء فوق الصورة
+   ========================================================== */
+#cover .cov-in { isolation:isolate; }
+#cover .cov-in::before{
+  content:''; position:absolute; inset:-22% -34%; z-index:-1; pointer-events:none;
+  background:radial-gradient(58% 54% at 50% 46%, rgba(255,255,255,.78), rgba(255,255,255,.34) 55%, transparent 76%);
+}
+body.t-men #cover .cov-in::before{
+  background:radial-gradient(58% 54% at 50% 46%, rgba(24,9,13,.74), rgba(24,9,13,.30) 55%, transparent 76%);
+}
+
+/* ==========================================================
+   الجسم الداخلي — كل قالب له ورقته الخاصة لا ورق واحد للجميع
+   ========================================================== */
+body.t-garden  { background:#fdf4f6; }
+body.t-saudi   { background:#fdf8ec; }
+body.t-crystal { background:#f2f7fb; }
+body.t-sudan   { background:#fdf3e9; }
+body.t-levant  { background:#eef7f3; }
+body.t-women   { background:#fdf1f5; }
+/* قالب الرجال: ورق عنّابي داكن مطابق لغلافه */
+body.t-men     { background:#1a0b0f; color:#f3e7c9; }
+body.t-men .is .sub,
+body.t-men .muted{ color:rgba(243,231,201,.62); }
+body.t-men .rsvp-box,
+body.t-men .venue-box,
+body.t-men .cal{ background:#241016; border-color:rgba(200,150,80,.26); color:#f3e7c9; }
+body.t-men .rsvp-box .inp,
+body.t-men .rsvp-box input,
+body.t-men .rsvp-box textarea{ background:#1c0d11; color:#f7edd6; border-color:rgba(200,150,80,.26); }
+body.t-men .rsvp-box::placeholder, body.t-men .inp::placeholder{ color:rgba(243,231,201,.4); }
+body.t-men .wish{ background:#241016; border-color:rgba(200,150,80,.2); }
+body.t-men .wish b{ color:#e8c98e; }
+body.t-men .wish p{ color:rgba(243,231,201,.8); }
+body.t-men .seg{ background:#1c0d11; }
+body.t-men .seg button{ color:rgba(243,231,201,.66); }
+body.t-men .seg button.on{ background:#3a1b22; color:#f7edd6; }
+body.t-men .cnt button{ color:#d9b878; border-color:rgba(200,150,80,.3); }
+body.t-men .finale h2{ color:#f7edd6; }
+
+/* ---- قالب الرجال: الأسطح الفاتحة تصبح داكنة ---- */
+body.t-men .is.alt{ background:#140a0d; border-block-color:rgba(200,150,80,.18); }
+body.t-men .is.alt h2,
+body.t-men .is h2{ color:#e2c48c; }
+body.t-men .cd .u{ background:#241016; border-color:rgba(200,150,80,.28); box-shadow:none; }
+body.t-men .cd .u b{ color:#f7edd6; }
+body.t-men .cd .u span{ color:rgba(243,231,201,.5); }
+body.t-men .cal{ background:#241016; }
+body.t-men .cal .wd, body.t-men .cal .d{ color:rgba(243,231,201,.72); }
+body.t-men .cal .d.on{ background:#c89650; color:#1a0b0f; }
+body.t-men .tl .node{ background:#241016; border-color:#c89650; box-shadow:0 0 0 4px rgba(200,150,80,.12); }
+body.t-men .tl .t, body.t-men .tl li{ color:rgba(243,231,201,.85); }
+body.t-men .tl b{ color:#e8c98e; }
+body.t-men .cnt button{ background:#241016; }
+body.t-men .w, body.t-men .wish{ background:#241016; border-color:rgba(200,150,80,.2); }
+body.t-men .w .n, body.t-men .wish b{ color:#e2c48c; }
+body.t-men .w .m, body.t-men .wish p{ color:rgba(243,231,201,.8); }
+body.t-men .inp, body.t-men input, body.t-men textarea{ background:#1c0d11; color:#f7edd6; border-color:rgba(200,150,80,.26); }
+body.t-men .inp::placeholder{ color:rgba(243,231,201,.38); }
+body.t-men .venue-box{ background:#241016; }
+body.t-men .venue-box b{ color:#f7edd6; }
+
+/* ==========================================================================
+   الهويات العشر المستوحاة من تصاميم عربية معاصرة
+   ========================================================================== */
+
+/* ==========================================================
+   ٨) العاج الملكي — ivory
+   عاجي مُحفَّر، تذهيب كلاسيكي، إطار باروك، خط نسخ فخم
+   ========================================================== */
+body.t-ivory #cover {
+  background: radial-gradient(115% 78% at 50% 0%, #fffdf8, #f8f0e0 54%, #efe1c8);
+  background-image: linear-gradient(180deg,
+    rgba(255,253,247,.86), rgba(250,243,230,.78) 54%, rgba(240,228,206,.88)),
+    url('/assets/hero/ivory.webp');
+  background-position: center 44%;
+}
+body.t-ivory #cover .frame {
+  border: 2px solid rgba(168,128,47,.42);
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 6px rgba(255,252,245,.5), inset 0 0 0 7px rgba(168,128,47,.22);
+}
+body.t-ivory #cover .frame::before {
+  border: 1px solid rgba(168,128,47,.3); border-radius: 2px; inset: 11px;
+}
+body.t-ivory .cov-names {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: .015em;
+  color: #3d3018; text-shadow: 0 1px 0 rgba(255,255,255,.6);
+}
+body.t-ivory .cov-names .amp { color: #a8802f; font-size: .46em; }
+body.t-ivory .cov-bism { color: #8a6a22; letter-spacing: .04em; }
+body.t-ivory .cov-date { color: #a8802f; letter-spacing: .06em; }
+body.t-ivory .seal {
+  border-radius: 4px;
+  background: linear-gradient(150deg, #e6cd93, #a8802f 52%, #6f4f14);
+  animation: none;
+  box-shadow: 0 10px 26px -12px rgba(122,90,28,.7), inset 0 1px 0 rgba(255,255,255,.45);
+}
+body.t-ivory .cd .u { border-radius: 4px; border-color: rgba(168,128,47,.3); }
+body.t-ivory .rsvp-box, body.t-ivory .venue-box, body.t-ivory .cal { border-radius: 5px; }
+body.t-ivory .tl .node { border-radius: 1px; transform: rotate(45deg); width: 13px; height: 13px; }
+body.t-ivory .tl li.lit .node { transform: rotate(45deg) scale(1.2); }
+body.t-ivory .cov-in > * { animation: riseFade 1s var(--ease) backwards; }
+body.t-ivory .cov-names { animation: scaleFade 1.15s var(--ease) backwards; }
+
+/* ==========================================================
+   ٩) المخمل العنّابي — velvet
+   عنّابي داكن مخملي، ورد أحمر، ذهب دافئ، فخامة درامية
+   ========================================================== */
+body.t-velvet #cover {
+  background: radial-gradient(110% 75% at 50% 0%, #5c1220, #38080f 60%, #22050a);
+  background-image: linear-gradient(180deg,
+    rgba(74,13,24,.80), rgba(52,9,17,.86) 55%, rgba(30,5,10,.92)),
+    url('/assets/hero/velvet.webp');
+  background-position: center 52%;
+  color: #fbeee6;
+}
+body.t-velvet #cover .frame { border: 1.5px solid rgba(217,164,164,.5); border-radius: 2px; }
+body.t-velvet #cover .frame::before { border: 1px solid rgba(217,164,164,.26); inset: 8px; border-radius: 0; }
+body.t-velvet .cov-in, body.t-velvet .cov-bism,
+body.t-velvet .cov-date, body.t-velvet .cov-venue { color: #fbeee6; }
+body.t-velvet .cov-bism { color: #e8b9b9; }
+body.t-velvet .cov-names {
+  color: #fff6f0; font-family: var(--font-display); font-weight: 700;
+  text-shadow: 0 3px 26px rgba(168,50,74,.55);
+}
+body.t-velvet .cov-names .amp { color: #d9a4a4; }
+body.t-velvet .cov-date { color: #e8b9b9; letter-spacing: .05em; }
+body.t-velvet .cov-venue, body.t-velvet .cov-hint { color: rgba(251,238,230,.6); }
+body.t-velvet .cov-orn { background: linear-gradient(90deg, transparent, #d9a4a4, transparent); }
+body.t-velvet .seal {
+  background: radial-gradient(circle at 35% 30%, #d0566e, #a8324a 55%, #6d1424);
+  box-shadow: 0 12px 30px -12px rgba(109,20,36,.9), inset 0 1px 0 rgba(255,255,255,.28);
+  animation: none;
+}
+body.t-velvet .cd .u { border-radius: 10px 10px 2px 2px; }
+body.t-velvet .tl .node { border-radius: 50% 50% 50% 0; transform: rotate(-45deg); }
+body.t-velvet .tl li.lit .node { transform: rotate(-45deg) scale(1.15); }
+body.t-velvet .cov-in > * { animation: curtainUp 1.1s var(--ease) backwards; }
+body.t-velvet .cov-names { animation: riseFade 1.25s var(--ease) backwards .1s; }
+
+/* ==========================================================
+   ١٠) الذهب والليل — thuluth
+   أسود عميق، ذهب خالص، أرابيسك هندسي، فخامة صامتة
+   ========================================================== */
+body.t-thuluth #cover {
+  background: radial-gradient(105% 70% at 50% 0%, #2a2418, #171208 62%, #0d0a04);
+  background-image: linear-gradient(180deg,
+    rgba(20,16,8,.86), rgba(16,12,6,.90) 55%, rgba(10,8,3,.94)),
+    url('/assets/hero/thuluth.webp');
+  background-position: center 48%;
+  color: #f3ecd8;
+}
+body.t-thuluth #cover .frame { border: 1px solid rgba(201,162,39,.55); border-radius: 0; }
+body.t-thuluth #cover .frame::before {
+  border: 1px solid rgba(201,162,39,.24); inset: 9px; border-radius: 0;
+}
+body.t-thuluth #cover::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(201,162,39,.12), transparent 30%),
+    radial-gradient(circle at 92% 92%, rgba(201,162,39,.12), transparent 30%);
+}
+body.t-thuluth .cov-in, body.t-thuluth .cov-bism,
+body.t-thuluth .cov-date, body.t-thuluth .cov-venue { color: #f3ecd8; }
+body.t-thuluth .cov-bism { color: #c9a227; letter-spacing: .09em; }
+body.t-thuluth .cov-names {
+  font-family: var(--font-display); font-weight: 700; letter-spacing: .02em;
+  color: #f7ebc4;
+  text-shadow: 0 0 34px rgba(201,162,39,.45), 0 2px 3px rgba(0,0,0,.6);
+}
+body.t-thuluth .cov-names .amp { color: #c9a227; font-size: .44em; }
+body.t-thuluth .cov-date { color: #c9a227; letter-spacing: .13em; }
+body.t-thuluth .cov-venue, body.t-thuluth .cov-hint { color: rgba(243,236,216,.55); }
+body.t-thuluth .cov-orn { background: linear-gradient(90deg, transparent, #c9a227, transparent); }
+body.t-thuluth .seal {
+  border-radius: 0; transform: rotate(45deg);
+  background: linear-gradient(150deg, #f0d888, #c9a227 50%, #7d6110);
+  box-shadow: 0 0 34px -6px rgba(201,162,39,.6), inset 0 1px 0 rgba(255,255,255,.4);
+  animation: none;
+}
+body.t-thuluth .seal span { transform: rotate(-45deg); }
+body.t-thuluth .cd .u { border-radius: 0; border-color: rgba(201,162,39,.36); }
+body.t-thuluth .rsvp-box, body.t-thuluth .venue-box, body.t-thuluth .cal { border-radius: 0; }
+body.t-thuluth .tl .node { border-radius: 0; transform: rotate(45deg); width: 12px; height: 12px; }
+body.t-thuluth .tl li.lit .node { transform: rotate(45deg) scale(1.25); }
+body.t-thuluth .cov-in > * { animation: scaleFade 1.15s var(--ease) backwards; }
+body.t-thuluth .cov-names { animation: curtainUp 1.3s var(--ease) backwards .12s; }
+
+/* ==========================================================
+   ١١) غروب المدينة — sunset
+   تدرّج وردي/بنفسجي، مآذن، فوانيس، رومانسي حالم
+   ========================================================== */
+body.t-sunset #cover {
+  background: linear-gradient(180deg, #f7b8ce, #c2547e 45%, #3d1f45);
+  background-image: linear-gradient(180deg,
+    rgba(255,226,236,.55), rgba(194,84,126,.45) 48%, rgba(61,31,69,.82)),
+    url('/assets/hero/sunset.webp');
+  background-position: center 40%;
+  color: #fff6fa;
+}
+body.t-sunset #cover .frame {
+  border: 1.5px solid rgba(255,240,245,.6);
+  border-radius: 24px 24px 8px 8px;
+}
+body.t-sunset #cover .frame::before {
+  border: 1px solid rgba(255,240,245,.3); inset: 8px;
+  border-radius: 18px 18px 4px 4px;
+}
+body.t-sunset .cov-in, body.t-sunset .cov-bism,
+body.t-sunset .cov-date, body.t-sunset .cov-venue { color: #fff6fa; }
+body.t-sunset .cov-bism { color: #ffe3ee; letter-spacing: .05em; }
+body.t-sunset .cov-names {
+  font-family: var(--font-display); font-weight: 700;
+  text-shadow: 0 4px 30px rgba(61,31,69,.6), 0 1px 2px rgba(61,31,69,.4);
+}
+body.t-sunset .cov-names .amp { color: #ffe3ee; }
+body.t-sunset .cov-date { color: #ffe3ee; letter-spacing: .06em; }
+body.t-sunset .cov-venue, body.t-sunset .cov-hint { color: rgba(255,246,250,.72); }
+body.t-sunset .cov-orn { background: linear-gradient(90deg, transparent, #ffe3ee, transparent); }
+body.t-sunset .seal {
+  background: radial-gradient(circle at 35% 30%, #f6a8c2, #c2547e 55%, #8a3358);
+  box-shadow: 0 14px 34px -12px rgba(61,31,69,.8), inset 0 1px 0 rgba(255,255,255,.4);
+}
+body.t-sunset .cd .u { border-radius: 14px 14px 3px 3px; }
+body.t-sunset .rsvp-box, body.t-sunset .venue-box, body.t-sunset .cal { border-radius: 20px 20px 6px 6px; }
+body.t-sunset .tl .node { border-radius: 50%; }
+body.t-sunset .cov-in > * { animation: riseFade 1.1s var(--ease) backwards; }
+body.t-sunset .seal { animation: breathe 2.6s ease-in-out infinite; }
+
+/* ==========================================================
+   ١٢) زهر الياسمين — blossom
+   أزرق فاتح وأبيض، بوكيه معلّق، رقّة وخفّة
+   ========================================================== */
+body.t-blossom #cover {
+  background: radial-gradient(120% 80% at 50% 0%, #ffffff, #eef5fa 52%, #dde9f2);
+  background-image: linear-gradient(180deg,
+    rgba(255,255,255,.90), rgba(240,247,251,.84) 55%, rgba(223,236,244,.90)),
+    url('/assets/hero/blossom.webp');
+  background-position: center 22%;
+}
+body.t-blossom #cover .frame {
+  border: 1.5px solid rgba(107,143,181,.36);
+  border-radius: 50% 50% 12px 12px / 26% 26% 3% 3%;
+}
+body.t-blossom #cover .frame::before {
+  border: 1px solid rgba(107,143,181,.18); inset: 9px;
+  border-radius: 50% 50% 8px 8px / 26% 26% 2% 2%;
+}
+body.t-blossom .cov-names {
+  font-family: var(--font-body); font-weight: 400; letter-spacing: .01em;
+  color: #2b4157;
+}
+body.t-blossom .cov-names .amp { color: #6b8fb5; font-size: .5em; font-weight: 300; }
+body.t-blossom .cov-bism { color: #6b8fb5; letter-spacing: .07em; }
+body.t-blossom .cov-date { color: #6b8fb5; letter-spacing: .07em; font-weight: 600; }
+body.t-blossom .seal {
+  background: radial-gradient(circle at 35% 30%, #dfeaf4, #6b8fb5 55%, #456b8f);
+  box-shadow: 0 14px 32px -14px rgba(69,107,143,.6), inset 0 1px 0 rgba(255,255,255,.55);
+}
+body.t-blossom .cd .u { border-radius: 999px 999px 8px 8px; }
+body.t-blossom .rsvp-box, body.t-blossom .venue-box, body.t-blossom .cal { border-radius: 22px; }
+body.t-blossom .tl .node { border-radius: 50%; width: 16px; height: 16px; border-width: 2px; }
+body.t-blossom .cov-in > * { animation: riseFade 1.2s var(--ease) backwards; }
+body.t-blossom .cov-names { animation: scaleFade 1.4s var(--ease) backwards .1s; }
+
+/* ==========================================================
+   ١٣) رخام وذهب — marble
+   رخام أبيض، خطوط ذهبية آرت ديكو، حداثة راقية
+   ========================================================== */
+body.t-marble #cover {
+  background: radial-gradient(120% 80% at 50% 0%, #ffffff, #f6f4ef 54%, #e9e4d8);
+  background-image: linear-gradient(180deg,
+    rgba(255,255,255,.88), rgba(249,247,241,.82) 54%, rgba(235,230,218,.90)),
+    url('/assets/hero/marble.webp');
+  background-position: center 46%;
+}
+body.t-marble #cover .frame {
+  border: 1px solid rgba(154,129,73,.45);
+  border-radius: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+body.t-marble #cover .frame::before {
+  border: 1px solid rgba(154,129,73,.22); inset: 10px; border-radius: 0;
+}
+body.t-marble #cover::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(135deg, transparent 46%, rgba(154,129,73,.10) 46.3%, transparent 46.6%),
+    linear-gradient(45deg, transparent 46%, rgba(154,129,73,.08) 46.3%, transparent 46.6%);
+}
+body.t-marble .cov-names {
+  font-family: var(--font-body); font-weight: 300; letter-spacing: .10em;
+  color: #332c1e;
+}
+body.t-marble .cov-names .amp { color: #9a8149; font-size: .46em; font-weight: 300; }
+body.t-marble .cov-bism { color: #9a8149; letter-spacing: .14em; }
+body.t-marble .cov-date { color: #7a6535; letter-spacing: .16em; font-weight: 600; }
+body.t-marble .seal {
+  border-radius: 0;
+  background: linear-gradient(150deg, #e4d5ae, #9a8149 52%, #5f4f26);
+  animation: none;
+  box-shadow: 0 12px 30px -14px rgba(107,90,48,.6), inset 0 1px 0 rgba(255,255,255,.5);
+}
+body.t-marble .cd .u { border-radius: 0; border-color: rgba(154,129,73,.3); }
+body.t-marble .rsvp-box, body.t-marble .venue-box, body.t-marble .cal { border-radius: 0; }
+body.t-marble .tl .node { border-radius: 0; width: 12px; height: 12px; }
+body.t-marble .cov-in > * { animation: riseFade .95s linear backwards; }
+
+/* ==========================================================
+   ١٤) الزمرد الملكي — emerald
+   زمردي غني، تذهيب، ورد أبيض، جوهرة ملكية
+   ========================================================== */
+body.t-emerald #cover {
+  background: radial-gradient(110% 72% at 50% 0%, #2a7a60, #14503c 58%, #0a3025);
+  background-image: linear-gradient(180deg,
+    rgba(31,107,82,.74), rgba(20,80,60,.80) 55%, rgba(10,48,37,.88)),
+    url('/assets/hero/emerald.webp');
+  background-position: center 50%;
+  color: #f0f7f3;
+}
+body.t-emerald #cover .frame {
+  border: 2px solid rgba(201,184,114,.5);
+  border-radius: 40px 40px 6px 6px;
+}
+body.t-emerald #cover .frame::before {
+  border: 1px solid rgba(201,184,114,.28); inset: 9px;
+  border-radius: 34px 34px 3px 3px;
+}
+body.t-emerald .cov-in, body.t-emerald .cov-bism,
+body.t-emerald .cov-date, body.t-emerald .cov-venue { color: #f0f7f3; }
+body.t-emerald .cov-bism { color: #c9b872; letter-spacing: .06em; }
+body.t-emerald .cov-names {
+  font-family: var(--font-display); font-weight: 700;
+  color: #fdfaf0;
+  text-shadow: 0 3px 28px rgba(10,48,37,.7);
+}
+body.t-emerald .cov-names .amp { color: #c9b872; }
+body.t-emerald .cov-date { color: #d6c98e; letter-spacing: .07em; }
+body.t-emerald .cov-venue, body.t-emerald .cov-hint { color: rgba(240,247,243,.62); }
+body.t-emerald .cov-orn { background: linear-gradient(90deg, transparent, #c9b872, transparent); }
+body.t-emerald .seal {
+  border-radius: 50% 50% 8px 8px;
+  background: radial-gradient(circle at 35% 30%, #e2d79a, #1f6b52 62%, #0f4a37);
+  box-shadow: 0 14px 34px -12px rgba(10,48,37,.9), inset 0 1px 0 rgba(255,255,255,.35);
+  animation: none;
+}
+body.t-emerald .cd .u { border-radius: 18px 18px 4px 4px; }
+body.t-emerald .tl .node { border-radius: 50% 50% 0 50%; transform: rotate(-45deg); }
+body.t-emerald .tl li.lit .node { transform: rotate(-45deg) scale(1.15); }
+body.t-emerald .cov-in > * { animation: scaleFade 1.15s var(--ease) backwards; }
+
+/* ==========================================================
+   ١٥) الطين والسنبلة — terracotta
+   طيني دافئ، نقش نوبي، بساطة أصيلة
+   ========================================================== */
+body.t-terracotta #cover {
+  background: radial-gradient(115% 78% at 50% 0%, #fdf6ef, #f5e3d2 54%, #e8cdb2);
+  background-image: linear-gradient(180deg,
+    rgba(255,250,244,.86), rgba(248,235,222,.80) 54%, rgba(235,213,190,.90)),
+    url('/assets/hero/terracotta.webp');
+  background-position: center 58%;
+}
+body.t-terracotta #cover .frame {
+  border: 1.5px solid rgba(178,98,55,.42);
+  border-radius: 3px;
+}
+body.t-terracotta #cover .frame::before {
+  border: 1px solid rgba(178,98,55,.2); inset: 8px; border-radius: 0;
+}
+/* شريط النقش النوبي */
+body.t-terracotta #cover::before {
+  content: ''; position: absolute; inset-inline: 0; bottom: 0; height: 26px; pointer-events: none;
+  background:
+    repeating-linear-gradient(135deg,
+      rgba(178,98,55,.30) 0 7px, transparent 7px 14px),
+    repeating-linear-gradient(45deg,
+      rgba(178,98,55,.18) 0 7px, transparent 7px 14px);
+}
+body.t-terracotta .cov-names {
+  font-family: var(--font-display); font-weight: 700;
+  color: #4a2412;
+}
+body.t-terracotta .cov-names .amp { color: #b26237; }
+body.t-terracotta .cov-bism { color: #8a4520; letter-spacing: .05em; }
+body.t-terracotta .cov-date { color: #b26237; letter-spacing: .05em; }
+body.t-terracotta .seal {
+  border-radius: 6px;
+  background: radial-gradient(circle at 35% 30%, #e0a878, #b26237 58%, #7a3d1c);
+  animation: none;
+  box-shadow: 0 12px 28px -12px rgba(122,61,28,.6), inset 0 1px 0 rgba(255,255,255,.3);
+}
+body.t-terracotta .cd .u { border-radius: 4px; }
+body.t-terracotta .rsvp-box, body.t-terracotta .venue-box, body.t-terracotta .cal { border-radius: 8px; }
+body.t-terracotta .tl .node { border-radius: 2px; transform: rotate(45deg); width: 13px; height: 13px; }
+body.t-terracotta .tl li.lit .node { transform: rotate(45deg) scale(1.2); }
+body.t-terracotta .cov-in > * { animation: riseFade 1s var(--ease) backwards; }
+
+/* ==========================================================
+   ١٦) الكتّان الهادئ — linen
+   بيج طبيعي، بساطة اسكندنافية، هدوء وأناقة صامتة
+   ========================================================== */
+body.t-linen #cover {
+  background: radial-gradient(120% 80% at 50% 0%, #fdfcf9, #f4f0e8 54%, #e8e1d5);
+  background-image: linear-gradient(180deg,
+    rgba(255,254,251,.90), rgba(246,242,234,.86) 54%, rgba(230,223,211,.92)),
+    url('/assets/hero/linen.webp');
+  background-position: center 48%;
+}
+body.t-linen #cover .frame {
+  border: 1px solid rgba(138,122,99,.32);
+  border-radius: 2px;
+}
+body.t-linen #cover .frame::before { display: none; }
+body.t-linen .cov-names {
+  font-family: var(--font-body); font-weight: 300; letter-spacing: .06em;
+  color: #3d362b; line-height: 1.6;
+}
+body.t-linen .cov-names .amp { color: #a89a83; font-size: .42em; font-weight: 300; }
+body.t-linen .cov-bism { color: #8a7a63; letter-spacing: .12em; font-weight: 400; }
+body.t-linen .cov-date { color: #6b5f4d; letter-spacing: .1em; font-weight: 500; font-size: .88rem; }
+body.t-linen .cov-orn { background: linear-gradient(90deg, transparent, rgba(138,122,99,.5), transparent); }
+body.t-linen .seal {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #d8cdba, #8a7a63 58%, #5f5445);
+  animation: none;
+  box-shadow: 0 10px 24px -14px rgba(95,84,69,.5), inset 0 1px 0 rgba(255,255,255,.4);
+}
+body.t-linen .cd .u { border-radius: 2px; }
+body.t-linen .rsvp-box, body.t-linen .venue-box, body.t-linen .cal { border-radius: 4px; }
+body.t-linen .tl .node { border-radius: 50%; width: 11px; height: 11px; border-width: 1.5px; }
+body.t-linen .cov-in > * { animation: riseFade 1.3s var(--ease) backwards; }
+body.t-linen .cov-in > *:nth-child(2) { animation-delay: .08s; }
+body.t-linen .cov-in > *:nth-child(3) { animation-delay: .16s; }
+body.t-linen .cov-in > *:nth-child(4) { animation-delay: .24s; }
+
+/* ==========================================================
+   ١٧) فانوس الليل — lantern
+   كحلي ليلي، ذهب دافئ، فوانيس، أجواء عربية ساحرة
+   ========================================================== */
+body.t-lantern #cover {
+  background: radial-gradient(110% 75% at 50% 0%, #1b2c48, #101d33 58%, #08111f);
+  background-image: linear-gradient(180deg,
+    rgba(16,29,51,.70), rgba(13,24,42,.78) 55%, rgba(8,17,31,.88)),
+    url('/assets/hero/lantern.webp');
+  background-position: center 55%;
+  color: #f6f1e4;
+}
+body.t-lantern #cover .frame {
+  border: 1.5px solid rgba(201,154,63,.48);
+  border-radius: 50% 50% 4px 4px / 14% 14% 2% 2%;
+}
+body.t-lantern #cover .frame::before {
+  border: 1px solid rgba(201,154,63,.24); inset: 8px;
+  border-radius: 50% 50% 3px 3px / 14% 14% 2% 2%;
+}
+body.t-lantern #cover::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(230,197,131,.20), transparent 24%),
+    radial-gradient(circle at 82% 16%, rgba(230,197,131,.16), transparent 22%),
+    radial-gradient(circle at 50% 96%, rgba(230,197,131,.14), transparent 30%);
+}
+body.t-lantern .cov-in, body.t-lantern .cov-bism,
+body.t-lantern .cov-date, body.t-lantern .cov-venue { color: #f6f1e4; }
+body.t-lantern .cov-bism { color: #e6c583; letter-spacing: .07em; }
+body.t-lantern .cov-names {
+  font-family: var(--font-display); font-weight: 700;
+  color: #fdf6e3;
+  text-shadow: 0 0 40px rgba(201,154,63,.5), 0 2px 4px rgba(0,0,0,.5);
+}
+body.t-lantern .cov-names .amp { color: #e6c583; }
+body.t-lantern .cov-date { color: #e6c583; letter-spacing: .08em; }
+body.t-lantern .cov-venue, body.t-lantern .cov-hint { color: rgba(246,241,228,.6); }
+body.t-lantern .cov-orn { background: linear-gradient(90deg, transparent, #e6c583, transparent); }
+body.t-lantern .seal {
+  border-radius: 50% 50% 6px 6px;
+  background: radial-gradient(circle at 40% 28%, #f0dca8, #c99a3f 55%, #7d5c18);
+  box-shadow: 0 0 42px -8px rgba(201,154,63,.6), inset 0 1px 0 rgba(255,255,255,.4);
+}
+body.t-lantern .cd .u { border-radius: 16px 16px 3px 3px; }
+body.t-lantern .tl .node { border-radius: 50%; box-shadow: 0 0 0 4px rgba(201,154,63,.16); }
+body.t-lantern .cov-in > * { animation: scaleFade 1.2s var(--ease) backwards; }
+body.t-lantern .seal { animation: breathe 3s ease-in-out infinite; }
+
+/* ==========================================================
+   الأسطح الداكنة للقوالب الجديدة
+   ========================================================== */
+body.t-velvet { background:#2a070d; color:#fbeee6; }
+body.t-velvet .is h2 { color:#d9a4a4; }
+body.t-velvet .is .sub, body.t-velvet .muted { color:rgba(251,238,230,.6); }
+body.t-velvet .rsvp-box, body.t-velvet .venue-box, body.t-velvet .cal,
+body.t-velvet .w { background:#3a0a12; border-color:rgba(217,164,164,.24); color:#fbeee6; }
+body.t-velvet .inp, body.t-velvet input, body.t-velvet textarea {
+  background:#2a070d; color:#fbeee6; border-color:rgba(217,164,164,.24);
+}
+body.t-velvet .inp::placeholder { color:rgba(251,238,230,.35); }
+body.t-velvet .seg { background:#2a070d; }
+body.t-velvet .seg button { color:rgba(251,238,230,.6); }
+body.t-velvet .seg button.on { background:#4a0d18; color:#fbeee6; }
+body.t-velvet .w .n, body.t-velvet b { color:#e8b9b9; }
+body.t-velvet .is.alt { background:#22050a; border-block-color:rgba(217,164,164,.18); }
+body.t-velvet .cd .u { background:#3a0a12; border-color:rgba(217,164,164,.26); }
+body.t-velvet .cd .u b { color:#fbeee6; }
+body.t-velvet .cd .u span { color:rgba(251,238,230,.5); }
+body.t-velvet .cnt button { background:#3a0a12; color:#d9a4a4; }
+body.t-velvet .tl .node { background:#3a0a12; border-color:#a8324a; }
+body.t-velvet .tl .t { color:rgba(251,238,230,.85); }
+body.t-velvet .finale h2 { color:#fbeee6; }
+
+body.t-thuluth { background:#0b0803; color:#f3ecd8; }
+body.t-thuluth .is h2 { color:#c9a227; }
+body.t-thuluth .is .sub, body.t-thuluth .muted { color:rgba(243,236,216,.58); }
+body.t-thuluth .rsvp-box, body.t-thuluth .venue-box, body.t-thuluth .cal,
+body.t-thuluth .w { background:#161208; border-color:rgba(201,162,39,.22); color:#f3ecd8; }
+body.t-thuluth .inp, body.t-thuluth input, body.t-thuluth textarea {
+  background:#100d05; color:#f3ecd8; border-color:rgba(201,162,39,.24);
+}
+body.t-thuluth .inp::placeholder { color:rgba(243,236,216,.32); }
+body.t-thuluth .seg { background:#100d05; }
+body.t-thuluth .seg button { color:rgba(243,236,216,.55); }
+body.t-thuluth .seg button.on { background:#241c0a; color:#f3ecd8; }
+body.t-thuluth .w .n, body.t-thuluth b { color:#c9a227; }
+body.t-thuluth .is.alt { background:#080602; border-block-color:rgba(201,162,39,.16); }
+body.t-thuluth .cd .u { background:#161208; border-color:rgba(201,162,39,.26); }
+body.t-thuluth .cd .u b { color:#f3ecd8; }
+body.t-thuluth .cd .u span { color:rgba(243,236,216,.45); }
+body.t-thuluth .cnt button { background:#161208; color:#c9a227; }
+body.t-thuluth .tl .node { background:#161208; border-color:#c9a227; }
+body.t-thuluth .tl .t { color:rgba(243,236,216,.85); }
+body.t-thuluth .finale h2 { color:#f3ecd8; }
+
+body.t-emerald { background:#eef7f3; }
+body.t-emerald .is h2 { color:#14503c; }
+body.t-emerald .is.alt { background:#ffffff; }
+
+body.t-lantern { background:#0b1524; color:#f6f1e4; }
+body.t-lantern .is h2 { color:#e6c583; }
+body.t-lantern .is .sub, body.t-lantern .muted { color:rgba(246,241,228,.58); }
+body.t-lantern .rsvp-box, body.t-lantern .venue-box, body.t-lantern .cal,
+body.t-lantern .w { background:#131f33; border-color:rgba(201,154,63,.22); color:#f6f1e4; }
+body.t-lantern .inp, body.t-lantern input, body.t-lantern textarea {
+  background:#0b1524; color:#f6f1e4; border-color:rgba(201,154,63,.24);
+}
+body.t-lantern .inp::placeholder { color:rgba(246,241,228,.32); }
+body.t-lantern .seg { background:#0b1524; }
+body.t-lantern .seg button { color:rgba(246,241,228,.55); }
+body.t-lantern .seg button.on { background:#1c2c46; color:#f6f1e4; }
+body.t-lantern .w .n, body.t-lantern b { color:#e6c583; }
+body.t-lantern .is.alt { background:#08111f; border-block-color:rgba(201,154,63,.16); }
+body.t-lantern .cd .u { background:#131f33; border-color:rgba(201,154,63,.24); }
+body.t-lantern .cd .u b { color:#f6f1e4; }
+body.t-lantern .cd .u span { color:rgba(246,241,228,.45); }
+body.t-lantern .cnt button { background:#131f33; color:#e6c583; }
+body.t-lantern .tl .node { background:#131f33; border-color:#c99a3f; }
+body.t-lantern .tl .t { color:rgba(246,241,228,.85); }
+body.t-lantern .finale h2 { color:#f6f1e4; }
+
+/* أسطح فاتحة */
+body.t-ivory   { background:#fbf6ec; }
+body.t-sunset  { background:#fdf1f6; }
+body.t-blossom { background:#f2f7fb; }
+body.t-marble  { background:#faf8f4; }
+body.t-terracotta { background:#fdf3ec; }
+body.t-linen   { background:#f8f5ef; }
+
+/* هالات الغلاف للقوالب الداكنة */
+body.t-velvet  #cover .cov-in::before { background:radial-gradient(58% 54% at 50% 46%, rgba(34,5,10,.62), rgba(34,5,10,.24) 55%, transparent 76%); }
+body.t-thuluth #cover .cov-in::before { background:radial-gradient(58% 54% at 50% 46%, rgba(8,6,2,.60), rgba(8,6,2,.22) 55%, transparent 76%); }
+body.t-lantern #cover .cov-in::before { background:radial-gradient(58% 54% at 50% 46%, rgba(6,12,22,.58), rgba(6,12,22,.22) 55%, transparent 76%); }
+
+@media (prefers-reduced-motion: reduce){
+  body[class*="t-"] .cov-in > *,
+  body[class*="t-"] .cov-names,
+  body[class*="t-"] .seal { animation: none !important; }
+}
+
+/* ==========================================================
+   تصحيحات بصرية بعد المراجعة
+   ========================================================== */
+/* المخمل والذهب والليل: صورة المرجع تحتوي كرتًا — نقرّبها لتصير ملمسًا */
+body.t-velvet  #cover { background-size: 190% auto; background-position: 62% 60%; }
+body.t-thuluth #cover { background-size: 185% auto; background-position: 38% 62%; }
+
+/* الرخام: أبرز الخطوط الذهبية وأضف عمقًا */
+body.t-marble #cover {
+  background-image: linear-gradient(180deg,
+    rgba(255,255,255,.72), rgba(248,245,238,.66) 54%, rgba(230,224,211,.80)),
+    url('/assets/hero/marble.webp');
+  background-size: 135% auto; background-position: center 46%;
+}
+body.t-marble #cover::after {
+  background:
+    linear-gradient(135deg, transparent 46%, rgba(154,129,73,.22) 46.3%, transparent 46.8%),
+    linear-gradient(45deg, transparent 46%, rgba(154,129,73,.18) 46.3%, transparent 46.8%);
+}
+body.t-marble .cov-names { color:#2b2517; }
+body.t-marble .cov-bism { color:#8a7340; }
+
+/* الكتّان: أضف ملمسًا وخطًا فاصلًا واضحًا */
+body.t-linen #cover {
+  background-image: linear-gradient(180deg,
+    rgba(255,254,251,.80), rgba(244,239,229,.74) 54%, rgba(226,218,204,.86)),
+    url('/assets/hero/linen.webp');
+  background-size: 130% auto; background-position: center 42%;
+}
+body.t-linen .cov-names { color:#2f2a21; }
+body.t-linen .cov-bism { color:#7a6c56; }
+body.t-linen .cov-date { color:#564c3d; }
+body.t-linen #cover .frame { border-color: rgba(138,122,99,.45); }
+
+/* العاج: أبرز النقش المحفور قليلًا */
+body.t-ivory #cover { background-size: 128% auto; background-position: center 50%; }
+
+/* ==========================================================
+   وضوح النصوص على الأغلفة الفاتحة — ظل خفيف + سماكة أنسب
+   ========================================================== */
+#cover .cov-bism{
+  font-weight:700; letter-spacing:.03em;
+  text-shadow:0 1px 0 rgba(255,255,255,.75), 0 1px 3px rgba(255,255,255,.5);
+}
+#cover .cov-names{ font-weight:700; letter-spacing:.005em; }
+#cover .cov-date{ font-weight:800; }
+#cover .cov-venue{ font-weight:500; }
+
+/* القوالب الفاتحة: تظليل أدقّ يمنع البهتان */
+body.t-garden  #cover .cov-names,
+body.t-saudi   #cover .cov-names,
+body.t-crystal #cover .cov-names,
+body.t-sudan   #cover .cov-names,
+body.t-levant  #cover .cov-names,
+body.t-ivory   #cover .cov-names,
+body.t-sunset  #cover .cov-names,
+body.t-blossom #cover .cov-names,
+body.t-marble  #cover .cov-names,
+body.t-emerald #cover .cov-names,
+body.t-terracotta #cover .cov-names,
+body.t-linen   #cover .cov-names{
+  text-shadow:0 2px 18px rgba(255,255,255,.55);
+}
+body.t-garden  #cover .cov-venue, body.t-saudi #cover .cov-venue,
+body.t-crystal #cover .cov-venue, body.t-linen #cover .cov-venue{
+  color:color-mix(in srgb, var(--deep) 62%, #fff);
+  font-weight:600;
+}
+
+/* ليلة الجرتق — الصورة مقدمة من صاحب الموقع */
+.jirtig-art { display:none; }
+body.t-jirtig #cover{background:radial-gradient(ellipse at 50% 30%,#fffdf7 0%,#fff6e8 58%,#f3e3c9 100%)}
+body.t-jirtig #cover .frame{border:2px solid #a92c2e; border-radius:24px}
+body.t-jirtig #cover .frame::before{border:1px solid #cca661;border-radius:18px}
+body.t-jirtig #cover .cov-in{padding:1rem 1.2rem;max-width:400px}
+body.t-jirtig .jirtig-cover-art{display:block;width:clamp(105px,20vh,165px);height:auto;margin:.35rem auto 0;border:3px solid #c9a25f;border-radius:50%;box-shadow:0 5px 18px #6821221a;background:#fff}
+body.t-jirtig .cov-bism{color:#8e292a}
+body.t-jirtig .cov-orn{margin:.45rem auto}
+body.t-jirtig .cov-names{font-size:clamp(1.65rem,5vh,2.8rem);line-height:1.15;margin:.25rem 0;color:#7d2427}
+body.t-jirtig .cov-names .amp{display:inline;margin:0 .4rem;color:#bd8e43}
+body.t-jirtig .cov-date{margin-top:.3rem;color:#a12e31}
+body.t-jirtig .seal{width:64px;height:64px;margin:.7rem auto 0;background:radial-gradient(circle at 35% 30%,#ce7070,#a52d30 55%,#641c22)}
+body.t-jirtig .cov-hint{margin-top:.3rem}
+body.t-jirtig .heroInv .bgimg{filter:blur(4px) saturate(.7) brightness(.55);transform:scale(1.08)}
+body.t-jirtig .heroInv .veil{background:linear-gradient(180deg,rgba(70,15,20,.68),rgba(55,15,16,.78))}
+body.t-jirtig .heroInv .inner{padding:2rem 1rem}
+body.t-jirtig .jirtig-hero-art{display:block;width:clamp(105px,20vh,170px);margin:0 auto 1rem;border:3px solid #d5b371;border-radius:50%;background:#fff;box-shadow:0 8px 30px #230b0b66}
+body.t-jirtig .phrase{color:#f5dfb5}
+body.t-jirtig .is h2{color:#8e292d}
+body.t-jirtig .finale{background:linear-gradient(160deg,#8e292d,#4a171a)}
+@media(max-height:650px){body.t-jirtig .jirtig-cover-art{width:90px}body.t-jirtig .cov-in{padding:.4rem}body.t-jirtig .cov-names{font-size:1.5rem}body.t-jirtig .seal{width:52px;height:52px}body.t-jirtig .orn{height:25px}}
+
+/* حنة العريس — تصميم أصلي مستلهم من الزينة السودانية */
+body.t-henna-groom #cover{display:block;background:linear-gradient(180deg,rgba(46,5,16,.28),transparent 60%),url('/assets/hero/henna-groom.webp') center center/cover no-repeat #4b101c}
+body.t-henna-groom #cover .frame{inset:12px;border:1px solid #d8bb80a8;border-radius:14px}
+body.t-henna-groom #cover .frame::before{inset:6px;border:1px solid #e3c68555;border-radius:9px}
+body.t-henna-groom #cover .cov-in{position:absolute;top:14%;left:50%;transform:translateX(-50%);width:min(82%,380px);max-width:380px;padding:.7rem 1.1rem 1rem;border:1px solid #dfbc764d;border-radius:18px;background:linear-gradient(180deg,#4b101dde,#440d1bd9);box-shadow:0 12px 40px #29051155;color:#fff7e8}
+body.t-henna-groom .cov-bism{color:#eddbb5}
+body.t-henna-groom .orn{height:25px;color:#e9c784}
+body.t-henna-groom .cov-orn{margin:.35rem auto;background:linear-gradient(90deg,transparent,#dfbd7b,transparent)}
+body.t-henna-groom .cov-names{color:#fff5e4;font-size:clamp(2rem,6vh,3.2rem);margin:.1rem 0}
+body.t-henna-groom .cov-date{color:#f0d19b;margin-top:.1rem}
+body.t-henna-groom .cov-venue,body.t-henna-groom .cov-hint{color:#f6e5c5}
+body.t-henna-groom .seal{width:58px;height:58px;margin:.55rem auto 0;background:radial-gradient(circle at 35% 30%,#f6d994,#b58949 65%,#765120);box-shadow:0 8px 25px #28071077}
+body.t-henna-groom .heroInv .bgimg{filter:brightness(.75);transform:none;background-position:center center}
+body.t-henna-groom .heroInv .veil{background:linear-gradient(180deg,rgba(47,4,17,.12),transparent 60%,rgba(35,4,9,.5))}
+body.t-henna-groom .heroInv .inner{position:absolute;top:13%;left:50%;transform:translateX(-50%);width:min(85%,430px);padding:1.1rem;border:1px solid #dfbc7655;border-radius:18px;background:#4b101de6}
+body.t-henna-groom .heroInv .phrase{color:#f6dca6;letter-spacing:0;margin-bottom:.2rem}
+body.t-henna-groom .heroInv h1{font-size:clamp(2rem,7vw,3.2rem)}
+body.t-henna-groom .heroInv .meta{margin-top:.7rem}
+body.t-henna-groom .heroInv .scroll-cue{color:#fff}
+body.t-henna-groom{background:#fff8ef}
+body.t-henna-groom .is h2{color:#641c29}
+body.t-henna-groom .finale{background:linear-gradient(160deg,#681525,#2d0a13)}
+@media(max-height:650px){body.t-henna-groom #cover .cov-in{top:9%;padding:.4rem .8rem}body.t-henna-groom .cov-names{font-size:1.6rem}body.t-henna-groom .seal{width:46px;height:46px}body.t-henna-groom .heroInv .inner{top:8%;padding:.6rem}}
+body.t-henna-groom #cover .cov-in::before{display:none}
+.henna-label{display:none}
+body.t-henna-groom .henna-label{display:block;font-size:.83rem;font-weight:800;color:#f3d69f;margin:.2rem 0}
+
+/* لمسات احتفالية خفيفة تحافظ على هوية كل قالب ووضوح التفاصيل */
+body{--petal-color:#e8bec6;--petal-light:#faeadc}
+body.t-saudi,body.t-ivory,body.t-thuluth,body.t-marble,body.t-lantern{--petal-color:#cda75c;--petal-light:#f2dfaf}
+body.t-sudan,body.t-jirtig,body.t-henna-groom,body.t-velvet{--petal-color:#b34042;--petal-light:#e6bc79}
+body.t-emerald,body.t-levant{--petal-color:#72a58b;--petal-light:#e1d09b}
+body.t-blossom,body.t-crystal{--petal-color:#a4bfd3;--petal-light:#e8edf2}
+body.t-terracotta,body.t-linen{--petal-color:#c39574;--petal-light:#ead5ae}
+body.t-sunset,body.t-women{--petal-color:#ed9fba;--petal-light:#ffd9cc}
+.heroInv .inner{padding:1.75rem 1.5rem;border:1px solid rgba(255,255,255,.27);border-radius:24px;background:linear-gradient(145deg,rgba(31,17,17,.38),rgba(31,17,17,.18));box-shadow:0 16px 55px rgba(15,7,8,.18);backdrop-filter:blur(3px)}
+.heroInv .phrase{font-size:clamp(.85rem,2.6vw,1rem);line-height:1.9;letter-spacing:0;color:#fff}
+.heroInv .meta{padding-top:1rem;border-top:1px solid rgba(255,255,255,.32)}
+.heroInv .meta b{font-size:.7rem;opacity:.9}
+.heroInv .meta span{color:#fff}
+.is h2{line-height:1.45}
+.is .sub{max-width:620px;margin-inline:auto;line-height:2}
+.rsvp-box,.venue-box,.cal{box-shadow:0 10px 35px rgba(60,37,24,.07)}
+.seal{transition:transform .25s ease,filter .25s ease}
+.seal:hover{filter:brightness(1.12);transform:scale(1.06)}
+body.t-henna-groom .heroInv .inner{background:#4b101de6}
+@media(max-width:520px){.heroInv .inner{padding:1.2rem 1rem;border-radius:18px}.heroInv .meta{margin-top:1rem;padding-top:.75rem}.heroInv .phrase{font-size:.86rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}#petals{display:none!important}.rvI{opacity:1!important;transform:none!important}*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}}
+
+/* إعادة تشكيل التجربة: خمس عائلات تركيبية لا مجرد تبديل للألوان. */
+.story-section{padding:clamp(3rem,8vw,6rem) 1.25rem;background:var(--soft);text-align:center}
+.story-section[hidden]{display:none!important}
+.story-paper{position:relative;max-width:700px;margin:auto;padding:clamp(2.2rem,7vw,4.4rem) clamp(1.5rem,5vw,4rem);background:rgba(255,255,255,.72);border:1px solid color-mix(in srgb,var(--accent) 24%,transparent);box-shadow:0 18px 55px rgba(50,30,23,.08)}
+.story-paper::before{content:'';position:absolute;inset:9px;border:1px solid color-mix(in srgb,var(--accent) 17%,transparent);pointer-events:none}
+.story-kicker{display:block;color:var(--accent);font-size:.75rem;font-weight:800;letter-spacing:.05em}
+.story-mark{display:block;margin:.6rem auto 0;font-size:1.7rem;color:var(--accent);line-height:1}
+.story-paper h2{font-family:var(--font-display);font-size:clamp(1.7rem,5vw,2.5rem);color:var(--deep);margin:.5rem 0 .8rem}
+.story-paper p{font-size:clamp(1rem,2.5vw,1.12rem);line-height:2.25;color:var(--deep);white-space:pre-wrap;max-width:510px;margin:0 auto}
+.story-sign{display:block;color:var(--accent);margin-top:1.3rem;font-size:1rem}
+
+/* حديقة وربيع: بطاقة ورقية تحطّ أسفل صورة الزهور */
+body:is(.t-garden,.t-blossom,.t-linen) #cover{display:flex;align-items:flex-end;justify-content:center;background-size:cover;background-position:center}
+body.t-garden #cover{background-image:linear-gradient(180deg,rgba(78,42,50,.02) 5%,rgba(59,28,35,.3) 100%),url('/assets/hero/garden.webp')}
+body.t-blossom #cover{background-image:linear-gradient(180deg,rgba(21,49,69,.03),rgba(32,51,68,.30)),url('/assets/hero/blossom.webp')}
+body.t-linen #cover{background-image:linear-gradient(180deg,rgba(73,62,47,.02),rgba(55,40,26,.28)),url('/assets/hero/linen.webp')}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .frame{border-color:rgba(255,255,255,.55)}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .cov-in{width:min(82%,390px);margin:0 auto 7vh;padding:1.3rem 1rem 1.2rem;background:#fffdf6ee;box-shadow:0 24px 65px #2b161633;border-radius:50% 50% 18px 18px / 15% 15% 18px 18px;border:1px solid #fff}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .cov-in::before{display:none}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .cov-names{margin:.25rem 0;padding:0;font-size:clamp(1.75rem,5vh,2.7rem);line-height:1.2}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .cov-names .amp{display:inline;margin:0 .35rem}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .cov-orn{margin:.5rem auto}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .seal{width:58px;height:58px;margin:.65rem auto 0}
+body:is(.t-garden,.t-blossom,.t-linen) #cover .cov-hint{margin-top:.35rem}
+body:is(.t-garden,.t-blossom,.t-linen) .story-paper{border-radius:48% 48% 18px 18px / 12% 12% 18px 18px}
+
+/* بطاقات القصور: قوس احتفالي، زخارف ذهبية ونص عمودي */
+body:is(.t-saudi,.t-ivory,.t-emerald) #cover{background-size:cover;background-position:center;}
+body:is(.t-saudi,.t-ivory,.t-emerald) #cover .cov-in{width:min(78vw,370px);max-width:370px;padding:2.7rem 1.4rem 1.4rem;background:#fff9edeb;border:2px solid color-mix(in srgb,var(--accent) 55%,#eee);border-radius:190px 190px 8px 8px;box-shadow:0 16px 55px #281b182e}
+body:is(.t-saudi,.t-ivory,.t-emerald) #cover .cov-in::before{display:none}
+body:is(.t-saudi,.t-ivory,.t-emerald) #cover .cov-names{font-size:clamp(1.8rem,5.8vh,2.8rem);line-height:1.15;margin:.2rem 0;padding:0}
+body:is(.t-saudi,.t-ivory,.t-emerald) #cover .cov-orn{margin:.6rem auto}
+body:is(.t-saudi,.t-ivory,.t-emerald) #cover .seal{width:58px;height:58px;margin:.7rem auto 0}
+body:is(.t-saudi,.t-ivory,.t-emerald) #cover .cov-hint{margin-top:.3rem}
+body:is(.t-saudi,.t-ivory,.t-emerald) .story-paper{border-radius:250px 250px 10px 10px;padding-top:5rem}
+body.t-emerald #cover .cov-in{background:#eef8f0ef}
+
+/* حداثة تحريرية: صورة بالأعلى وبطاقة بيضاء سفلية، تفاصيل هندسية */
+body:is(.t-crystal,.t-marble,.t-levant) #cover{display:flex;align-items:flex-end;justify-content:center;background-size:cover;background-position:center}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .frame{display:none}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .cov-in{width:100%;max-width:none;margin:0;padding:1.4rem 1.5rem 2rem;background:#fffdf9f2;border-top:3px solid var(--accent);box-shadow:0 -15px 55px #27201528}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .cov-in::before{display:none}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .cov-names{font-family:var(--font-body);font-size:clamp(1.65rem,5.5vh,2.5rem);line-height:1.2;margin:.2rem 0;padding:0}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .cov-names .amp{display:inline;margin:0 .4rem;font-size:.65em}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .cov-orn{margin:.35rem auto}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .seal{width:55px;height:55px;margin:.6rem auto 0}
+body:is(.t-crystal,.t-marble,.t-levant) #cover .cov-hint{margin-top:.25rem}
+body:is(.t-crystal,.t-marble,.t-levant) .story-paper{text-align:start;border:0;border-inline-start:5px solid var(--accent);background:#fff;box-shadow:0 15px 40px #2221}
+body:is(.t-crystal,.t-marble,.t-levant) .story-paper::before{display:none}
+body:is(.t-crystal,.t-marble,.t-levant) .story-paper p{margin-inline:0}
+
+/* أمسية سينمائية: خلفية داكنة وأسماء داخل بطاقة هادئة في الأسفل */
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover{display:flex;align-items:flex-end;justify-content:center;background-size:cover;background-position:center}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-in{width:min(90%,440px);margin:0 auto 7vh;padding:1.3rem 1rem;border:1px solid #e5c6888c;border-radius:12px;background:#1e101bdf;box-shadow:0 20px 60px #09040b77}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-in::before{display:none}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-bism,body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-names,body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-venue{color:#fff6e7}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-date,body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-names .amp{color:#f0d49d}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-names{font-size:clamp(1.8rem,5.4vh,2.8rem);line-height:1.15;margin:.2rem 0;padding:0}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-names .amp{display:inline;margin:0 .35rem}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-orn{margin:.5rem auto}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .seal{width:58px;height:58px;margin:.7rem auto 0}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-hint{margin-top:.3rem;color:#f9e5c3}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) .story-section{background:var(--deep)}
+body:is(.t-velvet,.t-thuluth,.t-lantern,.t-sunset) .story-paper{background:#fff9ef;border:1px solid var(--accent);border-radius:10px}
+
+/* التراث: شريط نسيج وزخارف هندسية وهوية للّمة */
+body:is(.t-sudan,.t-terracotta) #cover .cov-in{width:min(85vw,400px);padding:1.5rem;background:#fff8e8ed;border-top:12px solid #963f27;border-bottom:12px solid #963f27;box-shadow:0 18px 50px #43241838}
+body:is(.t-sudan,.t-terracotta) #cover .cov-in::before{display:none}
+body:is(.t-sudan,.t-terracotta) #cover .cov-names{font-size:clamp(1.8rem,5.5vh,2.7rem);margin:.2rem 0;padding:0;line-height:1.2}
+body:is(.t-sudan,.t-terracotta) #cover .cov-orn{margin:.5rem auto}
+body:is(.t-sudan,.t-terracotta) #cover .seal{width:58px;height:58px;margin:.6rem auto 0}
+body:is(.t-sudan,.t-terracotta) #cover .cov-hint{margin-top:.3rem}
+body:is(.t-sudan,.t-terracotta,.t-jirtig,.t-henna-groom) .story-paper{border-block:6px double var(--accent);border-inline:1px solid var(--accent)}
+body.t-henna-groom .story-paper{background:#fff8ef}
+@media(max-height:650px){body:is(.t-garden,.t-blossom,.t-linen,.t-crystal,.t-marble,.t-levant,.t-saudi,.t-ivory,.t-emerald,.t-sudan,.t-terracotta,.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .cov-in{padding:.6rem .8rem;margin-bottom:2vh}body:is(.t-garden,.t-blossom,.t-linen,.t-crystal,.t-marble,.t-levant,.t-saudi,.t-ivory,.t-emerald,.t-sudan,.t-terracotta,.t-velvet,.t-thuluth,.t-lantern,.t-sunset) #cover .seal{width:46px;height:46px;margin:.3rem auto 0}}

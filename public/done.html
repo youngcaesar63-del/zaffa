@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تم — زَفّة</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/base.css?v=60785fa1">
+<style>
+body{min-height:100svh;display:grid;place-content:center;padding:2rem 1.2rem;
+  background:radial-gradient(100% 70% at 50% 0%,#fff,var(--tint-1) 60%,var(--tint-2))}
+.done-card{max-width:520px;width:100%;text-align:center;background:#fff;border:1px solid var(--line);
+  border-radius:var(--r-xl);padding:clamp(1.8rem,5vw,3rem);box-shadow:var(--sh-2)}
+.tick{width:86px;height:86px;border-radius:50%;margin:0 auto 1.4rem;display:grid;place-content:center;
+  background:linear-gradient(135deg,var(--ok),var(--ok));box-shadow:0 16px 34px -16px rgba(63,122,92,.8);
+  animation:pop .6s var(--ease)}
+@keyframes pop{0%{transform:scale(.4);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.tick svg{width:38px;height:38px}
+.tick.pending{background:linear-gradient(135deg,var(--gold-lt),var(--warn));box-shadow:0 16px 34px -16px rgba(183,121,31,.8)}
+.link-box{display:flex;gap:.4rem;margin-top:1.2rem}
+.link-box input{flex:1;min-width:0;padding:.75rem .85rem;border-radius:11px;border:1.5px solid var(--line);
+  font-size:.82rem;font-family:ui-monospace,monospace;direction:ltr;text-align:left;background:var(--tint-1)}
+.actions{display:grid;gap:.6rem;margin-top:1.4rem}
+.steps-done{display:grid;gap:.7rem;text-align:start;margin-top:1.6rem;padding-top:1.4rem;border-top:1px solid var(--line)}
+.steps-done div{display:flex;gap:.6rem;font-size:.87rem;color:var(--ink-2);line-height:1.7}
+.steps-done span{flex:0 0 auto;width:22px;height:22px;border-radius:50%;background:var(--rose-soft);
+  color:var(--rose-deep);font-size:.72rem;font-weight:800;display:grid;place-content:center;margin-top:.15rem}
+</style>
+<link rel="stylesheet" href="/assets/site-refresh.css?v=20261123c">
+</head>
+<body class="site-done">
+<div class="done-card">
+  <div class="done-brand"><img src="/assets/logo.svg" alt="" width="30" height="30"><span>زَفّة</span></div>
+  <div class="tick" id="tick">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+  </div>
+
+  <h1 class="display" id="title" style="font-size:clamp(1.5rem,5vw,2rem)">دعوتك جاهزة 🎉</h1>
+  <p class="lead" id="sub" style="margin-top:.6rem;font-size:.95rem">شارك الرابط مع ضيوفك على الواتساب، وتابع الردود من لوحتك.</p>
+
+  <p id="doneRefWrap" class="muted hide" style="margin-top:.8rem">الرقم المرجعي للدعوة: <b id="doneRef" dir="ltr">—</b></p>
+  <div class="link-box hide" id="linkWrap">
+    <input id="inviteUrl" readonly dir="ltr">
+    <button class="btn btn-ghost" id="copyBtn" type="button" style="padding:.7rem 1rem;font-size:.82rem">نسخ</button>
+  </div>
+
+  <div class="actions">
+    <a class="btn btn-primary btn-lg btn-block" id="dashBtn" href="#">افتح لوحة التحكم</a>
+    <button class="btn btn-gold btn-block hide" id="shareBtn" type="button">📲 شارك على الواتساب</button>
+    <a class="btn btn-ghost btn-block hide" id="viewBtn" href="#" target="_blank" rel="noopener">شاهد دعوتك</a>
+  </div>
+
+  <div class="steps-done">
+    <div><span>١</span><div>احتفظ برابط لوحة التحكم — هو مفتاحك الوحيد لإدارة الدعوة.</div></div>
+    <div><span>٢</span><div>تقدر تعدّل الوقت أو المكان أو البرنامج في أي وقت، والتغيير يظهر فورًا.</div></div>
+    <div><span>٣</span><div>كل تأكيد حضور وتهنئة تظهر مباشرة في لوحتك.</div></div>
+  </div>
+</div>
+
+<script src="/assets/phrases.js?v=express2026"></script>
+<script src="/assets/zaffa.js?v=60785fa1"></script>
+<script src="/assets/card.js?v=joy2026"></script>
+<script>
+const id = qs.get('id');
+const k  = qs.get('k');
+const inviteUrl = id ? `${location.origin}/i/${id}` : '';
+const dashUrl = id ? `/dashboard?id=${id}&k=${k}` : '/create';
+
+if (id){
+  $('inviteUrl').value = inviteUrl;
+  $('dashBtn').href = dashUrl;
+  $('viewBtn').href = inviteUrl;
+  setLast({ id, k });
+}
+
+$('copyBtn').onclick = () => copyText(inviteUrl);
+$('shareBtn').onclick = () => {
+  const txt = `تشرفنا حضوركم في حفل زفافنا 🤍\n${inviteUrl}`;
+  window.open('https://wa.me/?text=' + encodeURIComponent(txt), '_blank');
+};
+
+/* التحقق من الدفع */
+if (id && k){
+  const sid = qs.get('session_id');
+  $('title').textContent = 'تم حفظ دعوتك ✓';
+  $('sub').textContent = 'نتحقق من الدفع…';
+
+  const ver = sid
+    ? `/api/verify?session_id=${encodeURIComponent(sid)}&id=${encodeURIComponent(id)}`
+    : null;
+
+  const after = status => {
+    const active = status === 'active';
+    $('linkWrap').classList.toggle('hide', !active);
+    $('shareBtn').classList.toggle('hide', !active);
+    $('viewBtn').classList.toggle('hide', !active);
+    if (active){
+      $('title').textContent = 'دعوتك مفعّلة 🎉';
+      $('sub').textContent = 'شارك الرابط مع ضيوفك على الواتساب، وتابع الردود من لوحتك.';
+    } else if (status === 'pending'){
+      $('tick').classList.add('pending');
+      $('tick').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
+      $('title').textContent = 'بانتظار تأكيد التحويل ⏳';
+      $('sub').textContent = 'استلمنا طلبك، وبتتفعّل دعوتك أول ما نتأكد من التحويل — عادة خلال ساعات قليلة.';
+    } else {
+      $('title').textContent = 'دعوتك محفوظة';
+      $('sub').textContent = 'لم يكتمل الدفع بعد. بياناتك محفوظة وتقدر تكمل في أي وقت.';
+    }
+  };
+
+  // لا نثق بمعلمات الرابط لتحديد التفعيل؛ نقرأ الحالة الحقيقية من الخادم.
+  (async () => {
+    try {
+      if (ver) await fetch(ver, { headers:{ 'x-edit-key': k } });
+      const info = await api(`/api/invites/${id}?k=${encodeURIComponent(k)}`);
+      after(info.status);
+    } catch (_) {
+      $('title').textContent = 'تعذّر التحقق من حالة الدعوة';
+      $('sub').textContent = 'افتح لوحة التحكم للتحقق من الحالة أو حاول مرة أخرى.';
+    }
+  })();
+
+  /* ---------- توليد صورة المشاركة ورفعها للسيرفر ---------- */
+  /* المتصفح يرسم الكرت (تشكيل عربي صحيح 100%) ثم يرفعه،
+     ليظهر على واتساب عند مشاركة الرابط. */
+  (async () => {
+    try {
+      const info = await api(`/api/invites/${id}?k=${encodeURIComponent(k)}`);
+      if (info.referenceNumber) { $('doneRef').textContent = String(info.referenceNumber); $('doneRefWrap').classList.remove('hide'); }
+      const blob = await InviteCard.toBlob(info.data, info.template);
+      const buf = await blob.arrayBuffer();
+      const ogResult = await fetch(`/api/invites/${id}/og`, {
+        method: 'POST',
+        headers: { 'content-type': 'image/png', 'x-edit-key': k },
+        body: buf,
+      });
+      if (!ogResult.ok) throw new Error('تعذّر رفع صورة المشاركة');
+      $('sub').insertAdjacentHTML('beforeend',
+        '<div style="margin-top:.5rem;font-size:.8rem;color:var(--ok);font-weight:700">✓ صورة المشاركة جاهزة — ستظهر أسماء العروسين على واتساب</div>');
+    } catch (e) {
+      /* صامت: لا نُفشل الصفحة إن تعذّر التوليد */
+      console.warn('og generation skipped:', e && e.message);
+    }
+  })();
+}
+</script>
+</body>
+</html>
